@@ -6,6 +6,8 @@
 
 package godrace;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Eduardo Cristerna
@@ -20,6 +22,11 @@ public class GodRace {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        // TODO code application logic here
+        Game game = new Game();
+        game.setTitle("GODRACE");
+        game.setVisible(true);
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }
