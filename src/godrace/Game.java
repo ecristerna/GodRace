@@ -17,7 +17,16 @@ import javax.swing.JFrame;
  * @author Ovidio
  */
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
+    private static final long serialVersionUID = 1L;
+    //variables
+    private boolean pausa;
+    private boolean instrucciones;
+    private boolean start;
+    private boolean gameover;
     
+    //Variables control de tiempo de animacion
+    private long tiempoActual;
+    private long tiempoInicial;
     
         public Game() {
             init();
@@ -25,7 +34,11 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         }
 
         public void init() {
-
+            setSize(1200,720);
+            pausa = false;
+            instrucciones = false;
+            start = false;
+            gameover = false;
         }
 
         /** 
