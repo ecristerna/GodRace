@@ -6,6 +6,9 @@
 
 package godrace;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -23,6 +26,14 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean instrucciones;
     private boolean start;
     private boolean gameover;
+    private Graphics dbg;
+    private Image dbImage;
+    private Image startScreen;
+    private Image instructionScreen;
+    private Image characterSelect;
+    private Image mapSelect;
+    private Image RainbowRoad;
+    private Image creditScreen;
     
     //Variables control de tiempo de animacion
     private long tiempoActual;
@@ -39,6 +50,13 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             instrucciones = false;
             start = false;
             gameover = false;
+            
+            startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
+            instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
+            characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
+            mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
+            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadNoSeparado.png"));
+            creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
         }
 
         /** 
@@ -117,7 +135,39 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             
         }
-    
+        
+        /**
+	 * Metodo <I>paint</I> sobrescrito de la clase <code>Applet</code>,
+	 * heredado de la clase Container.<P>
+	 * En este metodo se dibuja la imagen con la posicion actualizada,
+	 * ademas que cuando la imagen es cargada te despliega una advertencia.
+	 * @param g es el <code>objeto grafico</code> usado para dibujar.
+	 */
+        public void paint(Graphics g) {
+                //Inicializa el DoubleBuffer
+                if (dbImage == null){
+                    dbImage = createImage(this.getSize().width, this.getSize().height);
+                    dbg = dbImage.getGraphics();
+                }
+                //Actualiza la imagen de fondo
+                dbg.setColor(getBackground());
+                dbg.fillRect(0, 0, this.getSize().width, this.getSize().height);
+                //Actualiza el Foreground
+                dbg.setColor(getForeground());
+                paint1(dbg);
+                //Dibuja la imagen actualizada
+                g.drawImage(dbImage, 0, 0, this);
+        }
+        
+        public void paint1(Graphics g) {
+            g.drawImage(startScreen, 0, 0, this);
+            g.drawImage(instructionScreen, 0, 0, this);
+            g.drawImage(characterSelect, 0, 0, this);
+            g.drawImage(mapSelect, 0, 0, this);
+            g.drawImage(RainbowRoad, 0, 0, this);
+            g.drawImage(creditScreen, 0, 0, this);
+        }
+        
         /**
 	 * Metodo mouseClicked sobrescrito de la interface MouseListener.
 	 * En este metodo maneja el evento que se genera al hacer click con el mouse
@@ -172,6 +222,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 * @param e es el <code>evento</code> generado al presionar las teclas.
 	 */
 	public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                
+            }
         }   
     
          /**
