@@ -22,6 +22,14 @@ import javax.swing.JFrame;
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
     private static final long serialVersionUID = 1L;
     //variables
+    private boolean izquierda;
+    private boolean izquierda2;
+    private boolean derecha;
+    private boolean derecha2;
+    private boolean arriba;
+    private boolean arriba2;
+    private boolean abajo;
+    private boolean abajo2;
     private boolean pausa;
     private boolean instrucciones;
     private boolean start;
@@ -49,6 +57,16 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 
         public void init() {
             setSize(1200,720);
+            
+            izquierda = false;
+            izquierda2 = false;
+            derecha = false;
+            derecha2 = false;
+            arriba = false;
+            arriba2 = false;
+            abajo = false;
+            abajo2 = false;
+            
             pausa = false;
             instrucciones = false;
             start = false;
@@ -131,7 +149,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
          * Este metodo actualiza a los personajes en el applet en sus movimientos
         */
         public void actualiza() {
-            
+            while (!pausa) {
+                
+            }
         }
         
         /**
@@ -141,6 +161,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         * la  colision del bueno con los extremos del applet
         */
         public void checaColision() {
+            while (!pausa) {
+                
+            }
             
         }
         
@@ -177,10 +200,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(characterSelect, 0, 0, this);
                 if (start && pausaCharSelect && !pausaMapSelect)
                     g.drawImage(mapSelect, 0, 0, this);
-                if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow) {
+                if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow)
                     g.drawImage(RainbowRoad, 0, 0, this);
-                    //aqui se mueven los carritos y la pista
-                }
                 if (gameover)
                     g.drawImage(creditScreen, 0, 0, this);
             }
@@ -261,6 +282,31 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             if (e.getKeyCode() == KeyEvent.VK_P) {
                 pausa = !pausa;
             }
+            
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                izquierda = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                derecha = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                arriba = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                abajo = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                izquierda2 = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                derecha2 = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                arriba2 = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                abajo2 = true;
+            }
         }   
     
          /**
@@ -277,5 +323,29 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 * @param e es el <code>evento</code> que se genera en al soltar las teclas.
 	 */
         public void keyReleased(KeyEvent e){
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                izquierda = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                derecha = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                arriba = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                abajo = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                izquierda2 = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                derecha2 = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                arriba2 = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                abajo2 = false;
+            }
         }
 }
