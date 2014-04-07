@@ -36,7 +36,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean gameover;
     private boolean pausaCharSelect;
     private boolean pausaMapSelect;
-    private boolean pausaRainbow;
+    private boolean rainbow;
     private Graphics dbg;
     private Image dbImage;
     private Image startScreen;
@@ -45,6 +45,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image mapSelect;
     private Image RainbowRoad;
     private Image creditScreen;
+    private BasePersonajes P1;
+    private BasePersonajes P2;
     
     //Variables control de tiempo de animacion
     private long tiempoActual;
@@ -72,7 +74,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             start = false;
             pausaCharSelect = false;
             pausaMapSelect = false;
-            pausaRainbow = false;
+            rainbow = false;
             gameover = false;
             
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
@@ -81,6 +83,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadNoSeparado.png"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
+            
+            P1 = new BasePersonajes();
+            P2 = new BasePersonajes();
             
             addKeyListener(this);
         }
@@ -200,7 +205,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(characterSelect, 0, 0, this);
                 if (start && pausaCharSelect && !pausaMapSelect)
                     g.drawImage(mapSelect, 0, 0, this);
-                if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow)
+                if (start && pausaCharSelect && pausaMapSelect && rainbow)
                     g.drawImage(RainbowRoad, 0, 0, this);
                 if (gameover)
                     g.drawImage(creditScreen, 0, 0, this);
@@ -262,12 +267,14 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 */
 	public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow) {
-                    pausaRainbow = true;
+                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
+                    rainbow = false;
                     gameover = true;
                 }
-                if (start && pausaCharSelect && !pausaMapSelect)
+                if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
+                    rainbow = true;
+                }
                 if (start && !pausaCharSelect)
                     pausaCharSelect = true;
                 if (!start)
