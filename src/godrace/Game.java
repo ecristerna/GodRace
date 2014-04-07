@@ -176,8 +176,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 g.drawImage(characterSelect, 0, 0, this);
             if (start && pausaCharSelect && !pausaMapSelect)
                 g.drawImage(mapSelect, 0, 0, this);
-            if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow)
+            if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow) {
                 g.drawImage(RainbowRoad, 0, 0, this);
+                //aqui se mueven los carritos y la pista
+            }
             if (gameover)
                 g.drawImage(creditScreen, 0, 0, this);
         }

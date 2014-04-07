@@ -34,7 +34,7 @@ public class BasePersonajes {
         * Metodo modificador usado para cambiar la posicion en x del objeto 
         * @param x es la <code>posicion en x</code> del objeto.
         */
-       public void setX(int posX) {
+       public void setPosX(int posX) {
                this.posX = posX;
        }
 
@@ -42,7 +42,7 @@ public class BasePersonajes {
         * Metodo de acceso que regresa la posicion en x del objeto 
         * @return x es la <code>posicion en x</code> del objeto.
         */
-       public int getX() {
+       public int getPosX() {
                return posX;
        }
 
@@ -50,7 +50,7 @@ public class BasePersonajes {
         * Metodo modificador usado para cambiar la posicion en y del objeto 
         * @param y es la <code>posicion en y</code> del objeto.
         */
-       public void setY(int posY) {
+       public void setPosY(int posY) {
                this.posY = posY;
        }
 
@@ -58,8 +58,22 @@ public class BasePersonajes {
         * Metodo de acceso que regresa la posicion en y del objeto 
         * @return y es la <code>posicion en y</code> del objeto.
         */
-       public int getY() {
+       public int getPosY() {
                return posY;
+       }
+       /**
+        * Metodo modificador para actualizar la posicion en x del objeto
+        * @param avance es el <code>avance</code> del objeto.
+        */
+       public void actualizaPosX(int avance) {
+               this.posX+=avance;
+       }
+       /**
+        * Metodo modificador para actualizar la posicion en y del objeto
+        * @param avance es el <code>avance</code> del objeto.
+        */
+       public void actualizaPosY(int avance) {
+               this.posY+=avance;
        }
        /**
         * Metodo de acceso que regresa el ancho del icono 
@@ -91,7 +105,7 @@ public class BasePersonajes {
         * del rectangulo
         */
        public Rectangle getPerimetro(){
-               return new Rectangle(getX(),getY(),getAncho(),getAlto());
+               return new Rectangle(getPosX(),getPosY(),getAncho(),getAlto());
        }
 
        /**
