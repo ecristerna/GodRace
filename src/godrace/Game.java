@@ -168,20 +168,22 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         }
         
         public void paint1(Graphics g) {
-            if (!start)
-                g.drawImage(startScreen, 0, 0, this);
-            if (!start && instrucciones)
-                g.drawImage(instructionScreen, 0, 0, this);
-            if (start && !pausaCharSelect)
-                g.drawImage(characterSelect, 0, 0, this);
-            if (start && pausaCharSelect && !pausaMapSelect)
-                g.drawImage(mapSelect, 0, 0, this);
-            if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow) {
-                g.drawImage(RainbowRoad, 0, 0, this);
-                //aqui se mueven los carritos y la pista
+            while (!pausa) {
+                if (!start)
+                    g.drawImage(startScreen, 0, 0, this);
+                if (!start && instrucciones)
+                    g.drawImage(instructionScreen, 0, 0, this);
+                if (start && !pausaCharSelect)
+                    g.drawImage(characterSelect, 0, 0, this);
+                if (start && pausaCharSelect && !pausaMapSelect)
+                    g.drawImage(mapSelect, 0, 0, this);
+                if (start && pausaCharSelect && pausaMapSelect && !pausaRainbow) {
+                    g.drawImage(RainbowRoad, 0, 0, this);
+                    //aqui se mueven los carritos y la pista
+                }
+                if (gameover)
+                    g.drawImage(creditScreen, 0, 0, this);
             }
-            if (gameover)
-                g.drawImage(creditScreen, 0, 0, this);
         }
         
         /**
@@ -255,6 +257,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (!start) {
                     instrucciones = !instrucciones;
                 }
+            }
+            if (e.getKeyCode() == KeyEvent.VK_P) {
+                pausa = !pausa;
             }
         }   
     
