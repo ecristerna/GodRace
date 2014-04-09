@@ -205,10 +205,19 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     P1.setPosY(35);
                 if (P1.getPosY() + P1.getAlto() > getHeight())
                     P1.setPosY(getHeight() - P1.getAlto());
+                if (P1.getPosX() < 260)
+                    P1.setPosX(270);
+                if (P1.getPosX() > 800)
+                    P1.setPosX(790);
+                
                 if (P2.getPosY() < 35)
                     P2.setPosY(35);
                 if (P2.getPosY() + P2.getAlto() > getHeight())
                     P2.setPosY(getHeight() - P2.getAlto());
+                if (P2.getPosX() < 260)
+                    P2.setPosX(270);
+                if (P2.getPosX() > 800)
+                    P2.setPosX(790);
             }
         }
         
