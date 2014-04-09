@@ -8,7 +8,10 @@ package godrace;
 
 /**
  *
- * @author eduardocristerna
+ * @author Eduardo Cristerna
+ *         Graciela Garcia
+ *         Marcelo Garza
+ *         Ovidio Villarreal
  */
 public class GodRace {
 
