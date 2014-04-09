@@ -86,10 +86,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             P1 = new BasePersonajes();
             P2 = new BasePersonajes();
-            P1.setPosX(getWidth()/2);
-            //P2.setPosX(getWidth()/2);
-            P1.setPosY(getHeight()/2);
-            //P2.setPosY(getHeight()/2);
+            P1.setPosX(getWidth()/4);
+            P2.setPosX(2*getWidth()/4+150);
+            P1.setPosY(getHeight()-P1.getAlto());
+            P2.setPosY(getHeight()-P2.getAlto());
             
             addKeyListener(this);
         }
@@ -159,23 +159,35 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         */
         public void actualiza() {
             if (!pausa && rainbow) {
-                if (izquierda)
+                if (izquierda) {
                     P1.actualizaPosX(-5);
-                if (derecha)
+                }
+                if (derecha) {
                     P1.actualizaPosX(5);
-                if (arriba)
-                    P1.actualizaPosY(-5);
-                if (abajo)
-                    P1.actualizaPosY(5);
+                }
+                if (arriba) {
+                    if (P1.getPosY() - 35 > 0)
+                        P1.actualizaPosY(-5);
+                }
+                if (abajo) {
+                    if (P1.getPosY() + P1.getAlto() + 5 < getHeight())
+                        P1.actualizaPosY(5);
+                }
                 
-                if (izquierda2)
+                if (izquierda2) {
                     P2.actualizaPosX(-5);
-                if (derecha2)
+                }
+                if (derecha2) {
                     P2.actualizaPosX(5);
-                if (arriba2)
-                    P2.actualizaPosY(-5);
-                if (abajo2)
-                    P2.actualizaPosY(5);
+                }
+                if (arriba2) {
+                    if (P2.getPosY() - 35 > 0)
+                        P2.actualizaPosY(-5);
+                }
+                if (abajo2) {
+                    if (P2.getPosY() + P2.getAlto() + 5 < getHeight())
+                        P2.actualizaPosY(5);
+                }
             }
         }
         
@@ -227,7 +239,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (start && pausaCharSelect && pausaMapSelect && rainbow) {
                     g.drawImage(RainbowRoad, 0, 0, this);
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
-                    //g.drawImage(P2.getImagenI(), 0, 0, this);
+                    g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
                 if (gameover)
                     g.drawImage(creditScreen, 0, 0, this);
