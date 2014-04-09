@@ -17,7 +17,12 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Ovidio
+ * @author
+ * Eduardo Cristerna Morales
+ * Edgar Ovidio Villarreal Treviño
+ * Graciela Garcia Diaz
+ * Andres Marcelo Garza Cantu
+ * 
  */
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
     private static final long serialVersionUID = 1L;
@@ -86,8 +91,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             P1 = new BasePersonajes();
             P2 = new BasePersonajes();
-            P1.setPosX(getWidth()/4);
-            P2.setPosX(2*getWidth()/4+150);
+            P1.setPosX(2*getWidth()/4+150); 
+            P2.setPosX(getWidth()/4);
             P1.setPosY(getHeight()-P1.getAlto());
             P2.setPosY(getHeight()-P2.getAlto());
             
