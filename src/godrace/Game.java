@@ -86,7 +86,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
-            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadNoSeparado.png"));
+            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             P1 = new BasePersonajes();
@@ -170,13 +170,11 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (derecha) {
                     P1.actualizaPosX(5);
                 }
-                if (arriba) {
-                    if (P1.getPosY() - 35 > 0)
-                        P1.actualizaPosY(-5);
+                if (arriba) {    
+                    P1.actualizaPosY(-5);
                 }
                 if (abajo) {
-                    if (P1.getPosY() + P1.getAlto() + 5 < getHeight())
-                        P1.actualizaPosY(5);
+                    P1.actualizaPosY(5);
                 }
                 
                 if (izquierda2) {
@@ -186,12 +184,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     P2.actualizaPosX(5);
                 }
                 if (arriba2) {
-                    if (P2.getPosY() - 35 > 0)
-                        P2.actualizaPosY(-5);
+                    P2.actualizaPosY(-5);
                 }
                 if (abajo2) {
-                    if (P2.getPosY() + P2.getAlto() + 5 < getHeight())
-                        P2.actualizaPosY(5);
+                    P2.actualizaPosY(5);
                 }
             }
         }
@@ -205,6 +201,23 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             if (!pausa && rainbow) {
                 
+                if (P1.getPosY() < 35)
+                    P1.setPosY(35);
+                if (P1.getPosY() + P1.getAlto() > getHeight())
+                    P1.setPosY(getHeight() - P1.getAlto());
+                if (P1.getPosX() < 260)
+                    P1.setPosX(270);
+                if (P1.getPosX() > 800)
+                    P1.setPosX(790);
+                
+                if (P2.getPosY() < 35)
+                    P2.setPosY(35);
+                if (P2.getPosY() + P2.getAlto() > getHeight())
+                    P2.setPosY(getHeight() - P2.getAlto());
+                if (P2.getPosX() < 260)
+                    P2.setPosX(270);
+                if (P2.getPosX() > 800)
+                    P2.setPosX(790);
             }
         }
         
