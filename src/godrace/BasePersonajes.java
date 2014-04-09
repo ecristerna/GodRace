@@ -13,7 +13,13 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Ovidio
+ * @author
+ * @author
+ * Eduardo Cristerna Morales
+ * Edgar Ovidio Villarreal Treviño
+ * Graciela Garcia Diaz
+ * Andres Marcelo Garza Cantu
+ * 
  */
 public class BasePersonajes {
     private int posX;

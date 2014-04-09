@@ -10,10 +10,13 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Eduardo Cristerna
- *         Graciela Garcia
- *         Marcelo Garza
- *         Ovidio Villarreal
+ * @author 
+ * @author
+ * Eduardo Cristerna Morales
+ * Edgar Ovidio Villarreal Treviño
+ * Graciela Garcia Diaz
+ * Andres Marcelo Garza Cantu
+ * 
  */
 public class GodRace {
 
