@@ -8,6 +8,7 @@ package godrace;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 /**
@@ -23,6 +24,10 @@ public class BasePersonajes {
     public BasePersonajes() {
         this.posX = 0;
         this.posY = 0;
+        
+        Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Zeus.jpg"));
+        anim = new Animacion();
+        anim.sumaCuadro(zeus, 100);
     }
 
     public BasePersonajes(int posX, int posY) {

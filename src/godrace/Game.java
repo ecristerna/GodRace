@@ -59,7 +59,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 
         public void init() {
             setSize(1200,720);
-            
+            //variables booleanas de movimiento de personajes
             izquierda = false;
             izquierda2 = false;
             derecha = false;
@@ -86,6 +86,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             P1 = new BasePersonajes();
             P2 = new BasePersonajes();
+            P1.setPosX(getWidth()/2);
+            //P2.setPosX(getWidth()/2);
+            P1.setPosY(getHeight()/2);
+            //P2.setPosY(getHeight()/2);
             
             addKeyListener(this);
         }
@@ -154,8 +158,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
          * Este metodo actualiza a los personajes en el applet en sus movimientos
         */
         public void actualiza() {
-            while (!pausa) {
+            if (!pausa && rainbow) {
+                if (izquierda)
+                    P1.actualizaPosX(-5);
+                if (derecha)
+                    P1.actualizaPosX(5);
+                if (arriba)
+                    P1.actualizaPosY(-5);
+                if (abajo)
+                    P1.actualizaPosY(5);
                 
+                if (izquierda2)
+                    P2.actualizaPosX(-5);
+                if (derecha2)
+                    P2.actualizaPosX(5);
+                if (arriba2)
+                    P2.actualizaPosY(-5);
+                if (abajo2)
+                    P2.actualizaPosY(5);
             }
         }
         
@@ -166,10 +186,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         * la  colision del bueno con los extremos del applet
         */
         public void checaColision() {
-            while (!pausa) {
+            if (!pausa && rainbow) {
                 
             }
-            
         }
         
         /**
@@ -196,7 +215,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         }
         
         public void paint1(Graphics g) {
-            while (!pausa) {
+            if (!pausa) {
                 if (!start)
                     g.drawImage(startScreen, 0, 0, this);
                 if (!start && instrucciones)
@@ -205,8 +224,11 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(characterSelect, 0, 0, this);
                 if (start && pausaCharSelect && !pausaMapSelect)
                     g.drawImage(mapSelect, 0, 0, this);
-                if (start && pausaCharSelect && pausaMapSelect && rainbow)
+                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
                     g.drawImage(RainbowRoad, 0, 0, this);
+                    g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
+                    //g.drawImage(P2.getImagenI(), 0, 0, this);
+                }
                 if (gameover)
                     g.drawImage(creditScreen, 0, 0, this);
             }
