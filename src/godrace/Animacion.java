@@ -10,13 +10,13 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 /**
-	La clase Animacion maneja una serie de imágenes (cuadros)
-	y la cantidad de tiempo que se muestra cada cuadro.
+ * La clase Animacion maneja una serie de imágenes (cuadros)
+ * y la cantidad de tiempo que se muestra cada cuadro.
 */
 
 public class Animacion{
 	
-	private ArrayList cuadros;
+        private ArrayList cuadros;
 	private int indiceCuadroActual;
 	private long tiempoDeAnimacion;
 	private long duracionTotal;
@@ -77,6 +77,11 @@ public class Animacion{
 		}
 	}
 	
+        /**
+         * Método <I>getCuadro</I> regresa el cuadro siguiente de la animación
+         * @param i es el índice del cuadro
+         * @return es el cuadro del índice i
+         */
 	private cuadroDeAnimacion getCuadro(int i){
 		return (cuadroDeAnimacion)cuadros.get(i);
 	}
@@ -111,6 +116,5 @@ public class Animacion{
 		public void setTiempoFinal(long tiempoFinal){
 			this.tiempoFinal = tiempoFinal;
 		}
-	}
-		
+	}		
 }

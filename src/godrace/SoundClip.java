@@ -172,5 +172,4 @@ public class SoundClip {
 	public void stop() {
 		clip.stop();
 	}
-
 }

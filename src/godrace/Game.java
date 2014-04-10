@@ -24,6 +24,7 @@ import javax.swing.JFrame;
  * Andres Marcelo Garza Cantu
  * 
  */
+
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
     private static final long serialVersionUID = 1L;
     //variables
@@ -82,6 +83,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             rainbow = false;
             gameover = false;
             
+            // Imágenes de fondo, menús, créditos, etc.
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
@@ -89,6 +91,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
+            // Inicialización de personajes
             P1 = new BasePersonajes();
             P2 = new BasePersonajes();
             P1.setPosX(2*getWidth()/4+150); 
@@ -100,21 +103,21 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         }
 
         /** 
-        * Metodo <I>start</I> sobrescrito de la clase <code>Applet</code>.<P>
+       * Metodo <I>start</I> sobrescrito de la clase <code>Applet</code>.<P>
        * En este metodo se crea e inicializa el hilo
        * para la animacion este metodo es llamado despues del init o 
        * cuando el usuario visita otra pagina y luego regresa a la pagina
        * en donde esta este <code>Applet</code>
        * 
        */
-       public void start () {
+        public void start () {
                // Declaras un hilo
                Thread th = new Thread (this);
                // Empieza el hilo
                th.start ();
        }
 
-       /**
+        /**
         * Metodo <I>stop</I> sobrescrito de la clase <code>Applet</code>.<P>
         * En este metodo se pueden tomar acciones para cuando se termina
         * de usar el <code>Applet</code>. Usualmente cuando el usuario sale de la pagina
@@ -163,16 +166,21 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
          * Este metodo actualiza a los personajes en el applet en sus movimientos
         */
         public void actualiza() {
+            // Verifica que no esté en pausa y que esté en el escenario de juego
             if (!pausa && rainbow) {
+                // Actualiza la posición dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-5);
                 }
+                
                 if (derecha) {
                     P1.actualizaPosX(5);
                 }
+                
                 if (arriba) {    
                     P1.actualizaPosY(-5);
                 }
+                
                 if (abajo) {
                     P1.actualizaPosY(5);
                 }
@@ -180,12 +188,15 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (izquierda2) {
                     P2.actualizaPosX(-5);
                 }
+                
                 if (derecha2) {
                     P2.actualizaPosX(5);
                 }
+                
                 if (arriba2) {
                     P2.actualizaPosY(-5);
                 }
+                
                 if (abajo2) {
                     P2.actualizaPosY(5);
                 }
@@ -199,25 +210,41 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         * la  colision del bueno con los extremos del applet
         */
         public void checaColision() {
+            // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa && rainbow) {
-                
-                if (P1.getPosY() < 35)
+                // Verifica que el personaje 1 no choque con el frame
+                if (P1.getPosY() < 35) {
                     P1.setPosY(35);
-                if (P1.getPosY() + P1.getAlto() > getHeight())
-                    P1.setPosY(getHeight() - P1.getAlto());
-                if (P1.getPosX() < 260)
-                    P1.setPosX(270);
-                if (P1.getPosX() > 800)
-                    P1.setPosX(790);
+                }
                 
-                if (P2.getPosY() < 35)
+                if (P1.getPosY() + P1.getAlto() > getHeight()) {
+                    P1.setPosY(getHeight() - P1.getAlto());
+                }
+                
+                if (P1.getPosX() < 260) {
+                    P1.setPosX(270);
+                }
+                
+                if (P1.getPosX() > 800) {
+                    P1.setPosX(790);
+                }
+                
+                // Verifica que el personaje 2 no choque con el frame
+                if (P2.getPosY() < 35) {
                     P2.setPosY(35);
-                if (P2.getPosY() + P2.getAlto() > getHeight())
+                }
+                
+                if (P2.getPosY() + P2.getAlto() > getHeight()) {
                     P2.setPosY(getHeight() - P2.getAlto());
-                if (P2.getPosX() < 260)
+                }
+                
+                if (P2.getPosX() < 260) {
                     P2.setPosX(270);
-                if (P2.getPosX() > 800)
+                }
+                
+                if (P2.getPosX() > 800) {
                     P2.setPosX(790);
+                }
             }
         }
         
@@ -230,7 +257,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 */
         public void paint(Graphics g) {
                 //Inicializa el DoubleBuffer
-                if (dbImage == null){
+                if (dbImage == null) {
                     dbImage = createImage(this.getSize().width, this.getSize().height);
                     dbg = dbImage.getGraphics();
                 }
@@ -244,23 +271,40 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 g.drawImage(dbImage, 0, 0, this);
         }
         
+        /**
+         * El método <I>paint1</I> muestra en pantalla la animación
+         *
+         * @param g es la imágen a proyectar
+        */
         public void paint1(Graphics g) {
+            // Verifica que no esté pausado el juego
             if (!pausa) {
-                if (!start)
+                // Dibuja la pantalla de inicio
+                if (!start) {
                     g.drawImage(startScreen, 0, 0, this);
-                if (!start && instrucciones)
+                }
+                // Dibuja la pantalla de instrucciones
+                if (!start && instrucciones) {
                     g.drawImage(instructionScreen, 0, 0, this);
-                if (start && !pausaCharSelect)
+                }
+                // Dibuja la pantalla de selección de personajes
+                if (start && !pausaCharSelect) {
                     g.drawImage(characterSelect, 0, 0, this);
-                if (start && pausaCharSelect && !pausaMapSelect)
+                }
+                // Dibuja la pantalla de selección de pista
+                if (start && pausaCharSelect && !pausaMapSelect) {
                     g.drawImage(mapSelect, 0, 0, this);
+                }
+                // Dibuja el escenario de juego con sus personajes
                 if (start && pausaCharSelect && pausaMapSelect && rainbow) {
                     g.drawImage(RainbowRoad, 0, 0, this);
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
-                if (gameover)
+                // Dibuja la pantalla de créditos
+                if (gameover) {
                     g.drawImage(creditScreen, 0, 0, this);
+                }
             }
         }
         
@@ -318,58 +362,78 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 * @param e es el <code>evento</code> generado al presionar las teclas.
 	 */
 	public void keyPressed(KeyEvent e) {
+            // Verifica la tecla enter para cambiar de pantallas, dependiendo
+            // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                
                 if (start && pausaCharSelect && pausaMapSelect && rainbow) {
                     rainbow = false;
                     gameover = true;
                 }
+                
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
                     rainbow = true;
                 }
-                if (start && !pausaCharSelect)
+                
+                if (start && !pausaCharSelect) {
                     pausaCharSelect = true;
-                if (!start)
+                }
+                
+                if (!start) {
                     start = true;
+                }
             }
             
+            // Verifica la tecla I para mostrar las instrucciones mientras se esté
+            // en la pantalla de inicio
             if (e.getKeyCode() == KeyEvent.VK_I) {
+                
                 if (!start) {
                     instrucciones = !instrucciones;
                 }
             }
+            // Verifica la tecla de pausa
             if (e.getKeyCode() == KeyEvent.VK_P) {
                 pausa = !pausa;
             }
             
+            // Verifica las teclas de movimiento para los personajes
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 izquierda = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 derecha = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 arriba = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 abajo = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_A) {
                 izquierda2 = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 derecha2 = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 arriba2 = true;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 abajo2 = true;
             }
         }   
-    
-         /**
-	 * Metodo <I>keyTyped</I> sobrescrito de la interface <code>KeyListener</code>.<P>
+        
+        /**
+         * Metodo <I>keyTyped</I> sobrescrito de la interface <code>KeyListener</code>.<P>
 	 * En este metodo maneja el evento que se genera al presionar una tecla que no es de accion.
 	 * @param e es el <code>evento</code> que se genera en al presionar las teclas.
 	 */
@@ -381,28 +445,36 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
 	 * En este metodo maneja el evento que se genera al soltar la tecla presionada.
 	 * @param e es el <code>evento</code> que se genera en al soltar las teclas.
 	 */
-        public void keyReleased(KeyEvent e){
+        public void keyReleased(KeyEvent e) {
+            // Verifica que la tecla se haya soltado para dejar de mover el personaje
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 izquierda = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 derecha = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 arriba = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 abajo = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_A) {
                 izquierda2 = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 derecha2 = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 arriba2 = false;
             }
+            
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 abajo2 = false;
             }

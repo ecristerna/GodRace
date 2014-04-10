@@ -18,18 +18,16 @@ import javax.swing.JFrame;
  * Andres Marcelo Garza Cantu
  * 
  */
+
 public class GodRace {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        // TODO code application logic here
         Game game = new Game();
         game.setTitle("GODRACE");
         game.setVisible(true);
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
 }
