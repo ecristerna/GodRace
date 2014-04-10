@@ -346,6 +346,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
+                // Dibuja el escenario de juego con sus personajes
+                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
+                    g.drawImage(RainbowRoad, 0, 0, this);
+                    g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
+                    g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
+                }
                 // Dibuja la pantalla de créditos
                 if (gameover) {
                     g.drawImage(creditScreen, 0, 0, this);
@@ -411,9 +417,15 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 
+                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
+                    rainbow = false;
+                    gameover = true;
+                }
+                
                 if (start && pausaCharSelect && pausaMapSelect && jungle) {
                     jungle = false;
-                    gameover = true;
+                    rainbow = true;
+                    //gameover = true;
                 }
                 
                 if (start && pausaCharSelect && !pausaMapSelect) {
