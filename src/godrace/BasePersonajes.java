@@ -32,13 +32,12 @@ public class BasePersonajes {
      * Método constructor de la clase <I>BasePersonajes</I> que inicializa
      * posX y posY con 0
      */
-    public BasePersonajes() {
+    public BasePersonajes(Image img) {
         this.posX = 0;
         this.posY = 0;
         
-        Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Zeus.jpg"));
         anim = new Animacion();
-        anim.sumaCuadro(zeus, 100);
+        anim.sumaCuadro(img, 100);
     }
 
     /**
@@ -46,7 +45,7 @@ public class BasePersonajes {
      * @param posX es la posición en x del personaje
      * @param posY es la posición en y del personaje del tipo int
      */
-    public BasePersonajes(int posX, int posY) {
+    public BasePersonajes(int posX, int posY, Image img) {
         this.posX = posX;
         this.posY = posY;
     }

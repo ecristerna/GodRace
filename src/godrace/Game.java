@@ -95,9 +95,13 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
+            // Imagenes de personajes
+            Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
+            Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Zeus.jpg"));
+            
             // Inicialización de personajes
-            P1 = new BasePersonajes();
-            P2 = new BasePersonajes();
+            P1 = new BasePersonajes(dragon);
+            P2 = new BasePersonajes(zeus);
             P1.setPosX(2*getWidth()/4+150); 
             P2.setPosX(getWidth()/4);
             P1.setPosY(getHeight()-P1.getAlto());
