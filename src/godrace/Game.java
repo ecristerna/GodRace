@@ -92,7 +92,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
-            Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
+            Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Imagenes de personajes
@@ -175,7 +175,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         */
         public void actualiza() {
             // Verifica que no esté en pausa y que esté en el escenario de juego
-            if (!pausa && rainbow) {
+            if (!pausa && (rainbow || jungle)) {
                 // Actualiza la posición dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-5);
@@ -219,39 +219,76 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         */
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
-            if (!pausa && rainbow) {
-                // Verifica que el personaje 1 no choque con el frame
-                if (P1.getPosY() < 35) {
-                    P1.setPosY(35);
+            if (!pausa) {
+                if (rainbow) {
+                    // Verifica que el personaje 1 no choque con el frame
+                    if (P1.getPosY() < 35) {
+                        P1.setPosY(35);
+                    }
+
+                    if (P1.getPosY() + P1.getAlto() > getHeight()) {
+                        P1.setPosY(getHeight() - P1.getAlto());
+                    }
+
+                    if (P1.getPosX() < 260) {
+                        P1.setPosX(270);
+                    }
+
+                    if (P1.getPosX() > 800) {
+                        P1.setPosX(790);
+                    }
+
+                    // Verifica que el personaje 2 no choque con el frame
+                    if (P2.getPosY() < 35) {
+                        P2.setPosY(35);
+                    }
+
+                    if (P2.getPosY() + P2.getAlto() > getHeight()) {
+                        P2.setPosY(getHeight() - P2.getAlto());
+                    }
+
+                    if (P2.getPosX() < 260) {
+                        P2.setPosX(270);
+                    }
+
+                    if (P2.getPosX() > 800) {
+                        P2.setPosX(790);
+                    }
                 }
-                
-                if (P1.getPosY() + P1.getAlto() > getHeight()) {
-                    P1.setPosY(getHeight() - P1.getAlto());
-                }
-                
-                if (P1.getPosX() < 260) {
-                    P1.setPosX(270);
-                }
-                
-                if (P1.getPosX() > 800) {
-                    P1.setPosX(790);
-                }
-                
-                // Verifica que el personaje 2 no choque con el frame
-                if (P2.getPosY() < 35) {
-                    P2.setPosY(35);
-                }
-                
-                if (P2.getPosY() + P2.getAlto() > getHeight()) {
-                    P2.setPosY(getHeight() - P2.getAlto());
-                }
-                
-                if (P2.getPosX() < 260) {
-                    P2.setPosX(270);
-                }
-                
-                if (P2.getPosX() > 800) {
-                    P2.setPosX(790);
+                if (jungle) {
+                    // Verifica que el personaje 1 no choque con el frame
+                    if (P1.getPosY() < 35) {
+                        P1.setPosY(35);
+                    }
+
+                    if (P1.getPosY() + P1.getAlto() > getHeight()) {
+                        P1.setPosY(getHeight() - P1.getAlto());
+                    }
+                    
+                    if (P1.getPosX() < 295) {
+                        P1.setPosX(305);
+                    }
+
+                    if (P1.getPosX() > 890) {
+                        P1.setPosX(880);
+                    }
+
+                    // Verifica que el personaje 2 no choque con el frame
+                    if (P2.getPosY() < 35) {
+                        P2.setPosY(35);
+                    }
+
+                    if (P2.getPosY() + P2.getAlto() > getHeight()) {
+                        P2.setPosY(getHeight() - P2.getAlto());
+                    }
+
+                    if (P2.getPosX() < 295) {
+                        P2.setPosX(305);
+                    }
+
+                    if (P2.getPosX() > 890) {
+                        P2.setPosX(880);
+                    }
                 }
             }
         }
@@ -304,8 +341,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(mapSelect, 0, 0, this);
                 }
                 // Dibuja el escenario de juego con sus personajes
-                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
-                    g.drawImage(RainbowRoad, 0, 0, this);
+                if (start && pausaCharSelect && pausaMapSelect && jungle) {
+                    g.drawImage(Jungle, 0, 0, this);
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
@@ -374,14 +411,14 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 
-                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
-                    rainbow = false;
+                if (start && pausaCharSelect && pausaMapSelect && jungle) {
+                    jungle = false;
                     gameover = true;
                 }
                 
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
-                    rainbow = true;
+                    jungle = true;
                 }
                 
                 if (start && !pausaCharSelect) {
