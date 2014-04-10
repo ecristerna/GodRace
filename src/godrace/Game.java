@@ -97,7 +97,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             // Imagenes de personajes
             Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
-            Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Zeus.jpg"));
+            Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_ZeusGIF.gif"));
             
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon);
