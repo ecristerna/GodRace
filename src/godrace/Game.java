@@ -43,6 +43,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean pausaCharSelect;
     private boolean pausaMapSelect;
     private boolean rainbow;
+    private boolean jungle;
     private Graphics dbg;
     private Image dbImage;
     private Image startScreen;
@@ -50,6 +51,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image characterSelect;
     private Image mapSelect;
     private Image RainbowRoad;
+    private Image Jungle;
     private Image creditScreen;
     private BasePersonajes P1;
     private BasePersonajes P2;
@@ -81,6 +83,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             pausaCharSelect = false;
             pausaMapSelect = false;
             rainbow = false;
+            jungle = false;
             gameover = false;
             
             // Imágenes de fondo, menús, créditos, etc.
@@ -89,6 +92,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
+            Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Inicialización de personajes
