@@ -220,16 +220,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa) {
-                if (rainbow) {
-                    // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosY() < 35) {
+                if (P1.getPosY() < 35) {
                         P1.setPosY(35);
                     }
 
-                    if (P1.getPosY() + P1.getAlto() > getHeight()) {
-                        P1.setPosY(getHeight() - P1.getAlto());
+                if (P1.getPosY() + P1.getAlto() > getHeight()) {
+                    P1.setPosY(getHeight() - P1.getAlto());
+                }
+                
+                if (P2.getPosY() < 35) {
+                        P2.setPosY(35);
                     }
 
+                if (P2.getPosY() + P2.getAlto() > getHeight()) {
+                    P2.setPosY(getHeight() - P2.getAlto());
+                }
+                    
+                if (rainbow) {
+                    // Verifica que el personaje 1 no choque con el frame
                     if (P1.getPosX() < 260) {
                         P1.setPosX(270);
                     }
@@ -239,14 +247,6 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     }
 
                     // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosY() < 35) {
-                        P2.setPosY(35);
-                    }
-
-                    if (P2.getPosY() + P2.getAlto() > getHeight()) {
-                        P2.setPosY(getHeight() - P2.getAlto());
-                    }
-
                     if (P2.getPosX() < 260) {
                         P2.setPosX(270);
                     }
@@ -256,15 +256,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     }
                 }
                 if (jungle) {
-                    // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosY() < 35) {
-                        P1.setPosY(35);
-                    }
-
-                    if (P1.getPosY() + P1.getAlto() > getHeight()) {
-                        P1.setPosY(getHeight() - P1.getAlto());
-                    }
-                    
+                    // Verifica que el personaje 1 no choque con el frame                   
                     if (P1.getPosX() < 295) {
                         P1.setPosX(305);
                     }
@@ -274,14 +266,6 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     }
 
                     // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosY() < 35) {
-                        P2.setPosY(35);
-                    }
-
-                    if (P2.getPosY() + P2.getAlto() > getHeight()) {
-                        P2.setPosY(getHeight() - P2.getAlto());
-                    }
-
                     if (P2.getPosX() < 295) {
                         P2.setPosX(305);
                     }
