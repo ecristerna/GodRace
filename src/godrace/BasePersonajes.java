@@ -26,15 +26,17 @@ public class BasePersonajes {
     private int posY;
     private boolean powerUp;
     protected Animacion anim;
+    private SoundClip sonido;
 
     /**
      * Método constructor de la clase <I>BasePersonajes</I> que inicializa
      * posX y posY con 0
      */
-    public BasePersonajes(Image img) {
+    public BasePersonajes(Image img, SoundClip sonido) {
         this.posX = 0;
         this.posY = 0;
         powerUp = false;
+        this.sonido = sonido;
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
@@ -45,10 +47,11 @@ public class BasePersonajes {
      * @param posX es la posición en x del personaje
      * @param posY es la posición en y del personaje del tipo int
      */
-    public BasePersonajes(int posX, int posY, Image img) {
+    public BasePersonajes(int posX, int posY, Image img, SoundClip sonido) {
         this.posX = posX;
         this.posY = posY;
         powerUp = false;
+        this.sonido = sonido;
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
@@ -160,7 +163,6 @@ public class BasePersonajes {
     
     /**
      * Checa si el objeto <code>Animal</code> intersecta a otro <code>Animal</code>
-     *
      * @return un valor boleano <code>true</code> si lo intersecta <code>false</code>
      * en caso contrario
      */
@@ -168,6 +170,14 @@ public class BasePersonajes {
         return getPerimetro().intersects(obj.getPerimetro());
     }
     
+    public void setSonido(SoundClip sonido) {
+        this.sonido = sonido;
+    }
+    
+    public SoundClip setSonido() {
+        return sonido;
+    }
+            
     /**
      * Metodo de actualizacion de imagen de los sprites
      * @param tiempo 

@@ -103,11 +103,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_ZeusGIF.gif"));
             
             // Sonidos de los personajes
-            
+            SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
+            SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
             
             // Inicialización de personajes
-            P1 = new BasePersonajes(dragon);
-            P2 = new BasePersonajes(zeus);
+            P1 = new BasePersonajes(dragon, sonido_dragon);
+            P2 = new BasePersonajes(zeus, sonido_zeus);
             P1.setPosX(getWidth()/4); 
             P2.setPosX(2*getWidth()/4+150);
             P1.setPosY(getHeight()-P1.getAlto());
@@ -182,7 +183,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void actualiza() {
             // Verifica que no esté en pausa y que esté en el escenario de juego
             if (!pausa && (rainbow || jungle)) {
-                // Actualiza la posición dependiendo de la tecla que se esté oprimiendo
+                // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-5);
                 }
