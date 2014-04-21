@@ -99,6 +99,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
             Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_ZeusGIF.gif"));
             
+            // Sonidos de los personajes
+            
+            
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon);
             P2 = new BasePersonajes(zeus);
@@ -180,31 +183,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (izquierda) {
                     P1.actualizaPosX(-5);
                 }
-                
                 if (derecha) {
                     P1.actualizaPosX(5);
                 }
-                
                 if (arriba) {    
                     P1.actualizaPosY(-5);
                 }
-                
                 if (abajo) {
                     P1.actualizaPosY(5);
                 }
-                
                 if (izquierda2) {
                     P2.actualizaPosX(-5);
                 }
-                
                 if (derecha2) {
                     P2.actualizaPosX(5);
                 }
-                
                 if (arriba2) {
                     P2.actualizaPosY(-5);
                 }
-                
                 if (abajo2) {
                     P2.actualizaPosY(5);
                 }
@@ -222,35 +218,28 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             if (!pausa) {
                 if (P1.getPosY() < 35) {
                         P1.setPosY(35);
-                    }
-
+                }
                 if (P1.getPosY() + P1.getAlto() > getHeight()) {
                     P1.setPosY(getHeight() - P1.getAlto());
                 }
-                
                 if (P2.getPosY() < 35) {
                         P2.setPosY(35);
-                    }
-
+                }
                 if (P2.getPosY() + P2.getAlto() > getHeight()) {
                     P2.setPosY(getHeight() - P2.getAlto());
-                }
-                    
+                }    
                 if (rainbow) {
                     // Verifica que el personaje 1 no choque con el frame
                     if (P1.getPosX() < 260) {
                         P1.setPosX(270);
                     }
-
                     if (P1.getPosX() > 800) {
                         P1.setPosX(790);
                     }
-
                     // Verifica que el personaje 2 no choque con el frame
                     if (P2.getPosX() < 260) {
                         P2.setPosX(270);
                     }
-
                     if (P2.getPosX() > 800) {
                         P2.setPosX(790);
                     }
@@ -260,18 +249,33 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     if (P1.getPosX() < 295) {
                         P1.setPosX(305);
                     }
-
                     if (P1.getPosX() > 890) {
                         P1.setPosX(880);
                     }
-
                     // Verifica que el personaje 2 no choque con el frame
                     if (P2.getPosX() < 295) {
                         P2.setPosX(305);
                     }
-
                     if (P2.getPosX() > 890) {
                         P2.setPosX(880);
+                    }
+                }
+                
+                // Colision entre personajes
+                if (P1.intersecta(P2)) {
+                    if (derecha || izquierda2) {
+                        P1.setPosX(P1.getPosX() - 10);
+                        P2.setPosX(P2.getPosX() + 10);
+                    }
+                    if (derecha2 || izquierda) {
+                        P1.setPosX(P1.getPosX() + 10);
+                        P2.setPosX(P2.getPosX() - 10);
+                    }
+                    if (arriba || arriba2) {
+                        
+                    }
+                    if (abajo || abajo2) {
+                        
                     }
                 }
             }
