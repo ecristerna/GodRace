@@ -170,11 +170,11 @@ public class BasePersonajes {
         return getPerimetro().intersects(obj.getPerimetro());
     }
     
-    public void setSonido(SoundClip sonido) {
-        this.sonido = sonido;
-    }
-    
-    public SoundClip setSonido() {
+    /**
+     * Metodo de acceso que regresa el sonido del objeto 
+     * @return un objeto de la clase <code>SoundClip</code> que es el sonido del objeto.
+     */
+    public SoundClip getSonido() {
         return sonido;
     }
             

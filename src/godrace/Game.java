@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 
 /**
@@ -58,6 +59,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image creditScreen;
     private BasePersonajes P1;
     private BasePersonajes P2;
+    private LinkedList obstaclesLeft;
+    private LinkedList obstaclesRight;
     
     //Variables control de tiempo de animacion
     private long tiempoActual;
@@ -105,6 +108,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
             SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
+            
+            // Inicializa los obstaculos
+            obstaclesLeft = new LinkedList();
+            obstaclesRight = new LinkedList();
             
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon, sonido_dragon);
