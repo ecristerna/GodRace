@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 
 /**
@@ -27,6 +28,9 @@ import javax.swing.JFrame;
 
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
     private static final long serialVersionUID = 1L;
+    private final static int EXTREMO_SUPERIOR = 35;
+    private final static int JUNGLE_IZQUIERDO = 295;
+    private final static int JUNGLE_DERECHO = 890;
     //variables
     private boolean izquierda;
     private boolean izquierda2;
@@ -55,6 +59,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image creditScreen;
     private BasePersonajes P1;
     private BasePersonajes P2;
+    private LinkedList obstaclesLeft;
+    private LinkedList obstaclesRight;
     
     //Variables control de tiempo de animacion
     private long tiempoActual;
@@ -99,11 +105,19 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
             Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_ZeusGIF.gif"));
             
+            // Sonidos de los personajes
+            SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
+            SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
+            
+            // Inicializa los obstaculos
+            obstaclesLeft = new LinkedList();
+            obstaclesRight = new LinkedList();
+            
             // Inicialización de personajes
-            P1 = new BasePersonajes(dragon);
-            P2 = new BasePersonajes(zeus);
-            P1.setPosX(2*getWidth()/4+150); 
-            P2.setPosX(getWidth()/4);
+            P1 = new BasePersonajes(dragon, sonido_dragon);
+            P2 = new BasePersonajes(zeus, sonido_zeus);
+            P1.setPosX(getWidth()/4); 
+            P2.setPosX(2*getWidth()/4+150);
             P1.setPosY(getHeight()-P1.getAlto());
             P2.setPosY(getHeight()-P2.getAlto());
             
@@ -176,35 +190,28 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void actualiza() {
             // Verifica que no esté en pausa y que esté en el escenario de juego
             if (!pausa && (rainbow || jungle)) {
-                // Actualiza la posición dependiendo de la tecla que se esté oprimiendo
+                // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-5);
                 }
-                
                 if (derecha) {
                     P1.actualizaPosX(5);
                 }
-                
                 if (arriba) {    
                     P1.actualizaPosY(-5);
                 }
-                
                 if (abajo) {
                     P1.actualizaPosY(5);
                 }
-                
                 if (izquierda2) {
                     P2.actualizaPosX(-5);
                 }
-                
                 if (derecha2) {
                     P2.actualizaPosX(5);
                 }
-                
                 if (arriba2) {
                     P2.actualizaPosY(-5);
                 }
-                
                 if (abajo2) {
                     P2.actualizaPosY(5);
                 }
@@ -220,6 +227,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa) {
+<<<<<<< HEAD
                 if (P1.getPosY() < 35) {
                         P1.setPosY(35);
                     }
@@ -236,42 +244,75 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     P2.setPosY(getHeight() - P2.getAlto());
                 }
                     
+=======
+                if (P1.getPosY() < EXTREMO_SUPERIOR) {
+                    P1.setPosY(35);
+                }
+                if (P1.getPosY() + P1.getAlto() > getHeight()) {
+                    P1.setPosY(getHeight() - P1.getAlto());
+                }
+                if (P2.getPosY() < EXTREMO_SUPERIOR) {
+                    P2.setPosY(35);
+                }
+                if (P2.getPosY() + P2.getAlto() > getHeight()) {
+                    P2.setPosY(getHeight() - P2.getAlto());
+                }    
+>>>>>>> 422a6d5d49be8c9a06fbde73b81ada72ed2d7bb1
                 if (rainbow) {
                     // Verifica que el personaje 1 no choque con el frame
                     if (P1.getPosX() < 260) {
                         P1.setPosX(270);
                     }
-
                     if (P1.getPosX() > 800) {
                         P1.setPosX(790);
                     }
-
                     // Verifica que el personaje 2 no choque con el frame
                     if (P2.getPosX() < 260) {
                         P2.setPosX(270);
                     }
-
                     if (P2.getPosX() > 800) {
                         P2.setPosX(790);
                     }
                 }
                 if (jungle) {
                     // Verifica que el personaje 1 no choque con el frame                   
+<<<<<<< HEAD
                     if (P1.getPosX() < 295) {
+=======
+                    if (P1.getPosX() < JUNGLE_IZQUIERDO) {
+>>>>>>> 422a6d5d49be8c9a06fbde73b81ada72ed2d7bb1
                         P1.setPosX(305);
                     }
-
-                    if (P1.getPosX() > 890) {
+                    if (P1.getPosX() > JUNGLE_DERECHO) {
                         P1.setPosX(880);
                     }
-
                     // Verifica que el personaje 2 no choque con el frame
+<<<<<<< HEAD
                     if (P2.getPosX() < 295) {
+=======
+                    if (P2.getPosX() < JUNGLE_IZQUIERDO) {
+>>>>>>> 422a6d5d49be8c9a06fbde73b81ada72ed2d7bb1
                         P2.setPosX(305);
                     }
-
-                    if (P2.getPosX() > 890) {
+                    if (P2.getPosX() > JUNGLE_DERECHO) {
                         P2.setPosX(880);
+                    }
+                }
+                
+                // Colision entre personajes
+                if (P1.intersecta(P2) || P2.intersecta(P1)) {
+                    if (derecha || izquierda2) {
+                        P1.actualizaPosX(-20);
+                        P2.actualizaPosX(20);
+                    } else if (derecha2 || izquierda) {
+                        P1.actualizaPosX(20);
+                        P2.actualizaPosX(-20);
+                    } else if (arriba || abajo2) {
+                        P1.actualizaPosY(20);
+                        P2.actualizaPosY(-20);
+                    } else if (abajo || arriba2) {
+                        P1.actualizaPosY(-20);
+                        P2.actualizaPosY(20);
                     }
                 }
             }
@@ -441,35 +482,35 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             // Verifica las teclas de movimiento para los personajes
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                izquierda = true;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                derecha = true;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                arriba = true;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                abajo = true;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_A) {
                 izquierda2 = true;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_D) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 derecha2 = true;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_W) {
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
                 arriba2 = true;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_S) {
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 abajo2 = true;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                izquierda = true;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                derecha = true;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                arriba = true;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                abajo = true;
             }
         }   
         
@@ -489,35 +530,35 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void keyReleased(KeyEvent e) {
             // Verifica que la tecla se haya soltado para dejar de mover el personaje
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                izquierda = false;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                derecha = false;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                arriba = false;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                abajo = false;
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_A) {
                 izquierda2 = false;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_D) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 derecha2 = false;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_W) {
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
                 arriba2 = false;
             }
             
-            if (e.getKeyCode() == KeyEvent.VK_S) {
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 abajo2 = false;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                izquierda = false;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                derecha = false;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                arriba = false;
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                abajo = false;
             }
         }
 }
