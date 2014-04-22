@@ -31,6 +31,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private final static int EXTREMO_SUPERIOR = 35;
     private final static int JUNGLE_IZQUIERDO = 295;
     private final static int JUNGLE_DERECHO = 890;
+    private final static int DESERT_IZQUIERDO = 325;
+    private final static int DESERT_DERECHO = 770;
     //variables
     private boolean izquierda;
     private boolean izquierda2;
@@ -46,7 +48,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean gameover;
     private boolean pausaCharSelect;
     private boolean pausaMapSelect;
-    private boolean rainbow;
+    private boolean desert;
     private boolean jungle;
     private Graphics dbg;
     private Image dbImage;
@@ -54,9 +56,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image instructionScreen;
     private Image characterSelect;
     private Image mapSelect;
-    private Image RainbowRoad;
+    private Image Desert;
     private Image Jungle;
     private Image creditScreen;
+    private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
     private BasePersonajes P1;
@@ -90,7 +93,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             start = false;
             pausaCharSelect = false;
             pausaMapSelect = false;
-            rainbow = false;
+            desert = false;
             jungle = false;
             gameover = false;
             
@@ -99,13 +102,16 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
-            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
+            Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Sonidos de background
+            sonido_menu = new SoundClip("/sounds/Athenian_Rooftop.wav");
             sonido_jungle = new SoundClip("/sounds/Deep_Jungle.wav");
             sonido_desierto = new SoundClip("/sounds/Day_Agrabah.wav");
+            sonido_menu.setLooping(true);
+            sonido_menu.play();
             
             // Imagenes de personajes
             Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
@@ -122,8 +128,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon, sonido_dragon);
             P2 = new BasePersonajes(zeus, sonido_zeus);
-            P1.setPosX(getWidth()/4); 
-            P2.setPosX(2*getWidth()/4+150);
+            P1.setPosX(getWidth()/4 + 100); 
+            P2.setPosX(2*getWidth()/4 + 100);
             P1.setPosY(getHeight()-P1.getAlto());
             P2.setPosY(getHeight()-P2.getAlto());
             
@@ -195,7 +201,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         */
         public void actualiza() {
             // Verifica que no esté en pausa y que esté en el escenario de juego
-            if (!pausa && (rainbow || jungle)) {
+            if (!pausa && (desert || jungle)) {
                 // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-5);
@@ -245,36 +251,36 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (P2.getPosY() + P2.getAlto() > getHeight()) {
                     P2.setPosY(getHeight() - P2.getAlto());
                 }    
-                if (rainbow) {
+                if (desert) {
                     // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosX() < 260) {
-                        P1.setPosX(270);
+                    if (P1.getPosX() < DESERT_IZQUIERDO) {
+                        P1.setPosX(DESERT_IZQUIERDO + 10);
                     }
-                    if (P1.getPosX() > 800) {
-                        P1.setPosX(790);
+                    if (P1.getPosX() > DESERT_DERECHO) {
+                        P1.setPosX(DESERT_DERECHO - 10);
                     }
                     // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < 260) {
-                        P2.setPosX(270);
+                    if (P2.getPosX() < DESERT_IZQUIERDO) {
+                        P2.setPosX(DESERT_IZQUIERDO + 10);
                     }
-                    if (P2.getPosX() > 800) {
-                        P2.setPosX(790);
+                    if (P2.getPosX() > DESERT_DERECHO) {
+                        P2.setPosX(DESERT_DERECHO - 10);
                     }
                 }
                 if (jungle) {
                     // Verifica que el personaje 1 no choque con el frame                   
                     if (P1.getPosX() < JUNGLE_IZQUIERDO) {
-                        P1.setPosX(305);
+                        P1.setPosX(JUNGLE_IZQUIERDO + 10);
                     }
                     if (P1.getPosX() > JUNGLE_DERECHO) {
-                        P1.setPosX(880);
+                        P1.setPosX(JUNGLE_DERECHO - 10);
                     }
                     // Verifica que el personaje 2 no choque con el frame
                     if (P2.getPosX() < JUNGLE_IZQUIERDO) {
-                        P2.setPosX(305);
+                        P2.setPosX(JUNGLE_IZQUIERDO + 10);
                     }
                     if (P2.getPosX() > JUNGLE_DERECHO) {
-                        P2.setPosX(880);
+                        P2.setPosX(JUNGLE_DERECHO - 10);
                     }
                 }
                 
@@ -351,8 +357,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
                 // Dibuja el escenario de juego con sus personajes
-                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
-                    g.drawImage(RainbowRoad, 0, 0, this);
+                if (start && pausaCharSelect && pausaMapSelect && desert) {
+                    g.drawImage(Desert, 0, 0, this);
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
@@ -421,15 +427,15 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 
-                if (start && pausaCharSelect && pausaMapSelect && rainbow) {
-                    rainbow = false;
+                if (start && pausaCharSelect && pausaMapSelect && desert) {
+                    desert = false;
                     sonido_desierto.stop();
                     gameover = true;
                 }
                 
                 if (start && pausaCharSelect && pausaMapSelect && jungle) {
                     jungle = false;
-                    rainbow = true;
+                    desert = true;
                     sonido_jungle.stop();
                     sonido_desierto.setLooping(true);
                     sonido_desierto.play();
@@ -438,6 +444,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
+                    sonido_menu.stop();
                     jungle = true;
                     sonido_jungle.setLooping(true);
                     sonido_jungle.play();
