@@ -36,10 +36,7 @@ public class BasePersonajes {
         this.posX = 0;
         this.posY = 0;
         powerUp = false;
-<<<<<<< HEAD
-=======
         this.sonido = sonido;
->>>>>>> 422a6d5d49be8c9a06fbde73b81ada72ed2d7bb1
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
@@ -54,10 +51,7 @@ public class BasePersonajes {
         this.posX = posX;
         this.posY = posY;
         powerUp = false;
-<<<<<<< HEAD
-=======
         this.sonido = sonido;
->>>>>>> 422a6d5d49be8c9a06fbde73b81ada72ed2d7bb1
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
