@@ -59,8 +59,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image creditScreen;
     private BasePersonajes P1;
     private BasePersonajes P2;
-    private LinkedList obstaclesLeft;
-    private LinkedList obstaclesRight;
+    private LinkedList<Obstaculos> obstaclesLeft;
+    private LinkedList<Obstaculos> obstaclesRight;
     
     //Variables control de tiempo de animacion
     private long tiempoActual;
@@ -97,7 +97,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
-            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoadGIF.gif"));
+            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
@@ -110,8 +110,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
             
             // Inicializa los obstaculos
-            obstaclesLeft = new LinkedList();
-            obstaclesRight = new LinkedList();
+            obstaclesLeft = new<Obstaculos> LinkedList();
+            obstaclesRight = new<Obstaculos> LinkedList();
             
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon, sonido_dragon);
