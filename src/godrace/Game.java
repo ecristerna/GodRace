@@ -57,6 +57,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image RainbowRoad;
     private Image Jungle;
     private Image creditScreen;
+    private SoundClip sonido_jungle;
+    private SoundClip sonido_desierto;
     private BasePersonajes P1;
     private BasePersonajes P2;
     private LinkedList<Obstaculos> obstaclesLeft;
@@ -100,6 +102,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
+            
+            // Sonidos de background
+            sonido_jungle = new SoundClip("/sounds/Deep_Jungle.wav");
+            sonido_desierto = new SoundClip("/sounds/Day_Agrabah.wav");
             
             // Imagenes de personajes
             Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
@@ -227,22 +233,6 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa) {
-                if (P1.getPosY() < 35) {
-                        P1.setPosY(35);
-                    }
-
-                if (P1.getPosY() + P1.getAlto() > getHeight()) {
-                    P1.setPosY(getHeight() - P1.getAlto());
-                }
-                
-                if (P2.getPosY() < 35) {
-                        P2.setPosY(35);
-                    }
-
-                if (P2.getPosY() + P2.getAlto() > getHeight()) {
-                    P2.setPosY(getHeight() - P2.getAlto());
-                }
-                    
                 if (P1.getPosY() < EXTREMO_SUPERIOR) {
                     P1.setPosY(35);
                 }
@@ -273,23 +263,18 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 }
                 if (jungle) {
                     // Verifica que el personaje 1 no choque con el frame                   
-                    if (P1.getPosX() < 295) {
-                        if (P1.getPosX() < JUNGLE_IZQUIERDO) {
-                            P1.setPosX(305);
-                        }
-                        
-                        if (P1.getPosX() > JUNGLE_DERECHO) {
-                            P1.setPosX(880);
-                        }
+                    if (P1.getPosX() < JUNGLE_IZQUIERDO) {
+                        P1.setPosX(305);
+                    }
+                    if (P1.getPosX() > JUNGLE_DERECHO) {
+                        P1.setPosX(880);
                     }
                     // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < 295) {
-                        if (P2.getPosX() < JUNGLE_IZQUIERDO) {
-
-                        }
-                        if (P2.getPosX() > JUNGLE_DERECHO) {
-                            P2.setPosX(880);
-                        }
+                    if (P2.getPosX() < JUNGLE_IZQUIERDO) {
+                        P2.setPosX(305);
+                    }
+                    if (P2.getPosX() > JUNGLE_DERECHO) {
+                        P2.setPosX(880);
                     }
                 }
                 
@@ -298,19 +283,13 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     if (derecha || izquierda2) {
                         P1.actualizaPosX(-20);
                         P2.actualizaPosX(20);
-                    }
-                    
-                    else if (derecha2 || izquierda) {
+                    } else if (derecha2 || izquierda) {
                         P1.actualizaPosX(20);
                         P2.actualizaPosX(-20);
-                    }
-                    
-                    else if (arriba || abajo2) {
+                    } else if (arriba || abajo2) {
                         P1.actualizaPosY(20);
                         P2.actualizaPosY(-20);
-                    }
-                    
-                    else if (abajo || arriba2) {
+                    } else if (abajo || arriba2) {
                         P1.actualizaPosY(-20);
                         P2.actualizaPosY(20);
                     }
@@ -444,18 +423,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 
                 if (start && pausaCharSelect && pausaMapSelect && rainbow) {
                     rainbow = false;
+                    sonido_desierto.stop();
                     gameover = true;
                 }
                 
                 if (start && pausaCharSelect && pausaMapSelect && jungle) {
                     jungle = false;
                     rainbow = true;
+                    sonido_jungle.stop();
+                    sonido_desierto.setLooping(true);
+                    sonido_desierto.play();
                     //gameover = true;
                 }
                 
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
                     jungle = true;
+                    sonido_jungle.setLooping(true);
+                    sonido_jungle.play();
                 }
                 
                 if (start && !pausaCharSelect) {
