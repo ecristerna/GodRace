@@ -8,7 +8,6 @@ package godrace;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,42 +17,40 @@ import javax.swing.ImageIcon;
  * Edgar Ovidio Villarreal Treviño
  * Graciela Garcia Diaz
  * Andres Marcelo Garza Cantu
- * 
  */
-
-public class BasePersonajes {
+public class Obstaculos {
     private int posX;
     private int posY;
-    private boolean powerUp;
+    
     protected Animacion anim;
-
+    
     /**
-     * Método constructor de la clase <I>BasePersonajes</I> que inicializa
+     * Método constructor de la clase <I>Obstaculos</I> que inicializa
      * posX y posY con 0
+     * @param img es la imagen del obstaculo
      */
-    public BasePersonajes(Image img) {
+    public Obstaculos(Image img) {
         this.posX = 0;
         this.posY = 0;
-        powerUp = false;
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
     }
-
+    
     /**
-     * Método constructor con parámetros de la clase <I>BasePersonajes</I>
-     * @param posX es la posición en x del personaje
-     * @param posY es la posición en y del personaje del tipo int
+     * Método constructor con parámetros de la clase <I>Obstaculos</I>
+     * @param posX es la posición en x del obstaculo
+     * @param posY es la posición en y del obstaculo del tipo int
+     * @param img es la imagen del obstaculo
      */
-    public BasePersonajes(int posX, int posY, Image img) {
+    public Obstaculos(int posX, int posY, Image img) {
         this.posX = posX;
         this.posY = posY;
-        powerUp = false;
         
         anim = new Animacion();
         anim.sumaCuadro(img, 100);
     }
-
+    
     /**
      * Metodo modificador usado para cambiar la posicion en x del objeto 
      * @param x es la <code>posicion en x</code> del objeto.
@@ -87,22 +84,6 @@ public class BasePersonajes {
     }
     
     /**
-     * Metodo modificador usado para cambiar el valor de powerUp del objeto 
-     * @param powerUp es el <code>power up</code> del objeto.
-     */
-    public void setPowerUp(boolean powerUp) {
-        this.powerUp = powerUp;
-    }
-    
-    /**
-     * Metodo de acceso que regresa si tiene power up el objeto 
-     * @return powerUp es el <code>power up</code> del objeto.
-     */
-    public boolean getPowerUp() {
-        return powerUp;
-    }
-    
-    /**
      * Metodo modificador para actualizar la posicion en x del objeto
      * @param avance es el <code>avance</code> del objeto.
      */
@@ -116,13 +97,6 @@ public class BasePersonajes {
      */
     public void actualizaPosY(int avance) {
         this.posY+=avance;
-    }
-    
-    /**
-     * Metodo modificador para actualizar el powerUp del objeto
-     */
-    public void actualizaPowerUp() {
-        this.powerUp = !this.powerUp;
     }
     
     /**
@@ -164,7 +138,7 @@ public class BasePersonajes {
      * @return un valor boleano <code>true</code> si lo intersecta <code>false</code>
      * en caso contrario
      */
-    public boolean intersecta(BasePersonajes obj){
+    public boolean intersecta(Obstaculos obj){
         return getPerimetro().intersects(obj.getPerimetro());
     }
     
