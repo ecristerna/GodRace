@@ -52,7 +52,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean pausaMapSelect;
     private boolean desert;
     private boolean jungle;
-    private boolean agregarObstaculo;
+    private boolean underworld;
+    private int vidaP1;
+    private int vidaP2;
     private Graphics dbg;
     private Image dbImage;
     private Image startScreen;
@@ -61,10 +63,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image mapSelect;
     private Image Desert;
     private Image Jungle;
+    private Image Underworld;
     private Image creditScreen;
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
+    private SoundClip sonido_underworld;
     private Obstaculos obstaculo;
     private BasePersonajes P1;
     private BasePersonajes P2;
@@ -99,23 +103,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             pausaMapSelect = false;
             desert = false;
             jungle = false;
+            underworld = false;
             gameover = false;
-            
-            agregarObstaculo = false;
             
             // Imágenes de fondo, menús, créditos, etc.
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
-            characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect.png"));
+            characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect2.png"));
             mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
             Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
+            Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Sonidos de background
             sonido_menu = new SoundClip("/sounds/Athenian_Rooftop.wav");
             sonido_jungle = new SoundClip("/sounds/Deep_Jungle.wav");
             sonido_desierto = new SoundClip("/sounds/Day_Agrabah.wav");
+            sonido_underworld = new SoundClip("/sounds/Hades_Underworld.wav");
             sonido_menu.setLooping(true);
             sonido_menu.play();
             
@@ -134,6 +139,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             inicializaObstaculos();
             
             // Inicialización de personajes
+            vidaP1 = 100;
+            vidaP2 = 100;
             P1 = new BasePersonajes(dragon, sonido_dragon);
             P2 = new BasePersonajes(zeus, sonido_zeus);
             P1.setPosX(getWidth()/4 + 100); 
@@ -144,7 +151,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             addKeyListener(this);
         }
         
-        public void creaObstaculo(int n) {
+        public void creaObstaculo(int n, int extremoIzquierdo, int extremoDerecho) {
             //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
             Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
             Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
@@ -169,12 +176,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             switch (n) {
                 case 0:
-                    ob.setPosX(randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2) - ob.getAncho()) + JUNGLE_IZQUIERDO);
+                    ob.setPosX(randPosicionX.nextInt((int)((extremoDerecho - extremoIzquierdo)/2) - ob.getAncho()) + extremoIzquierdo);
                     ob.setPosY(obstaclesLeft.getLast().getPosY() - randPosicionY.nextInt(100) - 200);
                     obstaclesLeft.add(ob);
                 break;
                 case 1:
-                    ob.setPosX(JUNGLE_DERECHO - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+                    ob.setPosX(extremoDerecho - randPosicionX.nextInt((int)((extremoDerecho - extremoIzquierdo)/2)));
                     ob.setPosY(obstaclesRight.getLast().getPosY() - randPosicionY.nextInt(100) - 200);
                     obstaclesRight.add(ob);
                 break;
@@ -189,7 +196,6 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
             
             Random randObstaculo = new Random();
-            Random randPosicionX = new Random();
             switch (randObstaculo.nextInt(3)) {
                 case 0:
                     obstaculo.setImagenI(obstaculo1);
@@ -202,16 +208,16 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 break;
             }
             
-            obstaculo.setPosX(randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2) - obstaculo.getAncho()) + JUNGLE_IZQUIERDO);
+            obstaculo.setPosX(getWidth()/2 - 100);
             obstaculo.setPosY(-100);
             obstaclesLeft.add(obstaculo);
-            obstaculo.setPosX(JUNGLE_DERECHO - obstaculo.getAncho() - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+            obstaculo.setPosX(getWidth() + 100);
             obstaculo.setPosY(-100);
             obstaclesRight.add(obstaculo);
             
             for (int i = 1; i < 10; i++) {
-                creaObstaculo(0);
-                creaObstaculo(1);
+                creaObstaculo(0, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                creaObstaculo(1, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
             }   
         }
 
@@ -266,7 +272,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
                 try	{
                         // El thread se duerme.
-                        Thread.sleep (30);
+                        Thread.sleep (20);
                 }
                 catch (InterruptedException ex)	{
                         System.out.println("Error en " + ex.toString());
@@ -280,7 +286,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         */
         public void actualiza() {
             // Verifica que no esté en pausa y que esté en el escenario de juego
-            if (!pausa && (desert || jungle)) {
+            if (!pausa && !gameover && (desert || jungle)) {
                 // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-velocidadPersonajes);
@@ -312,6 +318,14 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     obstaclesLeft.get(i).actualizaPosY(5);
                 for (int i = 0; i < obstaclesRight.size(); i++)
                    obstaclesRight.get(i).actualizaPosY(5);
+                
+                // Checa que la vida de los personajes se acabe
+                if (vidaP1 <= 0) {
+                    gameover = true;
+                }
+                if (vidaP2 <= 0) {
+                    gameover = true;
+                }
             }
         }
         
@@ -338,16 +352,37 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     P2.setPosY(getHeight() - P2.getAlto());
                 }
                 
+                // Intersecciones de los obstaculos con los personajes y con la parte inferior  del frame
                 for (int i = 0; i < obstaclesLeft.size(); i++) {
                     if (obstaclesLeft.get(i).getPosY() > getHeight()) {
                         obstaclesLeft.removeFirst();
-                        creaObstaculo(0);
+                        creaObstaculo(0, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                    }
+                    if (obstaclesLeft.get(i).intersecta(P1)) {
+                        obstaclesLeft.remove(i);
+                        creaObstaculo(0, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                        vidaP1--;
+                    }
+                    if (obstaclesLeft.get(i).intersecta(P2)) {
+                        obstaclesLeft.remove(i);
+                        creaObstaculo(0, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                        vidaP2--;
                     }
                 }
                 for (int i = 0; i < obstaclesRight.size(); i++) {
                     if (obstaclesRight.get(i).getPosY() > getHeight()) {
                         obstaclesRight.removeFirst();
-                        creaObstaculo(1);
+                        creaObstaculo(1, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                    }
+                    if (obstaclesRight.get(i).intersecta(P1)) {
+                        obstaclesRight.remove(i);
+                        creaObstaculo(1, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                        vidaP1-=10;
+                    }
+                    if (obstaclesRight.get(i).intersecta(P2)) {
+                        obstaclesRight.remove(i);
+                        creaObstaculo(1, JUNGLE_IZQUIERDO, JUNGLE_DERECHO);
+                        vidaP2-=10;
                     }
                 }
                 
@@ -466,6 +501,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
+                // Dibuja el escenario de juego con sus personajes
+                if (start && pausaCharSelect && pausaMapSelect && underworld) {
+                    g.drawImage(Underworld, 0, 0, this);
+                    g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
+                    g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
+                }
                 // Dibuja la pantalla de créditos
                 if (gameover) {
                     g.drawImage(creditScreen, 0, 0, this);
@@ -531,21 +572,25 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 
+                if (start && pausaCharSelect && pausaMapSelect && underworld) {
+                    underworld = false;
+                    sonido_underworld.stop();
+                    gameover = true;
+                }
                 if (start && pausaCharSelect && pausaMapSelect && desert) {
                     desert = false;
                     sonido_desierto.stop();
-                    gameover = true;
+                    sonido_underworld.setLooping(true);
+                    sonido_underworld.play();
+                    underworld = true;
                 }
-                
                 if (start && pausaCharSelect && pausaMapSelect && jungle) {
                     jungle = false;
                     desert = true;
                     sonido_jungle.stop();
                     sonido_desierto.setLooping(true);
                     sonido_desierto.play();
-                    //gameover = true;
                 }
-                
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     pausaMapSelect = true;
                     sonido_menu.stop();
@@ -553,11 +598,9 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     sonido_jungle.setLooping(true);
                     sonido_jungle.play();
                 }
-                
                 if (start && !pausaCharSelect) {
                     pausaCharSelect = true;
                 }
-                
                 if (!start) {
                     start = true;
                 }

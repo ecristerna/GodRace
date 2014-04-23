@@ -149,7 +149,7 @@ public class Obstaculos {
      * @return un valor boleano <code>true</code> si lo intersecta <code>false</code>
      * en caso contrario
      */
-    public boolean intersecta(Obstaculos obj){
+    public boolean intersecta(BasePersonajes obj){
         return getPerimetro().intersects(obj.getPerimetro());
     }
     
