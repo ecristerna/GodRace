@@ -24,6 +24,13 @@ public class Obstaculos {
     
     protected Animacion anim;
     
+    public Obstaculos() {
+        this.posX = 0;
+        this.posY = 0;
+        
+        anim = new Animacion();
+    }
+    
     /**
      * Método constructor de la clase <I>Obstaculos</I> que inicializa
      * posX y posY con 0
@@ -121,6 +128,10 @@ public class Obstaculos {
      */
     public Image getImagenI() {
         return (new ImageIcon(anim.getImagen())).getImage();
+    }
+    
+    public void setImagenI(Image img) {
+        anim.sumaCuadro(img, 100);
     }
     
     /**

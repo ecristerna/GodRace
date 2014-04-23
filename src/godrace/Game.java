@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import java.util.Random;
 import javax.swing.JFrame;
 
 /**
@@ -50,6 +51,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean pausaMapSelect;
     private boolean desert;
     private boolean jungle;
+    private boolean agregarObstaculo;
     private Graphics dbg;
     private Image dbImage;
     private Image startScreen;
@@ -62,6 +64,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
+    private Obstaculos obstaculo;
     private BasePersonajes P1;
     private BasePersonajes P2;
     private LinkedList<Obstaculos> obstaclesLeft;
@@ -97,6 +100,8 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             jungle = false;
             gameover = false;
             
+            agregarObstaculo = false;
+            
             // Imágenes de fondo, menús, créditos, etc.
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
@@ -121,9 +126,11 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
             SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
             
-            // Inicializa los obstaculos
+            // Inicializacion de obstaculos
+            obstaculo = new Obstaculos();
             obstaclesLeft = new<Obstaculos> LinkedList();
             obstaclesRight = new<Obstaculos> LinkedList();
+            inicializaObstaculos();
             
             // Inicialización de personajes
             P1 = new BasePersonajes(dragon, sonido_dragon);
@@ -134,6 +141,75 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             P2.setPosY(getHeight()-P2.getAlto());
             
             addKeyListener(this);
+        }
+        
+        public void creaObstaculo(int n) {
+            //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
+            
+            Obstaculos ob = new Obstaculos();
+            
+            Random randObstaculo = new Random();
+            Random randPosicionX = new Random();
+            switch (randObstaculo.nextInt(3)) {
+                case 0:
+                    ob.setImagenI(obstaculo1);
+                break;
+                case 1:
+                    ob.setImagenI(obstaculo2);
+                break;
+                case 2:
+                    ob.setImagenI(obstaculo3);
+                break;
+            }
+            
+            switch (n) {
+                case 0:
+                    ob.setPosX(randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2) - ob.getAncho()) + JUNGLE_IZQUIERDO);
+                    ob.setPosY(obstaclesLeft.getLast().getPosY() - 50);
+                    obstaclesLeft.add(ob);
+                break;
+                case 1:
+                    ob.setPosX(JUNGLE_DERECHO - ob.getAncho() - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+                    ob.setPosY(obstaclesRight.getLast().getPosY() - 50);
+                    obstaclesRight.add(ob);
+                break;
+            }
+        }
+        
+        public void inicializaObstaculos() {
+            // Imagenes los obstaculos
+            //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
+            
+            Random randObstaculo = new Random();
+            Random randPosicionX = new Random();
+            switch (randObstaculo.nextInt(3)) {
+                case 0:
+                    obstaculo.setImagenI(obstaculo1);
+                break;
+                case 1:
+                    obstaculo.setImagenI(obstaculo2);
+                break;
+                case 2:
+                    obstaculo.setImagenI(obstaculo3);
+                break;
+            }
+            
+            obstaculo.setPosX(randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2) - obstaculo.getAncho()) + JUNGLE_IZQUIERDO);
+            obstaculo.setPosY(-100);
+            obstaclesLeft.add(obstaculo);
+            obstaculo.setPosX(JUNGLE_DERECHO - obstaculo.getAncho() - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+            obstaclesRight.add(obstaculo);
+            
+            for (int i = 1; i < 10; i++) {
+                creaObstaculo(0);
+                creaObstaculo(1);
+            }   
         }
 
         /** 
@@ -227,6 +303,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 if (abajo2) {
                     P2.actualizaPosY(5);
                 }
+                
+                // Actualiza obstaculos
+                for (int i = 0; i < obstaclesLeft.size(); i++)
+                    obstaclesLeft.get(i).actualizaPosY(5);
+                for (int i = 0; i < obstaclesRight.size(); i++)
+                   obstaclesRight.get(i).actualizaPosY(5);
             }
         }
         
@@ -239,6 +321,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa) {
+                // Colision de los personajes con los extremos superiores e inferiores del frame
                 if (P1.getPosY() < EXTREMO_SUPERIOR) {
                     P1.setPosY(35);
                 }
@@ -250,7 +333,21 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 }
                 if (P2.getPosY() + P2.getAlto() > getHeight()) {
                     P2.setPosY(getHeight() - P2.getAlto());
-                }    
+                }
+                
+                for (int i = 0; i < obstaclesLeft.size(); i++) {
+                    if (obstaclesLeft.get(i).getPosY() > getHeight()) {
+                        obstaclesLeft.removeFirst();
+                        creaObstaculo(0);
+                    }
+                }
+                for (int i = 0; i < obstaclesRight.size(); i++) {
+                    if (obstaclesRight.get(i).getPosY() > getHeight()) {
+                        obstaclesRight.removeFirst();
+                        creaObstaculo(1);
+                    }
+                }
+                
                 if (desert) {
                     // Verifica que el personaje 1 no choque con el frame
                     if (P1.getPosX() < DESERT_IZQUIERDO) {
@@ -355,6 +452,10 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(Jungle, 0, 0, this);
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
+                    for (int i = 0; i < obstaclesLeft.size(); i++)
+                        g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
+                    for (int i = 0; i < obstaclesRight.size(); i++)
+                        g.drawImage(obstaclesRight.get(i).getImagenI(), obstaclesRight.get(i).getPosX(), obstaclesRight.get(i).getPosY(), this);
                 }
                 // Dibuja el escenario de juego con sus personajes
                 if (start && pausaCharSelect && pausaMapSelect && desert) {
