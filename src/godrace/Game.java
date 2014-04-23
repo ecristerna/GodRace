@@ -29,6 +29,7 @@ import javax.swing.JFrame;
 
 public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
     private static final long serialVersionUID = 1L;
+    private final static int velocidadPersonajes = 8;
     private final static int EXTREMO_SUPERIOR = 35;
     private final static int JUNGLE_IZQUIERDO = 295;
     private final static int JUNGLE_DERECHO = 890;
@@ -153,6 +154,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             
             Random randObstaculo = new Random();
             Random randPosicionX = new Random();
+            Random randPosicionY = new Random();
             switch (randObstaculo.nextInt(3)) {
                 case 0:
                     ob.setImagenI(obstaculo1);
@@ -168,12 +170,12 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             switch (n) {
                 case 0:
                     ob.setPosX(randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2) - ob.getAncho()) + JUNGLE_IZQUIERDO);
-                    ob.setPosY(obstaclesLeft.getLast().getPosY() - 50);
+                    ob.setPosY(obstaclesLeft.getLast().getPosY() - randPosicionY.nextInt(100) - 200);
                     obstaclesLeft.add(ob);
                 break;
                 case 1:
-                    ob.setPosX(JUNGLE_DERECHO - ob.getAncho() - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
-                    ob.setPosY(obstaclesRight.getLast().getPosY() - 50);
+                    ob.setPosX(JUNGLE_DERECHO - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+                    ob.setPosY(obstaclesRight.getLast().getPosY() - randPosicionY.nextInt(100) - 200);
                     obstaclesRight.add(ob);
                 break;
             }
@@ -204,6 +206,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             obstaculo.setPosY(-100);
             obstaclesLeft.add(obstaculo);
             obstaculo.setPosX(JUNGLE_DERECHO - obstaculo.getAncho() - randPosicionX.nextInt((int)((JUNGLE_DERECHO - JUNGLE_IZQUIERDO)/2)));
+            obstaculo.setPosY(-100);
             obstaclesRight.add(obstaculo);
             
             for (int i = 1; i < 10; i++) {
@@ -280,28 +283,28 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             if (!pausa && (desert || jungle)) {
                 // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
-                    P1.actualizaPosX(-5);
+                    P1.actualizaPosX(-velocidadPersonajes);
                 }
                 if (derecha) {
-                    P1.actualizaPosX(5);
+                    P1.actualizaPosX(velocidadPersonajes);
                 }
                 if (arriba) {    
-                    P1.actualizaPosY(-5);
+                    P1.actualizaPosY(-velocidadPersonajes);
                 }
                 if (abajo) {
-                    P1.actualizaPosY(5);
+                    P1.actualizaPosY(velocidadPersonajes);
                 }
                 if (izquierda2) {
-                    P2.actualizaPosX(-5);
+                    P2.actualizaPosX(-velocidadPersonajes);
                 }
                 if (derecha2) {
-                    P2.actualizaPosX(5);
+                    P2.actualizaPosX(velocidadPersonajes);
                 }
                 if (arriba2) {
-                    P2.actualizaPosY(-5);
+                    P2.actualizaPosY(-velocidadPersonajes);
                 }
                 if (abajo2) {
-                    P2.actualizaPosY(5);
+                    P2.actualizaPosY(velocidadPersonajes);
                 }
                 
                 // Actualiza obstaculos
