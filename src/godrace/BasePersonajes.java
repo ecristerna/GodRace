@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 public class BasePersonajes {
     private int posX;
     private int posY;
+    private int velPowerUp;
     private boolean powerUp;
     protected Animacion anim;
     private SoundClip sonido;
@@ -35,6 +36,7 @@ public class BasePersonajes {
     public BasePersonajes(Image img, SoundClip sonido) {
         this.posX = 0;
         this.posY = 0;
+        this.velPowerUp = 0;
         powerUp = false;
         this.sonido = sonido;
         
@@ -103,6 +105,21 @@ public class BasePersonajes {
      */
     public boolean getPowerUp() {
         return powerUp;
+    }
+    /**
+     * Metodo modificador usado para cambiar el valor de la velocidad del powerUp del objeto 
+     * @param velPowerUp es la <code>velocidad</code> del power up del objeto.
+     */
+    public void setVelPowerUp(int velPowerUp) {
+        this.velPowerUp = velPowerUp;
+    }
+    
+    /**
+     * Metodo de acceso que regresa la velocidad del power up el objeto 
+     * @return velPowerUp es la <code>velocidad</code> del power up del objeto.
+     */
+    public int getVelPowerUp() {
+        return velPowerUp;
     }
     
     /**

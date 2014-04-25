@@ -27,7 +27,7 @@ import javax.swing.JFrame;
  * 
  */
 
-public class Game extends JFrame implements Runnable, MouseListener, KeyListener {
+public class Game extends JFrame implements Runnable, KeyListener {
     private static final long serialVersionUID = 1L;
     private final static int velocidadPersonajes = 8;
     private final static int EXTREMO_SUPERIOR = 35;
@@ -53,6 +53,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private boolean desert;
     private boolean jungle;
     private boolean underworld;
+    private int opcionMenu;
     private int vidaP1;
     private int vidaP2;
     private int extremoDerecho;
@@ -67,10 +68,17 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
     private Image Jungle;
     private Image Underworld;
     private Image creditScreen;
+    private Image cursorMenuInicialImg;
+    private Image cursorP1Img;
+    private Image cursorP2Img;
+    private Image cursorPSelImg;
+    private Image cursorMapaImg;
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
+    private Obstaculos cursorP1;
+    private Obstaculos cursorP2;
     private Obstaculos obstaculo;
     private BasePersonajes P1;
     private BasePersonajes P2;
@@ -118,6 +126,13 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
+            // Imagenes de cursores de seleccion
+            cursorMenuInicialImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            cursorP1Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP1.gif"));
+            cursorP2Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP2.gif"));
+            cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoSELECT.gif"));
+            cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            
             // Sonidos de background
             sonido_menu = new SoundClip("/sounds/Athenian_Rooftop.wav");
             sonido_jungle = new SoundClip("/sounds/Deep_Jungle.wav");
@@ -133,6 +148,11 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
             SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
+            
+            // Inicializa Cursores
+            opcionMenu = 0;
+            cursorP1 = new Obstaculos(cursorMenuInicialImg);
+            cursorP2 = new Obstaculos(cursorP2Img);
             
             // Inicializacion de obstaculos
             obstaculo = new Obstaculos();
@@ -192,7 +212,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
         
         public void inicializaObstaculos() {
             // Imagenes los obstaculos
-            Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
             Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
             Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
@@ -289,6 +309,24 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
          * Este metodo actualiza a los personajes en el applet en sus movimientos
         */
         public void actualiza() {
+            // Verifica que se este en el menu principal
+            if (!start) {
+                switch (opcionMenu) {
+                    case 0:
+                        cursorP1.setPosX(720);
+                        cursorP1.setPosY(400);
+                    break;
+                    case 1:
+                        cursorP1.setPosX(580);
+                        cursorP1.setPosY(505);
+                    break;
+                    case 2:
+                        cursorP1.setPosX(550);
+                        cursorP1.setPosY(615);
+                    break;
+                }
+            }
+
             // Verifica que no esté en pausa y que esté en el escenario de juego
             if (!pausa && !gameover && (desert || jungle || underworld)) {
                 // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
@@ -476,6 +514,7 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 // Dibuja la pantalla de inicio
                 if (!start) {
                     g.drawImage(startScreen, 0, 0, this);
+                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
                 }
                 // Dibuja la pantalla de instrucciones
                 if (!start && instrucciones) {
@@ -484,10 +523,13 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                 // Dibuja la pantalla de selección de personajes
                 if (start && !pausaCharSelect) {
                     g.drawImage(characterSelect, 0, 0, this);
+                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
+                    g.drawImage(cursorP2.getImagenI(), cursorP2.getPosX(), cursorP2.getPosY(), this);
                 }
                 // Dibuja la pantalla de selección de pista
                 if (start && pausaCharSelect && !pausaMapSelect) {
                     g.drawImage(mapSelect, 0, 0, this);
+                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
                 }
                 // Dibuja el escenario de juego con sus personajes
                 if (start && pausaCharSelect && pausaMapSelect && jungle) {
@@ -517,54 +559,6 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
                     g.drawImage(creditScreen, 0, 0, this);
                 }
             }
-        }
-        
-        /**
-	 * Metodo mouseClicked sobrescrito de la interface MouseListener.
-	 * En este metodo maneja el evento que se genera al hacer click con el mouse
-	 * sobre algun componente.
-	 * e es el evento generado al hacer click con el mouse.
-	 */
-        public void mouseClicked(MouseEvent e) {
-           
-        }
-
-        /**
-	 * Metodo mousePressed sobrescrito de la interface MouseListener.
-	 * En este metodo maneja el evento que se genera al presionar un botÃ³n
-	 * del mouse sobre algun componente.
-	 * e es el evento generado al presionar un botÃ³n del mouse sobre algun componente.
-	 */
-        public void mousePressed(MouseEvent e) {
-        }
-
-        /**
-	 * Metodo mouseReleased sobrescrito de la interface MouseListener.
-	 * En este metodo maneja el evento que se genera al soltar un botÃ³n
-	 * del mouse sobre algun componente.
-	 * e es el evento generado al soltar un botÃ³n del mouse sobre algun componente.
-	 */
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        /**
-	 * Metodo mouseEntered sobrescrito de la interface MouseListener.
-	 * En este metodo maneja el evento que se genera cuando el mouse
-	 * entra en algun componente.
-	 * e es el evento generado cuando el mouse entra en algun componente.
-	 */
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        /**
-	 * Metodo mouseExited sobrescrito de la interface MouseListener.
-	 * En este metodo maneja el evento que se genera cuando el mouse
-	 * sale de algun componente.
-	 * e es el evento generado cuando el mouse sale de algun componente.
-	 */
-        public void mouseExited(MouseEvent e) {
-
         }
         
         /**
@@ -650,10 +644,36 @@ public class Game extends JFrame implements Runnable, MouseListener, KeyListener
             }
             
             if (e.getKeyCode() == KeyEvent.VK_W) {
+                if (!start) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 2;
+                        break;
+                        case 1:
+                            opcionMenu = 0;
+                        break;
+                        case 2:
+                            opcionMenu = 1;
+                        break;
+                    }
+                }
                 arriba = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_S) {
+                if (!start) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 1;
+                        break;
+                        case 1:
+                            opcionMenu = 2;
+                        break;
+                        case 2:
+                            opcionMenu = 0;
+                        break;
+                    }
+                }
                 abajo = true;
             }
         }   
