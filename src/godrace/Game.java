@@ -78,6 +78,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image cursorP2Img;
     private Image cursorPSelImg;
     private Image cursorMapaImg;
+    private Image P1healthbar;
+    private Image P2healthbar;
+    private Image P1Icono;
+    private Image P2Icono;
     private Image zeus;
     private Image amaterasu;
     private Image dragon;
@@ -174,6 +178,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
             anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
             
+            P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.gif"));
+            P2healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health2.gif"));
+            
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
             SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
@@ -191,7 +198,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
             obstaculo = new Obstaculos();
             obstaclesLeft = new<Obstaculos> LinkedList();
             obstaclesRight = new<Obstaculos> LinkedList();
-            inicializaObstaculos();
             
             // Inicialización de personajes
             vidaP1 = 100;
@@ -266,8 +272,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
             obstaculo.setPosY(-100);
             obstaclesRight.add(obstaculo);
             
-            extremoIzquierdo = JUNGLE_IZQUIERDO;
-            extremoDerecho = JUNGLE_DERECHO;
             for (int i = 1; i < 10; i++) {
                 creaObstaculo(0);
                 creaObstaculo(1);
@@ -427,53 +431,69 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     // mandar a crear los objetos de personaje
                     switch(opcionP1) {
                         case 0:
+                            P1Icono = zeus;
                             P1.setImagenI(zeus);
                         break;
                         case 1:
+                            P1Icono = amaterasu;
                             P1.setImagenI(amaterasu);
                         break;
                         case 2:
+                            P1Icono = dragon;
                             P1.setImagenI(dragon);
                         break;
                         case 3:
+                            P1Icono = hades;
                             P1.setImagenI(hades);
                         break;
                         case 4:
+                            P1Icono = quetzal;
                             P1.setImagenI(quetzal);
                         break;
                         case 5:
+                            P1Icono = ra;
                             P1.setImagenI(ra);
                         break;
                         case 6:
+                            P1Icono = anubis;
                             P1.setImagenI(anubis);
                         break;
                         case 7:
+                            P1Icono = freya;
                             P1.setImagenI(freya);
                         break;
                     }
                     switch(opcionP2) {
                         case 0:
+                            P2Icono = zeus;
                             P2.setImagenI(zeus);
                         break;
                         case 1:
+                            P2Icono = amaterasu;
                             P2.setImagenI(amaterasu);
                         break;
                         case 2:
+                            P2Icono = dragon;
                             P2.setImagenI(dragon);
                         break;
                         case 3:
+                            P2Icono = hades;
                             P2.setImagenI(hades);
                         break;
                         case 4:
+                            P2Icono = quetzal;
                             P2.setImagenI(quetzal);
                         break;
                         case 5:
+                            P2Icono = ra;
                             P2.setImagenI(ra);
                         break;
                         case 6:
+                            P2Icono = anubis;
                             P2.setImagenI(anubis);
                         break;
                         case 7:
+                            P2Icono = freya;
                             P2.setImagenI(freya);
                         break;
                     }
@@ -558,7 +578,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
         */
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
-            if (!pausa && (jungle || desert || underworld || rainbow)) {
+            if (!pausa && !gameover && (jungle || desert || underworld || rainbow)) {
                 // Colision de los personajes con los extremos superiores e inferiores del frame
                 if (P1.getPosY() < EXTREMO_SUPERIOR) {
                     P1.setPosY(35);
@@ -707,7 +727,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     // Dibuja la pantalla de selección de pista
                     g.drawImage(mapSelect, 0, 0, this);
                     g.drawImage(cursorMapa.getImagenI(), cursorMapa.getPosX(), cursorMapa.getPosY(), this);
-                } else {
+                } else if(!gameover){
                     switch (opcionMenu) {
                         case 0:
                             g.drawImage(Jungle, 0, 0, this);
@@ -722,17 +742,19 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             g.drawImage(RainbowRoad, 0, 0, this);
                         break;
                     }
+                    // Dibuja la healthbar
+                    //g.drawImage(P1healthbar, 0, 0, this);
+                    //g.drawImage(P2healthbar, getWidth()-350, 0, this);
+                    // Dibuja a los personajes
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
-                }
-                // Dibuja los obstaculos
-                for (int i = 0; i < obstaclesLeft.size(); i++)
-                    g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
-                for (int i = 0; i < obstaclesRight.size(); i++)
-                    g.drawImage(obstaclesRight.get(i).getImagenI(), obstaclesRight.get(i).getPosX(), obstaclesRight.get(i).getPosY(), this);
-                
-                // Dibuja la pantalla de créditos
-                if (gameover) {
+                    // Dibuja los obstaculos
+                    for (int i = 0; i < obstaclesLeft.size(); i++)
+                        g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
+                    for (int i = 0; i < obstaclesRight.size(); i++)
+                        g.drawImage(obstaclesRight.get(i).getImagenI(), obstaclesRight.get(i).getPosX(), obstaclesRight.get(i).getPosY(), this);
+                } else {
+                    // Dibuja la pantalla de créditos
                     g.drawImage(GameOver, 0, 0, this);
                 }
             }
@@ -762,30 +784,42 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         }
                     }
                 } else if(pausaCharSelect && !pausaMapSelect) {
-                    pausaMapSelect = true;
                     sonido_menu.stop();
                     switch (opcionMenu) {
                         case 0:
+                            extremoIzquierdo = JUNGLE_IZQUIERDO;
+                            extremoDerecho = JUNGLE_DERECHO;
+                            inicializaObstaculos();
                             jungle = true;
                             sonido_jungle.setLooping(true);
                             sonido_jungle.play();
                         break;
                         case 1:
+                            extremoIzquierdo = DESERT_IZQUIERDO;
+                            extremoDerecho = DESERT_DERECHO;
+                            inicializaObstaculos();
                             desert = true;
                             sonido_desierto.setLooping(true);
                             sonido_desierto.play();
                         break;
                         case 2:
+                            //extremoIzquierdo = UNDERWORLD_IZQUIERDO;
+                            //extremoDerecho = UNDERWORLD_DERECHO;
+                            //inicializaObstaculos();
                             underworld = true;
                             sonido_underworld.setLooping(true);
                             sonido_underworld.play();
                         break;
                         case 3:
+                            //extremoIzquierdo = RAINBOW_IZQUIERDO;
+                            //extremoDerecho = RAINBOW_DERECHO;
+                            //inicializaObstaculos();
                             rainbow = true;
                             sonido_rainbow.setLooping(true);
                             sonido_rainbow.play();
                         break;
                     }
+                    pausaMapSelect = true;
                 }
             }
             
