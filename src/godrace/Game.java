@@ -174,8 +174,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
             // Inicialización de personajes
             vidaP1 = 100;
             vidaP2 = 100;
-            P1 = new BasePersonajes(dragon, sonido_dragon);
-            P2 = new BasePersonajes(zeus, sonido_zeus);
+            P1 = new BasePersonajes(zeus, sonido_zeus);
+            P2 = new BasePersonajes(dragon, sonido_dragon);
             P1.setPosX(getWidth()/4 + 100); 
             P2.setPosX(2*getWidth()/4 + 100);
             P1.setPosY(getHeight()-P1.getAlto());
@@ -410,6 +410,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 }
                 }
                 if (p1Select && p2Select) {
+                    // mandar a crear los objetos de personaje
                     pausaCharSelect = true;
                 }
             } else if (!pausaMapSelect) {

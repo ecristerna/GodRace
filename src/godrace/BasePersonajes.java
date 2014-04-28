@@ -33,6 +33,16 @@ public class BasePersonajes {
      * Método constructor de la clase <I>BasePersonajes</I> que inicializa
      * posX y posY con 0
      */
+    public BasePersonajes() {
+        this.posX = 0;
+        this.posY = 0;
+        this.velPowerUp = 0;
+        powerUp = false;
+    }
+    /**
+     * Método constructor de la clase <I>BasePersonajes</I> que inicializa
+     * posX y posY con 0
+     */
     public BasePersonajes(Image img, SoundClip sonido) {
         this.posX = 0;
         this.posY = 0;
@@ -169,6 +179,10 @@ public class BasePersonajes {
         return (new ImageIcon(anim.getImagen())).getImage();
     }
     
+    public void setImagenI(Image img) {
+        anim.sumaCuadro(img, 100);
+    }
+    
     /**
      * Metodo de acceso que regresa un nuevo rectangulo
      * @return un objeto de la clase <code>Rectangle</code> que es el perimetro 
@@ -194,7 +208,11 @@ public class BasePersonajes {
     public SoundClip getSonido() {
         return sonido;
     }
-            
+    
+    public void setSonido (SoundClip sonido) {
+        this.sonido = sonido;
+    }
+    
     /**
      * Metodo de actualizacion de imagen de los sprites
      * @param tiempo 
