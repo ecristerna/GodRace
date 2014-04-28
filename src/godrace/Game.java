@@ -53,6 +53,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean desert;
     private boolean jungle;
     private boolean underworld;
+    private boolean rainbow;
     private int opcionMenu;
     private int opcionP1;
     private int opcionP2;
@@ -69,16 +70,26 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image Desert;
     private Image Jungle;
     private Image Underworld;
+    private Image RainbowRoad;
     private Image creditScreen;
     private Image cursorMenuInicialImg;
     private Image cursorP1Img;
     private Image cursorP2Img;
     private Image cursorPSelImg;
     private Image cursorMapaImg;
+    private Image zeus;
+    private Image amaterasu;
+    private Image dragon;
+    private Image hades;
+    private Image quetzal;
+    private Image ra;
+    private Image anubis;
+    private Image freya;
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
+    private SoundClip sonido_rainbow;
     private Obstaculos cursorMenu;
     private Obstaculos cursorP1;
     private Obstaculos cursorP2;
@@ -118,6 +129,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             desert = false;
             jungle = false;
             underworld = false;
+            rainbow = false;
             gameover = false;
             
             p1Select = false;
@@ -131,6 +143,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
+            RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoad.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Imagenes de cursores de seleccion
@@ -145,12 +158,19 @@ public class Game extends JFrame implements Runnable, KeyListener {
             sonido_jungle = new SoundClip("/sounds/Deep_Jungle.wav");
             sonido_desierto = new SoundClip("/sounds/Day_Agrabah.wav");
             sonido_underworld = new SoundClip("/sounds/Hades_Underworld.wav");
+            sonido_rainbow = new SoundClip("/sounds/Rainbow_Road.wav");
             sonido_menu.setLooping(true);
             sonido_menu.play();
             
             // Imagenes de personajes
-            Image dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_DragonGIF.gif"));
-            Image zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Character_ZeusGIF.gif"));
+            zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char1.gif"));
+            amaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.gif"));
+            dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char3.gif"));
+            hades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.gif"));
+            quetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.gif"));
+            ra = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char6.gif"));
+            anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
+            freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
             
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
@@ -174,12 +194,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
             // Inicialización de personajes
             vidaP1 = 100;
             vidaP2 = 100;
-            P1 = new BasePersonajes(zeus, sonido_zeus);
-            P2 = new BasePersonajes(dragon, sonido_dragon);
-            P1.setPosX(getWidth()/4 + 100); 
-            P2.setPosX(2*getWidth()/4 + 100);
-            P1.setPosY(getHeight()-P1.getAlto());
-            P2.setPosY(getHeight()-P2.getAlto());
+            P1 = new BasePersonajes();
+            P2 = new BasePersonajes();
             
             addKeyListener(this);
         }
@@ -411,6 +427,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 }
                 if (p1Select && p2Select) {
                     // mandar a crear los objetos de personaje
+                    switch(opcionP1) {
+                        case 0:
+                            P1.setImagenI(zeus);
+                        break;
+                        case 1:
+                            P1.setImagenI(amaterasu);
+                        break;
+                        case 2:
+                            P1.setImagenI(dragon);
+                        break;
+                        case 3:
+                            P1.setImagenI(hades);
+                        break;
+                        case 4:
+                            P1.setImagenI(quetzal);
+                        break;
+                        case 5:
+                            P1.setImagenI(ra);
+                        break;
+                        case 6:
+                            P1.setImagenI(anubis);
+                        break;
+                        case 7:
+                            P1.setImagenI(freya);
+                        break;
+                    }
+                    switch(opcionP2) {
+                        case 0:
+                            P2.setImagenI(zeus);
+                        break;
+                        case 1:
+                            P2.setImagenI(amaterasu);
+                        break;
+                        case 2:
+                            P2.setImagenI(dragon);
+                        break;
+                        case 3:
+                            P2.setImagenI(hades);
+                        break;
+                        case 4:
+                            P2.setImagenI(quetzal);
+                        break;
+                        case 5:
+                            P2.setImagenI(ra);
+                        break;
+                        case 6:
+                            P2.setImagenI(anubis);
+                        break;
+                        case 7:
+                            P2.setImagenI(freya);
+                        break;
+                    }
+                    
+                    P1.setPosX(getWidth()/4 + 100); 
+                    P2.setPosX(2*getWidth()/4 + 100);
+                    P1.setPosY(getHeight()-P1.getAlto());
+                    P2.setPosY(getHeight()-P2.getAlto());
+                    
                     pausaCharSelect = true;
                 }
             } else if (!pausaMapSelect) {
@@ -435,7 +509,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
 
             // Verifica que no esté en pausa y que esté en el escenario de juego
-            if (!pausa && !gameover && (desert || jungle || underworld)) {
+            if (!pausa && !gameover && (desert || jungle || underworld || rainbow)) {
                 // Actualiza la posición de los personajes dependiendo de la tecla que se esté oprimiendo
                 if (izquierda) {
                     P1.actualizaPosX(-velocidadPersonajes);
@@ -486,7 +560,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
         */
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
-            if (!pausa) {
+            if (!pausa && (jungle || desert || underworld || rainbow)) {
                 // Colision de los personajes con los extremos superiores e inferiores del frame
                 if (P1.getPosY() < EXTREMO_SUPERIOR) {
                     P1.setPosY(35);
@@ -620,12 +694,12 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (!pausa) {
                 // Dibuja la pantalla de inicio
                 if (!start) {
+                    g.drawImage(startScreen, 0, 0, this);
+                    g.drawImage(cursorMenu.getImagenI(), cursorMenu.getPosX(), cursorMenu.getPosY(), this);
                     // Dibuja la pantalla de instrucciones
                     if (instrucciones) {
                         g.drawImage(instructionScreen, 0, 0, this);
                     }
-                    g.drawImage(startScreen, 0, 0, this);
-                    g.drawImage(cursorMenu.getImagenI(), cursorMenu.getPosX(), cursorMenu.getPosY(), this);
                 } else if (!pausaCharSelect) {
                     // Dibuja la pantalla de selección de personajes
                     g.drawImage(characterSelect, 0, 0, this);
@@ -647,7 +721,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             g.drawImage(Underworld, 0, 0, this);
                         break;
                         case 3:
-                            g.drawImage(Underworld, 0, 0, this);
+                            g.drawImage(RainbowRoad, 0, 0, this);
                         break;
                     }
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
@@ -675,36 +749,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
             // Verifica la tecla enter para cambiar de pantallas, dependiendo
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                
-                /*if (start && pausaCharSelect && pausaMapSelect && underworld) {
-                    underworld = false;
-                    sonido_underworld.stop();
-                    gameover = true;
-                }
-                if (start && pausaCharSelect && pausaMapSelect && desert) {
-                    desert = false;
-                    sonido_desierto.stop();
-                    sonido_underworld.setLooping(true);
-                    sonido_underworld.play();
-                    underworld = true;
-                }
-                if (start && pausaCharSelect && pausaMapSelect && jungle) {
-                    jungle = false;
-                    desert = true;
-                    sonido_jungle.stop();
-                    sonido_desierto.setLooping(true);
-                    sonido_desierto.play();
-                }
-                if (start && pausaCharSelect && !pausaMapSelect) {
-                    pausaMapSelect = true;
-                    sonido_menu.stop();
-                    jungle = true;
-                    sonido_jungle.setLooping(true);
-                    sonido_jungle.play();
-                }
-                if (start && !pausaCharSelect) {
-                    pausaCharSelect = true;
-                } */
                 if (!start) {
                     if (instrucciones)
                         instrucciones = false;
@@ -742,9 +786,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_underworld.play();
                         break;
                         case 3:
-                            underworld = true;
-                            sonido_underworld.setLooping(true);
-                            sonido_underworld.play();
+                            rainbow = true;
+                            sonido_rainbow.setLooping(true);
+                            sonido_rainbow.play();
                         break;
                     }
                 }

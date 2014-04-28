@@ -38,6 +38,8 @@ public class BasePersonajes {
         this.posY = 0;
         this.velPowerUp = 0;
         powerUp = false;
+        
+        anim = new Animacion();
     }
     /**
      * Método constructor de la clase <I>BasePersonajes</I> que inicializa
