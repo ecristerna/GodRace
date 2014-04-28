@@ -43,6 +43,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean abajo;
     private boolean abajo2;
     private boolean pausa;
+    private boolean p1Select;
+    private boolean p2Select;
     private boolean instrucciones;
     private boolean start;
     private boolean gameover;
@@ -52,6 +54,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean jungle;
     private boolean underworld;
     private int opcionMenu;
+    private int opcionP1;
+    private int opcionP2;
     private int vidaP1;
     private int vidaP2;
     private int extremoDerecho;
@@ -75,8 +79,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
+    private Obstaculos cursorMenu;
     private Obstaculos cursorP1;
     private Obstaculos cursorP2;
+    private Obstaculos cursorMapa;
     private Obstaculos obstaculo;
     private BasePersonajes P1;
     private BasePersonajes P2;
@@ -114,11 +120,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
             underworld = false;
             gameover = false;
             
+            p1Select = false;
+            p2Select = false;
+            
             // Imágenes de fondo, menús, créditos, etc.
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
             instructionScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Instructions.png"));
             characterSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_CharacterSelect2.png"));
-            mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect.png"));
+            mapSelect = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MapSelect_1.png"));
             Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_DesertGIF.gif"));
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
@@ -129,7 +138,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             cursorP1Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP1.gif"));
             cursorP2Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP2.gif"));
             cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoSELECT.gif"));
-            cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
+            cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoMP1.gif"));
             
             // Sonidos de background
             sonido_menu = new SoundClip("/sounds/Athenian_Rooftop.wav");
@@ -149,8 +158,12 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             // Inicializa Cursores
             opcionMenu = 0;
-            cursorP1 = new Obstaculos(cursorMenuInicialImg);
+            opcionP1 = 0;
+            opcionP2 = 1;
+            cursorMenu = new Obstaculos(cursorMenuInicialImg);
+            cursorP1 = new Obstaculos(cursorP1Img);
             cursorP2 = new Obstaculos(cursorP2Img);
+            cursorMapa = new Obstaculos(cursorMapaImg);
             
             // Inicializacion de obstaculos
             obstaculo = new Obstaculos();
@@ -311,16 +324,111 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (!start) {
                 switch (opcionMenu) {
                     case 0:
-                        cursorP1.setPosX(720);
-                        cursorP1.setPosY(400);
+                        cursorMenu.setPosX(720);
+                        cursorMenu.setPosY(400);
                     break;
                     case 1:
-                        cursorP1.setPosX(580);
-                        cursorP1.setPosY(505);
+                        cursorMenu.setPosX(580);
+                        cursorMenu.setPosY(505);
                     break;
                     case 2:
-                        cursorP1.setPosX(550);
-                        cursorP1.setPosY(615);
+                        cursorMenu.setPosX(550);
+                        cursorMenu.setPosY(615);
+                    break;
+                }
+            } else if (!pausaCharSelect) {
+                if (!p1Select) {
+                switch (opcionP1) {
+                    case 0:
+                        cursorP1.setPosX(97);
+                        cursorP1.setPosY(194);
+                    break;
+                    case 1:
+                        cursorP1.setPosX(365);
+                        cursorP1.setPosY(194);
+                    break;
+                    case 2:
+                        cursorP1.setPosX(636);
+                        cursorP1.setPosY(194);
+                    break;
+                    case 3:
+                        cursorP1.setPosX(908);
+                        cursorP1.setPosY(194);
+                    break;
+                    case 4:
+                        cursorP1.setPosX(98);
+                        cursorP1.setPosY(431);
+                    break;
+                    case 5:
+                        cursorP1.setPosX(367);
+                        cursorP1.setPosY(431);
+                    break;
+                    case 6:
+                        cursorP1.setPosX(636);
+                        cursorP1.setPosY(431);
+                    break;
+                    case 7:
+                        cursorP1.setPosX(908);
+                        cursorP1.setPosY(431);
+                    break;
+                }
+                }
+                if (!p2Select) {
+                switch (opcionP2) {
+                    case 0:
+                        cursorP2.setPosX(97);
+                        cursorP2.setPosY(194);
+                    break;
+                    case 1:
+                        cursorP2.setPosX(365);
+                        cursorP2.setPosY(194);
+                    break;
+                    case 2:
+                        cursorP2.setPosX(636);
+                        cursorP2.setPosY(194);
+                    break;
+                    case 3:
+                        cursorP2.setPosX(908);
+                        cursorP2.setPosY(194);
+                    break;
+                    case 4:
+                        cursorP2.setPosX(98);
+                        cursorP2.setPosY(431);
+                    break;
+                    case 5:
+                        cursorP2.setPosX(367);
+                        cursorP2.setPosY(431);
+                    break;
+                    case 6:
+                        cursorP2.setPosX(636);
+                        cursorP2.setPosY(431);
+                    break;
+                    case 7:
+                        cursorP2.setPosX(908);
+                        cursorP2.setPosY(431);
+                    break;
+                }
+                }
+                if (p1Select && p2Select) {
+                    pausaCharSelect = true;
+                }
+            } else if (!pausaMapSelect) {
+                switch (opcionMenu) {
+                    case 0:
+                        cursorMapa.setPosX(47);
+                        cursorMapa.setPosY(203);
+                    break;
+                    case 1:
+                        cursorMapa.setPosX(635);
+                        cursorMapa.setPosY(203);
+                    break;
+                    case 2:
+                        cursorMapa.setPosX(47);
+                        cursorMapa.setPosY(425);
+                    break;
+                    case 3:
+                        cursorMapa.setPosX(635);
+                        cursorMapa.setPosY(425);
                     break;
                 }
             }
@@ -511,42 +619,40 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (!pausa) {
                 // Dibuja la pantalla de inicio
                 if (!start) {
+                    // Dibuja la pantalla de instrucciones
+                    if (instrucciones) {
+                        g.drawImage(instructionScreen, 0, 0, this);
+                    }
                     g.drawImage(startScreen, 0, 0, this);
-                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
-                }
-                // Dibuja la pantalla de instrucciones
-                if (!start && instrucciones) {
-                    g.drawImage(instructionScreen, 0, 0, this);
-                }
-                // Dibuja la pantalla de selección de personajes
-                if (start && !pausaCharSelect) {
+                    g.drawImage(cursorMenu.getImagenI(), cursorMenu.getPosX(), cursorMenu.getPosY(), this);
+                } else if (!pausaCharSelect) {
+                    // Dibuja la pantalla de selección de personajes
                     g.drawImage(characterSelect, 0, 0, this);
                     g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
                     g.drawImage(cursorP2.getImagenI(), cursorP2.getPosX(), cursorP2.getPosY(), this);
-                }
-                // Dibuja la pantalla de selección de pista
-                if (start && pausaCharSelect && !pausaMapSelect) {
+                } else if (!pausaMapSelect) {
+                    // Dibuja la pantalla de selección de pista
                     g.drawImage(mapSelect, 0, 0, this);
-                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
-                }
-                // Dibuja el escenario de juego con sus personajes
-                if (start && pausaCharSelect && pausaMapSelect && jungle) {
-                    g.drawImage(Jungle, 0, 0, this);
+                    g.drawImage(cursorMapa.getImagenI(), cursorMapa.getPosX(), cursorMapa.getPosY(), this);
+                } else {
+                    switch (opcionMenu) {
+                        case 0:
+                            g.drawImage(Jungle, 0, 0, this);
+                        break;
+                        case 1:
+                            g.drawImage(Desert, 0, 0, this);
+                        break;
+                        case 2:
+                            g.drawImage(Underworld, 0, 0, this);
+                        break;
+                        case 3:
+                            g.drawImage(Underworld, 0, 0, this);
+                        break;
+                    }
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
                 }
-                // Dibuja el escenario de juego con sus personajes
-                if (start && pausaCharSelect && pausaMapSelect && desert) {
-                    g.drawImage(Desert, 0, 0, this);
-                    g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
-                    g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
-                }
-                // Dibuja el escenario de juego con sus personajes
-                if (start && pausaCharSelect && pausaMapSelect && underworld) {
-                    g.drawImage(Underworld, 0, 0, this);
-                    g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
-                    g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
-                }
+                // Dibuja los obstaculos
                 for (int i = 0; i < obstaclesLeft.size(); i++)
                     g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
                 for (int i = 0; i < obstaclesRight.size(); i++)
@@ -569,7 +675,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             // de la pantalla actual en la que se esté
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 
-                if (start && pausaCharSelect && pausaMapSelect && underworld) {
+                /*if (start && pausaCharSelect && pausaMapSelect && underworld) {
                     underworld = false;
                     sonido_underworld.stop();
                     gameover = true;
@@ -597,47 +703,457 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 }
                 if (start && !pausaCharSelect) {
                     pausaCharSelect = true;
-                }
+                } */
                 if (!start) {
-                    start = true;
+                    if (instrucciones)
+                        instrucciones = false;
+                    else {
+                        switch (opcionMenu) {
+                            case 0:
+                                start = true;
+                                opcionMenu = 0;
+                            break;
+                            case 1:
+                                opcionMenu = 0;
+                            break;
+                            case 2:
+                                instrucciones = true;
+                            break;
+                        }
+                    }
+                } else if(pausaCharSelect && !pausaMapSelect) {
+                    pausaMapSelect = true;
+                    sonido_menu.stop();
+                    switch (opcionMenu) {
+                        case 0:
+                            jungle = true;
+                            sonido_jungle.setLooping(true);
+                            sonido_jungle.play();
+                        break;
+                        case 1:
+                            desert = true;
+                            sonido_desierto.setLooping(true);
+                            sonido_desierto.play();
+                        break;
+                        case 2:
+                            underworld = true;
+                            sonido_underworld.setLooping(true);
+                            sonido_underworld.play();
+                        break;
+                        case 3:
+                            underworld = true;
+                            sonido_underworld.setLooping(true);
+                            sonido_underworld.play();
+                        break;
+                    }
                 }
             }
             
-            // Verifica la tecla I para mostrar las instrucciones mientras se esté
-            // en la pantalla de inicio
-            if (e.getKeyCode() == KeyEvent.VK_I) {
-                
-                if (!start) {
-                    instrucciones = !instrucciones;
-                }
-            }
             // Verifica la tecla de pausa
             if (e.getKeyCode() == KeyEvent.VK_P) {
                 pausa = !pausa;
             }
             
+            if (e.getKeyCode() == KeyEvent.VK_F) {
+                if (!pausaCharSelect) {
+                    p1Select = true;
+                }
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_G) {
+                
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_N) {
+                if (!pausaCharSelect) {
+                    p2Select = true;
+                }
+            }
+            
+            if (e.getKeyCode() == KeyEvent.VK_M) {
+                
+            }
+            
             // Verifica las teclas de movimiento para los personajes
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                if (!pausaCharSelect) {
+                    switch(opcionP2) {
+                        case 0:
+                            if (opcionP1 == 3) {
+                                opcionP2 = 2;
+                            } else {
+                                opcionP2 = 3;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP1 == 0) {
+                                opcionP2 = 3;
+                            } else {
+                                opcionP2 = 0;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP1 == 1) {
+                                opcionP2 = 0;
+                            } else {
+                                opcionP2 = 1;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP1 == 2) {
+                                opcionP2 = 1;
+                            } else {
+                                opcionP2 = 2;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP1 == 7) {
+                                opcionP2 = 6;
+                            } else {
+                                opcionP2 = 7;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP1 == 4) {
+                                opcionP2 = 7;
+                            } else {
+                                opcionP2 = 4;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP1 == 5) {
+                                opcionP2 = 4;
+                            } else {
+                                opcionP2 = 5;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP1 == 6) {
+                                opcionP2 = 5;
+                            } else {
+                                opcionP2 = 6;
+                            }
+                        break;
+                    }
+                }
                 izquierda2 = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (!pausaCharSelect) {
+                    switch(opcionP2) {
+                        case 0:
+                            if (opcionP1 == 1) {
+                                opcionP2 = 2;
+                            } else {
+                                opcionP2 = 1;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP1 == 2) {
+                                opcionP2 = 3;
+                            } else {
+                                opcionP2 = 2;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP1 == 3) {
+                                opcionP2 = 0;
+                            } else {
+                                opcionP2 = 3;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP1 == 0) {
+                                opcionP2 = 1;
+                            } else {
+                                opcionP2 = 0;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP1 == 5) {
+                                opcionP2 = 6;
+                            } else {
+                                opcionP2 = 5;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP1 == 6) {
+                                opcionP2 = 7;
+                            } else {
+                                opcionP2 = 6;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP1 == 7) {
+                                opcionP2 = 4;
+                            } else {
+                                opcionP2 = 7;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP1 == 4) {
+                                opcionP2 = 5;
+                            } else {
+                                opcionP2 = 4;
+                            }
+                        break;
+                    }
+                }
                 derecha2 = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_UP) {
+                if (!pausaCharSelect) {
+                    switch(opcionP2) {
+                        case 0:
+                            if (opcionP1 != 4) {
+                                opcionP2 = 4;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP1 != 5) {
+                                opcionP2 = 5;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP1 != 6) {
+                                opcionP2 = 6;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP1 != 7) {
+                                opcionP2 = 7;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP1 != 0) {
+                                opcionP2 = 0;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP1 != 1) {
+                                opcionP2 = 1;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP1 != 2) {
+                                opcionP2 = 2;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP1 != 3) {
+                                opcionP2 = 3;
+                            }
+                        break;
+                    }
+                }
                 arriba2 = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                if (!pausaCharSelect) {
+                    switch(opcionP2) {
+                        case 0:
+                            if (opcionP1 != 4) {
+                                opcionP2 = 4;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP1 != 5) {
+                                opcionP2 = 5;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP1 != 6) {
+                                opcionP2 = 6;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP1 != 7) {
+                                opcionP2 = 7;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP1 != 0) {
+                                opcionP2 = 0;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP1 != 1) {
+                                opcionP2 = 1;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP1 != 2) {
+                                opcionP2 = 2;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP1 != 3) {
+                                opcionP2 = 3;
+                            }
+                        break;
+                    }
+                }
                 abajo2 = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_A) {
+                if (!pausaCharSelect) {
+                    switch (opcionP1) {
+                        case 0:
+                            if (opcionP2 == 3) {
+                                opcionP1 = 2;
+                            } else {
+                                opcionP1 = 3;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP2 == 0) {
+                                opcionP1 = 3;
+                            } else {
+                                opcionP1 = 0;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP2 == 1) {
+                                opcionP1 = 0;
+                            } else {
+                                opcionP1 = 1;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP2 == 2) {
+                                opcionP1 = 1;
+                            } else {
+                                opcionP1 = 2;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP2 == 7) {
+                                opcionP1 = 6;
+                            } else {
+                                opcionP1 = 7;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP2 == 4) {
+                                opcionP1 = 7;
+                            } else {
+                                opcionP1 = 4;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP2 == 5) {
+                                opcionP1 = 4;
+                            } else {
+                                opcionP1 = 5;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP2 == 6) {
+                                opcionP1 = 5;
+                            } else {
+                                opcionP1 = 6;
+                            }
+                        break;
+                    }
+                } else if (!pausaMapSelect) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 1;
+                        break;
+                        case 1:
+                            opcionMenu = 0;
+                        break;
+                        case 2:
+                            opcionMenu = 3;
+                        break;
+                        case 3:
+                            opcionMenu = 2;
+                        break;
+                    }
+                }
                 izquierda = true;
             }
             
             if (e.getKeyCode() == KeyEvent.VK_D) {
+                if (!pausaCharSelect) {
+                    switch(opcionP1) {
+                        case 0:
+                            if (opcionP2 == 1) {
+                                opcionP1 = 2;
+                            } else {
+                                opcionP1 = 1;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP2 == 2) {
+                                opcionP1 = 3;
+                            } else {
+                                opcionP1 = 2;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP2 == 3) {
+                                opcionP1 = 0;
+                            } else {
+                                opcionP1 = 3;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP2 == 0) {
+                                opcionP1 = 1;
+                            } else {
+                                opcionP1 = 0;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP2 == 5) {
+                                opcionP1 = 6;
+                            } else {
+                                opcionP1 = 5;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP2 == 6) {
+                                opcionP1 = 7;
+                            } else {
+                                opcionP1 = 6;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP2 == 7) {
+                                opcionP1 = 4;
+                            } else {
+                                opcionP1 = 7;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP2 == 4) {
+                                opcionP1 = 5;
+                            } else {
+                                opcionP1 = 4;
+                            }
+                        break;
+                    }
+                } else if (!pausaMapSelect) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 1;
+                        break;
+                        case 1:
+                            opcionMenu = 0;
+                        break;
+                        case 2:
+                            opcionMenu = 3;
+                        break;
+                        case 3:
+                            opcionMenu = 2;
+                        break;
+                    }
+                }
                 derecha = true;
             }
             
@@ -651,6 +1167,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             opcionMenu = 0;
                         break;
                         case 2:
+                            opcionMenu = 1;
+                        break;
+                    }
+                } else if (!pausaCharSelect) {
+                    switch(opcionP1) {
+                        case 0:
+                            if (opcionP2 != 4) {
+                                opcionP1 = 4;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP2 != 5) {
+                                opcionP1 = 5;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP2 != 6) {
+                                opcionP1 = 6;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP2 != 7) {
+                                opcionP1 = 7;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP2 != 0) {
+                                opcionP1 = 0;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP2 != 1) {
+                                opcionP1 = 1;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP2 != 2) {
+                                opcionP1 = 2;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP2 != 3) {
+                                opcionP1 = 3;
+                            }
+                        break;
+                    }
+                } else if (!pausaMapSelect) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 2;
+                        break;
+                        case 1:
+                            opcionMenu = 3;
+                        break;
+                        case 2:
+                            opcionMenu = 0;
+                        break;
+                        case 3:
                             opcionMenu = 1;
                         break;
                     }
@@ -669,6 +1243,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         break;
                         case 2:
                             opcionMenu = 0;
+                        break;
+                    }
+                } else if (!pausaCharSelect) {
+                    switch(opcionP1) {
+                        case 0:
+                            if (opcionP2 != 4) {
+                                opcionP1 = 4;
+                            }
+                        break;
+                        case 1:
+                            if (opcionP2 != 5) {
+                                opcionP1 = 5;
+                            }
+                        break;
+                        case 2:
+                            if (opcionP2 != 6) {
+                                opcionP1 = 6;
+                            }
+                        break;
+                        case 3:
+                            if (opcionP2 != 7) {
+                                opcionP1 = 7;
+                            }
+                        break;
+                        case 4:
+                            if (opcionP2 != 0) {
+                                opcionP1 = 0;
+                            }
+                        break;
+                        case 5:
+                            if (opcionP2 != 1) {
+                                opcionP1 = 1;
+                            }
+                        break;
+                        case 6:
+                            if (opcionP2 != 2) {
+                                opcionP1 = 2;
+                            }
+                        break;
+                        case 7:
+                            if (opcionP2 != 3) {
+                                opcionP1 = 3;
+                            }
+                        break;
+                    }
+                } else if (!pausaMapSelect) {
+                    switch(opcionMenu) {
+                        case 0:
+                            opcionMenu = 2;
+                        break;
+                        case 1:
+                            opcionMenu = 3;
+                        break;
+                        case 2:
+                            opcionMenu = 0;
+                        break;
+                        case 3:
+                            opcionMenu = 1;
                         break;
                     }
                 }
