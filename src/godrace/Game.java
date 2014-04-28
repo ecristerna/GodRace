@@ -71,6 +71,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image Jungle;
     private Image Underworld;
     private Image RainbowRoad;
+    private Image GameOver;
     private Image creditScreen;
     private Image cursorMenuInicialImg;
     private Image cursorP1Img;
@@ -144,6 +145,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoad.gif"));
+            GameOver = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_GameOver.gif"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Imagenes de cursores de seleccion
@@ -340,16 +342,12 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (!start) {
                 switch (opcionMenu) {
                     case 0:
-                        cursorMenu.setPosX(720);
-                        cursorMenu.setPosY(400);
+                        cursorMenu.setPosX(750);
+                        cursorMenu.setPosY(465);
                     break;
                     case 1:
-                        cursorMenu.setPosX(580);
-                        cursorMenu.setPosY(505);
-                    break;
-                    case 2:
                         cursorMenu.setPosX(550);
-                        cursorMenu.setPosY(615);
+                        cursorMenu.setPosY(580);
                     break;
                 }
             } else if (!pausaCharSelect) {
@@ -735,7 +733,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 
                 // Dibuja la pantalla de créditos
                 if (gameover) {
-                    g.drawImage(creditScreen, 0, 0, this);
+                    g.drawImage(GameOver, 0, 0, this);
                 }
             }
         }
@@ -759,9 +757,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
                                 opcionMenu = 0;
                             break;
                             case 1:
-                                opcionMenu = 0;
-                            break;
-                            case 2:
                                 instrucciones = true;
                             break;
                         }
@@ -1206,13 +1201,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 if (!start) {
                     switch(opcionMenu) {
                         case 0:
-                            opcionMenu = 2;
+                            opcionMenu = 1;
                         break;
                         case 1:
                             opcionMenu = 0;
-                        break;
-                        case 2:
-                            opcionMenu = 1;
                         break;
                     }
                 } else if (!pausaCharSelect) {
@@ -1284,9 +1276,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             opcionMenu = 1;
                         break;
                         case 1:
-                            opcionMenu = 2;
-                        break;
-                        case 2:
                             opcionMenu = 0;
                         break;
                     }
