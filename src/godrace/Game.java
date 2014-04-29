@@ -33,6 +33,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private final static int JUNGLE_DERECHO = 890;
     private final static int DESERT_IZQUIERDO = 325;
     private final static int DESERT_DERECHO = 770;
+    private final static int UNDERWORLD_IZQUIERDO = 290;
+    private final static int UNDERWORLD_DERECHO = 776;
+    private final static int RAINBOW_IZQUIERDO=271;
+    private final static int RAINBOW_DERECHO = 776;
     //variables
     private boolean izquierda;
     private boolean izquierda2;
@@ -80,6 +84,32 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image cursorMapaImg;
     private Image P1healthbar;
     private Image P2healthbar;
+    private Animacion P1barra;
+    private Animacion P2barra;
+    private Image barra0;
+    private Image barra1;
+    private Image barra2;
+    private Image barra3;
+    private Image barra4;
+    private Image barra5;
+    private Image barra6;
+    private Image barra7;
+    private Image barra8;
+    private Image barra9;
+    private Image barra10;
+    private Image barra11;
+    private Image barra12;
+    private Image barra13;
+    private Image barra14;
+    private Image barra15;
+    private Image barra16;
+    private Image barra17;
+    private Image barra18;
+    private Image barra19;
+    private Image barra20;
+    private Image barra21;
+    private Image barra22;
+    private Image barra23;
     private Image P1Icono;
     private Image P2Icono;
     private Image zeus;
@@ -149,7 +179,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map1_JungleGIF.gif"));
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoad.gif"));
-            GameOver = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_GameOver.gif"));
+            GameOver = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_GameOver.png"));
             creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
             
             // Imagenes de cursores de seleccion
@@ -178,8 +208,85 @@ public class Game extends JFrame implements Runnable, KeyListener {
             anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
             
+            // Imagenes de barra de vida
             P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.gif"));
             P2healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health2.gif"));
+            barra0 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif"));
+            barra1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif"));
+            barra2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif"));
+            barra3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif"));
+            barra4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif"));
+            barra5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif"));
+            barra6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif"));
+            barra7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif"));
+            barra8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif"));
+            barra9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif"));
+            barra10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif"));
+            barra11 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif"));
+            barra12 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif"));
+            barra13 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif"));
+            barra14 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif"));
+            barra15 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif"));
+            barra16 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif"));
+            barra17 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif"));
+            barra18 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif"));
+            barra19 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif"));
+            barra20 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif"));
+            barra21 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif"));
+            barra22 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif"));
+            barra23 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif"));
+            
+            P1barra = new Animacion();
+            P1barra.sumaCuadro(barra0, 5);
+            P1barra.sumaCuadro(barra1, 5);
+            P1barra.sumaCuadro(barra2, 5);
+            P1barra.sumaCuadro(barra3, 5);
+            P1barra.sumaCuadro(barra4, 5);
+            P1barra.sumaCuadro(barra5, 5);
+            P1barra.sumaCuadro(barra6, 5);
+            P1barra.sumaCuadro(barra7, 5);
+            P1barra.sumaCuadro(barra8, 5);
+            P1barra.sumaCuadro(barra9, 5);
+            P1barra.sumaCuadro(barra10, 5);
+            P1barra.sumaCuadro(barra11, 5);
+            P1barra.sumaCuadro(barra12, 5);
+            P1barra.sumaCuadro(barra13, 5);
+            P1barra.sumaCuadro(barra14, 5);
+            P1barra.sumaCuadro(barra15, 5);
+            P1barra.sumaCuadro(barra16, 5);
+            P1barra.sumaCuadro(barra17, 5);
+            P1barra.sumaCuadro(barra18, 5);
+            P1barra.sumaCuadro(barra19, 5);
+            P1barra.sumaCuadro(barra20, 5);
+            P1barra.sumaCuadro(barra21, 5);
+            P1barra.sumaCuadro(barra22, 5);
+            P1barra.sumaCuadro(barra23, 5);
+            
+            P2barra = new Animacion();
+            P2barra.sumaCuadro(barra0, 5);
+            P2barra.sumaCuadro(barra1, 5);
+            P2barra.sumaCuadro(barra2, 5);
+            P2barra.sumaCuadro(barra3, 5);
+            P2barra.sumaCuadro(barra4, 5);
+            P2barra.sumaCuadro(barra5, 5);
+            P2barra.sumaCuadro(barra6, 5);
+            P2barra.sumaCuadro(barra7, 5);
+            P2barra.sumaCuadro(barra8, 5);
+            P2barra.sumaCuadro(barra9, 5);
+            P2barra.sumaCuadro(barra10, 5);
+            P2barra.sumaCuadro(barra11, 5);
+            P2barra.sumaCuadro(barra12, 5);
+            P2barra.sumaCuadro(barra13, 5);
+            P2barra.sumaCuadro(barra14, 5);
+            P2barra.sumaCuadro(barra15, 5);
+            P2barra.sumaCuadro(barra16, 5);
+            P2barra.sumaCuadro(barra17, 5);
+            P2barra.sumaCuadro(barra18, 5);
+            P2barra.sumaCuadro(barra19, 5);
+            P2barra.sumaCuadro(barra20, 5);
+            P2barra.sumaCuadro(barra21, 5);
+            P2barra.sumaCuadro(barra22, 5);
+            P2barra.sumaCuadro(barra23, 5);
             
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
@@ -200,8 +307,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
             obstaclesRight = new<Obstaculos> LinkedList();
             
             // Inicialización de personajes
-            vidaP1 = 100;
-            vidaP2 = 100;
+            vidaP1 = 120;
+            vidaP2 = 120;
             P1 = new BasePersonajes();
             P2 = new BasePersonajes();
             
@@ -602,12 +709,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     if (obstaclesLeft.get(i).intersecta(P1)) {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
-                        vidaP1--;
+                        vidaP1-=5;
+                        P1barra.actualiza(5);
                     }
                     if (obstaclesLeft.get(i).intersecta(P2)) {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
-                        vidaP2--;
+                        vidaP2-=5;
+                        P2barra.actualiza(5);
                     }
                 }
                 for (int i = 0; i < obstaclesRight.size(); i++) {
@@ -618,12 +727,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     if (obstaclesRight.get(i).intersecta(P1)) {
                         obstaclesRight.remove(i);
                         creaObstaculo(1);
-                        vidaP1-=10;
+                        vidaP1-=5;
+                        P1barra.actualiza(5);
                     }
                     if (obstaclesRight.get(i).intersecta(P2)) {
                         obstaclesRight.remove(i);
                         creaObstaculo(1);
-                        vidaP2-=10;
+                        vidaP2-=5;
+                        P2barra.actualiza(5);
                     }
                 }
                 
@@ -657,6 +768,38 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     }
                     if (P2.getPosX() > JUNGLE_DERECHO) {
                         P2.setPosX(JUNGLE_DERECHO - 10);
+                    }
+                }
+                if (rainbow) {
+                    // Verifica que el personaje 1 no choque con el frame
+                    if (P1.getPosX() < RAINBOW_IZQUIERDO) {
+                        P1.setPosX(RAINBOW_IZQUIERDO + 10);
+                    }
+                    if (P1.getPosX() > RAINBOW_DERECHO) {
+                        P1.setPosX(RAINBOW_DERECHO - 10);
+                    }
+                    // Verifica que el personaje 2 no choque con el frame
+                    if (P2.getPosX() < RAINBOW_IZQUIERDO) {
+                        P2.setPosX(RAINBOW_IZQUIERDO + 10);
+                    }
+                    if (P2.getPosX() > RAINBOW_DERECHO) {
+                        P2.setPosX(RAINBOW_DERECHO - 10);
+                    }
+                }
+                if (underworld) {
+                    // Verifica que el personaje 1 no choque con el frame
+                    if (P1.getPosX() < UNDERWORLD_IZQUIERDO) {
+                        P1.setPosX(UNDERWORLD_IZQUIERDO + 10);
+                    }
+                    if (P1.getPosX() > UNDERWORLD_DERECHO) {
+                        P1.setPosX(UNDERWORLD_DERECHO - 10);
+                    }
+                    // Verifica que el personaje 2 no choque con el frame
+                    if (P2.getPosX() < UNDERWORLD_IZQUIERDO) {
+                        P2.setPosX(UNDERWORLD_IZQUIERDO + 10);
+                    }
+                    if (P2.getPosX() > UNDERWORLD_DERECHO) {
+                        P2.setPosX(UNDERWORLD_DERECHO - 10);
                     }
                 }
                 
@@ -743,8 +886,13 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         break;
                     }
                     // Dibuja la healthbar
-                    //g.drawImage(P1healthbar, 0, 0, this);
-                    //g.drawImage(P2healthbar, getWidth()-350, 0, this);
+                    g.drawImage(P1healthbar, 0, 0, this);
+                    g.drawImage(P2healthbar, getWidth()-155, 0, this);
+                    g.drawImage(P1Icono, 10, 8, this);
+                    g.drawImage(P2Icono, getWidth()-145, 8, this);
+                    g.drawImage(P1barra.getImagen(), 4, 110, this);
+                    g.drawImage(P2barra.getImagen(), getWidth()-25, 110, this);
+                    
                     // Dibuja a los personajes
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
@@ -803,17 +951,17 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_desierto.play();
                         break;
                         case 2:
-                            //extremoIzquierdo = UNDERWORLD_IZQUIERDO;
-                            //extremoDerecho = UNDERWORLD_DERECHO;
-                            //inicializaObstaculos();
+                            extremoIzquierdo = UNDERWORLD_IZQUIERDO;
+                            extremoDerecho = UNDERWORLD_DERECHO;
+                            inicializaObstaculos();
                             underworld = true;
                             sonido_underworld.setLooping(true);
                             sonido_underworld.play();
                         break;
                         case 3:
-                            //extremoIzquierdo = RAINBOW_IZQUIERDO;
-                            //extremoDerecho = RAINBOW_DERECHO;
-                            //inicializaObstaculos();
+                            extremoIzquierdo = RAINBOW_IZQUIERDO;
+                            extremoDerecho = RAINBOW_DERECHO;
+                            inicializaObstaculos();
                             rainbow = true;
                             sonido_rainbow.setLooping(true);
                             sonido_rainbow.play();
