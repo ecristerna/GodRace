@@ -968,6 +968,22 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         break;
                     }
                     pausaMapSelect = true;
+                } else if (gameover) {
+                    switch(opcionMenu) {
+                        case 0:
+                            sonido_jungle.stop();
+                        break;
+                        case 1:
+                            sonido_desierto.stop();
+                        break;
+                        case 2:
+                            sonido_underworld.stop();
+                        break;
+                        case 3:
+                            sonido_rainbow.stop();
+                        break;
+                    }
+                    init();
                 }
             }
             
