@@ -184,10 +184,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             // Imagenes de cursores de seleccion
             cursorMenuInicialImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
-            cursorP1Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP1.gif"));
-            cursorP2Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoP2.gif"));
-            cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoSELECT.gif"));
-            cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bioforge_MarcoMP1.gif"));
+            cursorP1Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoP1.gif"));
+            cursorP2Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoP2.gif"));
+            cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoSELECT.gif"));
+            cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoMP1.gif"));
             
             // Sonidos de background
             sonido_menu = new SoundClip("/sounds/Athenian_Rooftop.wav");
