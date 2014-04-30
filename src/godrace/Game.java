@@ -86,32 +86,16 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image P2healthbar;
     private Animacion P1barra;
     private Animacion P2barra;
-    private Image barra0;
-    private Image barra1;
-    private Image barra2;
-    private Image barra3;
-    private Image barra4;
-    private Image barra5;
-    private Image barra6;
-    private Image barra7;
-    private Image barra8;
-    private Image barra9;
-    private Image barra10;
-    private Image barra11;
-    private Image barra12;
-    private Image barra13;
-    private Image barra14;
-    private Image barra15;
-    private Image barra16;
-    private Image barra17;
-    private Image barra18;
-    private Image barra19;
-    private Image barra20;
-    private Image barra21;
-    private Image barra22;
-    private Image barra23;
     private Image P1Icono;
     private Image P2Icono;
+    private Image iZeus;
+    private Image iAmaterasu;
+    private Image iDragon;
+    private Image iHades;
+    private Image iQuetzal;
+    private Image iRa;
+    private Image iAnubis;
+    private Image iFreya;
     private Image zeus;
     private Image amaterasu;
     private Image dragon;
@@ -198,95 +182,79 @@ public class Game extends JFrame implements Runnable, KeyListener {
             sonido_menu.setLooping(true);
             sonido_menu.play();
             
-            // Imagenes de personajes
-            zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char1.gif"));
+            // Imagenes de personajes y sus iconos
+            iZeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char1.gif"));
+            iAmaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.gif"));
+            iDragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char3.gif"));
+            iHades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.gif"));
+            iQuetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.gif"));
+            iRa = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char6.gif"));
+            iAnubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
+            iFreya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
+            zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ZEUS.gif"));
             amaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.gif"));
-            dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char3.gif"));
+            dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_SHENLONG.gif"));
             hades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.gif"));
             quetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.gif"));
-            ra = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char6.gif"));
-            anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
-            freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
+            ra = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_RAH.gif"));
+            anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ANUBIS.gif"));
+            freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_FREYA.gif"));
             
             // Imagenes de barra de vida
             P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.gif"));
             P2healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health2.gif"));
-            barra0 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif"));
-            barra1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif"));
-            barra2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif"));
-            barra3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif"));
-            barra4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif"));
-            barra5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif"));
-            barra6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif"));
-            barra7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif"));
-            barra8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif"));
-            barra9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif"));
-            barra10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif"));
-            barra11 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif"));
-            barra12 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif"));
-            barra13 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif"));
-            barra14 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif"));
-            barra15 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif"));
-            barra16 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif"));
-            barra17 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif"));
-            barra18 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif"));
-            barra19 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif"));
-            barra20 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif"));
-            barra21 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif"));
-            barra22 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif"));
-            barra23 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif"));
             
             P1barra = new Animacion();
-            P1barra.sumaCuadro(barra0, 5);
-            P1barra.sumaCuadro(barra1, 5);
-            P1barra.sumaCuadro(barra2, 5);
-            P1barra.sumaCuadro(barra3, 5);
-            P1barra.sumaCuadro(barra4, 5);
-            P1barra.sumaCuadro(barra5, 5);
-            P1barra.sumaCuadro(barra6, 5);
-            P1barra.sumaCuadro(barra7, 5);
-            P1barra.sumaCuadro(barra8, 5);
-            P1barra.sumaCuadro(barra9, 5);
-            P1barra.sumaCuadro(barra10, 5);
-            P1barra.sumaCuadro(barra11, 5);
-            P1barra.sumaCuadro(barra12, 5);
-            P1barra.sumaCuadro(barra13, 5);
-            P1barra.sumaCuadro(barra14, 5);
-            P1barra.sumaCuadro(barra15, 5);
-            P1barra.sumaCuadro(barra16, 5);
-            P1barra.sumaCuadro(barra17, 5);
-            P1barra.sumaCuadro(barra18, 5);
-            P1barra.sumaCuadro(barra19, 5);
-            P1barra.sumaCuadro(barra20, 5);
-            P1barra.sumaCuadro(barra21, 5);
-            P1barra.sumaCuadro(barra22, 5);
-            P1barra.sumaCuadro(barra23, 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif")), 5);
             
             P2barra = new Animacion();
-            P2barra.sumaCuadro(barra0, 5);
-            P2barra.sumaCuadro(barra1, 5);
-            P2barra.sumaCuadro(barra2, 5);
-            P2barra.sumaCuadro(barra3, 5);
-            P2barra.sumaCuadro(barra4, 5);
-            P2barra.sumaCuadro(barra5, 5);
-            P2barra.sumaCuadro(barra6, 5);
-            P2barra.sumaCuadro(barra7, 5);
-            P2barra.sumaCuadro(barra8, 5);
-            P2barra.sumaCuadro(barra9, 5);
-            P2barra.sumaCuadro(barra10, 5);
-            P2barra.sumaCuadro(barra11, 5);
-            P2barra.sumaCuadro(barra12, 5);
-            P2barra.sumaCuadro(barra13, 5);
-            P2barra.sumaCuadro(barra14, 5);
-            P2barra.sumaCuadro(barra15, 5);
-            P2barra.sumaCuadro(barra16, 5);
-            P2barra.sumaCuadro(barra17, 5);
-            P2barra.sumaCuadro(barra18, 5);
-            P2barra.sumaCuadro(barra19, 5);
-            P2barra.sumaCuadro(barra20, 5);
-            P2barra.sumaCuadro(barra21, 5);
-            P2barra.sumaCuadro(barra22, 5);
-            P2barra.sumaCuadro(barra23, 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif")), 5);
             
             // Sonidos de los personajes
             SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
@@ -538,69 +506,69 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     // mandar a crear los objetos de personaje
                     switch(opcionP1) {
                         case 0:
-                            P1Icono = zeus;
+                            P1Icono = iZeus;
                             P1.setImagenI(zeus);
                         break;
                         case 1:
-                            P1Icono = amaterasu;
+                            P1Icono = iAmaterasu;
                             P1.setImagenI(amaterasu);
                         break;
                         case 2:
-                            P1Icono = dragon;
+                            P1Icono = iDragon;
                             P1.setImagenI(dragon);
                         break;
                         case 3:
-                            P1Icono = hades;
+                            P1Icono = iHades;
                             P1.setImagenI(hades);
                         break;
                         case 4:
-                            P1Icono = quetzal;
+                            P1Icono = iQuetzal;
                             P1.setImagenI(quetzal);
                         break;
                         case 5:
-                            P1Icono = ra;
+                            P1Icono = iRa;
                             P1.setImagenI(ra);
                         break;
                         case 6:
-                            P1Icono = anubis;
+                            P1Icono = iAnubis;
                             P1.setImagenI(anubis);
                         break;
                         case 7:
-                            P1Icono = freya;
+                            P1Icono = iFreya;
                             P1.setImagenI(freya);
                         break;
                     }
                     switch(opcionP2) {
                         case 0:
-                            P2Icono = zeus;
+                            P2Icono = iZeus;
                             P2.setImagenI(zeus);
                         break;
                         case 1:
-                            P2Icono = amaterasu;
+                            P2Icono = iAmaterasu;
                             P2.setImagenI(amaterasu);
                         break;
                         case 2:
-                            P2Icono = dragon;
+                            P2Icono = iDragon;
                             P2.setImagenI(dragon);
                         break;
                         case 3:
-                            P2Icono = hades;
+                            P2Icono = iHades;
                             P2.setImagenI(hades);
                         break;
                         case 4:
-                            P2Icono = quetzal;
+                            P2Icono = iQuetzal;
                             P2.setImagenI(quetzal);
                         break;
                         case 5:
-                            P2Icono = ra;
+                            P2Icono = iRa;
                             P2.setImagenI(ra);
                         break;
                         case 6:
-                            P2Icono = anubis;
+                            P2Icono = iAnubis;
                             P2.setImagenI(anubis);
                         break;
                         case 7:
-                            P2Icono = freya;
+                            P2Icono = iFreya;
                             P2.setImagenI(freya);
                         break;
                     }
@@ -806,17 +774,17 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 // Colision entre personajes
                 if (P1.intersecta(P2) || P2.intersecta(P1)) {
                     if (derecha || izquierda2) {
-                        P1.actualizaPosX(-24);
-                        P2.actualizaPosX(24);
+                        P1.actualizaPosX(-30);
+                        P2.actualizaPosX(30);
                     } else if (derecha2 || izquierda) {
-                        P1.actualizaPosX(24);
-                        P2.actualizaPosX(-24);
+                        P1.actualizaPosX(30);
+                        P2.actualizaPosX(-30);
                     } else if (arriba || abajo2) {
-                        P1.actualizaPosY(24);
-                        P2.actualizaPosY(-24);
+                        P1.actualizaPosY(30);
+                        P2.actualizaPosY(-30);
                     } else if (abajo || arriba2) {
-                        P1.actualizaPosY(-24);
-                        P2.actualizaPosY(24);
+                        P1.actualizaPosY(-30);
+                        P2.actualizaPosY(30);
                     }
                 }
             }
@@ -896,6 +864,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     // Dibuja a los personajes
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
                     g.drawImage(P2.getImagenI(), P2.getPosX(), P2.getPosY(), this);
+                    
                     // Dibuja los obstaculos
                     for (int i = 0; i < obstaclesLeft.size(); i++)
                         g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
@@ -904,6 +873,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 } else {
                     // Dibuja la pantalla de créditos
                     g.drawImage(GameOver, 0, 0, this);
+                    if (vidaP1 > vidaP2) {
+                        g.drawImage(P1Icono, 535, 237, this);
+                    } else {
+                        g.drawImage(P2Icono, 535, 237, this);
+                    }
                 }
             }
         }
