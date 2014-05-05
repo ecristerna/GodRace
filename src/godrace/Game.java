@@ -223,10 +223,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             iAnubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
             iFreya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
             zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ZEUS.gif"));
-            amaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.gif"));
+            amaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_AMATER.gif"));
             dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_SHENLONG.gif"));
-            hades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.gif"));
-            quetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.gif"));
+            hades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_HADES.gif"));
+            quetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_QUETZY.gif"));
             ra = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_RAH.gif"));
             anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ANUBIS.gif"));
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_FREYA.gif"));
@@ -238,8 +238,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
             anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
             
             // Imagenes de barra de vida
-            P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.gif"));
-            P2healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health2.gif"));
+            P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.png"));
+            P2healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health2.png"));
             
             P1barra = new Animacion();
             P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif")), 5);
