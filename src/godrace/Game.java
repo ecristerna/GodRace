@@ -111,9 +111,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
     private SoundClip sonido_rainbow;
-    private Obstaculos cursorMenu;
     private Obstaculos cursorP1;
     private Obstaculos cursorP2;
+    private Obstaculos cursorMenu;
     private Obstaculos cursorMapa;
     private Obstaculos obstaculo;
     private Obstaculos powerUp;
@@ -173,7 +173,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             cursorMenuInicialImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
             cursorP1Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoP1.gif"));
             cursorP2Img = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoP2.gif"));
-            cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoSELECT.gif"));
+            cursorPSelImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoPSELECT.gif"));
             cursorMapaImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_MarcoMP1.gif"));
             
             // Sonidos de background
@@ -809,8 +809,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 } else if (!pausaCharSelect) {
                     // Dibuja la pantalla de selección de personajes
                     g.drawImage(characterSelect, 0, 0, this);
-                    g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
-                    g.drawImage(cursorP2.getImagenI(), cursorP2.getPosX(), cursorP2.getPosY(), this);
+                    if (p1Select)
+                        g.drawImage(cursorPSelImg, cursorP1.getPosX(), cursorP1.getPosY(), this);
+                    else
+                        g.drawImage(cursorP1.getImagenI(), cursorP1.getPosX(), cursorP1.getPosY(), this);
+                    if (p2Select)
+                        g.drawImage(cursorPSelImg, cursorP2.getPosX(), cursorP2.getPosY(), this);
+                    else
+                        g.drawImage(cursorP2.getImagenI(), cursorP2.getPosX(), cursorP2.getPosY(), this);
                 } else if (!pausaMapSelect) {
                     // Dibuja la pantalla de selección de pista
                     g.drawImage(mapSelect, 0, 0, this);
@@ -956,7 +962,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             if (e.getKeyCode() == KeyEvent.VK_F) {
                 if (!pausaCharSelect) {
-                    p1Select = true;
+                    p1Select = !p1Select;
                 }
             }
             
@@ -966,7 +972,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             if (e.getKeyCode() == KeyEvent.VK_N) {
                 if (!pausaCharSelect) {
-                    p2Select = true;
+                    p2Select = !p2Select;
                 }
             }
             
@@ -976,7 +982,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             // Verifica las teclas de movimiento para los personajes
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect && !p2Select) {
                     switch(opcionP2) {
                         case 0:
                             if (opcionP1 == 3) {
@@ -1040,7 +1046,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect  && !p2Select) {
                     switch(opcionP2) {
                         case 0:
                             if (opcionP1 == 1) {
@@ -1104,7 +1110,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect && !p2Select) {
                     switch(opcionP2) {
                         case 0:
                             if (opcionP1 != 4) {
@@ -1152,7 +1158,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect && !p2Select) {
                     switch(opcionP2) {
                         case 0:
                             if (opcionP1 != 4) {
@@ -1200,7 +1206,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_A) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect && !p1Select) {
                     switch (opcionP1) {
                         case 0:
                             if (opcionP2 == 3) {
@@ -1279,7 +1285,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_D) {
-                if (!pausaCharSelect) {
+                if (!pausaCharSelect && !p1Select) {
                     switch(opcionP1) {
                         case 0:
                             if (opcionP2 == 1) {
@@ -1367,7 +1373,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             opcionMenu = 0;
                         break;
                     }
-                } else if (!pausaCharSelect) {
+                } else if (!pausaCharSelect && !p1Select) {
                     switch(opcionP1) {
                         case 0:
                             if (opcionP2 != 4) {
@@ -1439,7 +1445,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             opcionMenu = 0;
                         break;
                     }
-                } else if (!pausaCharSelect) {
+                } else if (!pausaCharSelect && !p1Select) {
                     switch(opcionP1) {
                         case 0:
                             if (opcionP2 != 4) {
