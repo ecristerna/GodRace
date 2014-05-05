@@ -30,13 +30,13 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private final static int velocidadPersonajes = 8;
     private final static int EXTREMO_SUPERIOR = 35;
     private final static int JUNGLE_IZQUIERDO = 295;
-    private final static int JUNGLE_DERECHO = 890;
+    private final static int JUNGLE_DERECHO = 1000;
     private final static int DESERT_IZQUIERDO = 325;
-    private final static int DESERT_DERECHO = 770;
+    private final static int DESERT_DERECHO = 880;
     private final static int UNDERWORLD_IZQUIERDO = 290;
-    private final static int UNDERWORLD_DERECHO = 776;
+    private final static int UNDERWORLD_DERECHO = 906;
     private final static int RAINBOW_IZQUIERDO = 271;
-    private final static int RAINBOW_DERECHO = 776;
+    private final static int RAINBOW_DERECHO = 906;
     //variables
     private boolean izquierda;
     private boolean izquierda2;
@@ -717,15 +717,15 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     if (P1.getPosX() < extremoIzquierdo) {
                         P1.setPosX(extremoIzquierdo + 10);
                     }
-                    if (P1.getPosX() > extremoDerecho) {
-                        P1.setPosX(extremoDerecho - 10);
+                    if (P1.getPosX() + P1.getAncho() > extremoDerecho) {
+                        P1.setPosX(extremoDerecho - 10 - P1.getAncho());
                     }
                     // Verifica que el personaje 2 no choque con el frame
                     if (P2.getPosX() < extremoIzquierdo) {
                         P2.setPosX(extremoIzquierdo + 10);
                     }
-                    if (P2.getPosX() > extremoDerecho) {
-                        P2.setPosX(extremoDerecho - 10);
+                    if (P2.getPosX() + P2.getAncho() > extremoDerecho) {
+                        P2.setPosX(extremoDerecho - 10 - P2.getAncho());
                     }
                 }
                 
