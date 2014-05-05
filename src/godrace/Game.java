@@ -58,6 +58,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean jungle;
     private boolean underworld;
     private boolean rainbow;
+    private boolean attackHP1;
+    private boolean attackVP1;
+    private boolean attackHP2;
+    private boolean attackVP2;
     private int opcionMenu;
     private int opcionP1;
     private int opcionP2;
@@ -106,6 +110,22 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image ra;
     private Image anubis;
     private Image freya;
+    private Image zeusPH;
+    private Image zeusPV;
+    private Image amaterasuPH;
+    private Image amaterasuPV;
+    private Image dragonPH;
+    private Image dragonPV;
+    private Image hadesPH;
+    private Image hadesPV;
+    private Image quetzalPH;
+    private Image quetzalPV;
+    private Image raPH;
+    private Image raPV;
+    private Image anubisPH;
+    private Image anubisPV;
+    private Image freyaPH;
+    private Image freyaPV;
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
     private SoundClip sonido_desierto;
@@ -117,6 +137,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Obstaculos cursorMapa;
     private Obstaculos obstaculo;
     private Obstaculos powerUp;
+    private Obstaculos powerP1H;
+    private Obstaculos powerP1V;
+    private Obstaculos powerP2H;
+    private Obstaculos powerP2V;
     private BasePersonajes P1;
     private BasePersonajes P2;
     private LinkedList<Obstaculos> obstaclesLeft;
@@ -156,6 +180,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             p1Select = false;
             p2Select = false;
+            attackHP1 = false;
+            attackVP1 = false;
+            attackHP2 = false;
+            attackVP2 = false;
             
             // Imágenes de fondo, menús, créditos, etc.
             startScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_TitleScreen.png"));
@@ -202,6 +230,12 @@ public class Game extends JFrame implements Runnable, KeyListener {
             ra = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_RAH.gif"));
             anubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ANUBIS.gif"));
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_FREYA.gif"));
+            
+            // Imagenes de los power-ups
+            raPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
+            raPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
+            anubisPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
+            anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
             
             // Imagenes de barra de vida
             P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.gif"));
@@ -281,6 +315,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             PowerUp = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerUp.gif"));
             PowerDown = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerDown.gif"));
             powerUp = new Obstaculos(getWidth()/2, -1000, PowerUp);
+            powerP1H = new Obstaculos();
+            powerP1V = new Obstaculos();
+            powerP2H = new Obstaculos();
+            powerP2V = new Obstaculos();
             
             // Inicialización de personajes
             vidaP1 = 120;
@@ -534,10 +572,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         case 5:
                             P1Icono = iRa;
                             P1.setImagenI(ra);
+                            powerP1H.setImagenI(raPH);
+                            powerP1V.setImagenI(raPV);
                         break;
                         case 6:
                             P1Icono = iAnubis;
                             P1.setImagenI(anubis);
+                            powerP1H.setImagenI(anubisPH);
+                            powerP1V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P1Icono = iFreya;
@@ -568,10 +610,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         case 5:
                             P2Icono = iRa;
                             P2.setImagenI(ra);
+                            powerP2H.setImagenI(raPH);
+                            powerP2V.setImagenI(raPV);
                         break;
                         case 6:
                             P2Icono = iAnubis;
                             P2.setImagenI(anubis);
+                            powerP2H.setImagenI(anubisPH);
+                            powerP2V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P2Icono = iFreya;
@@ -643,6 +689,24 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 
                 // Actualiza el power-up
                 powerUp.actualizaPosY(10);
+                
+                // Actualiza los power-ups cuando si es que algun personaje lo tiene y lo uso
+                if (P1.getPowerUp()) {
+                    if (attackHP1) {
+                        powerP1H.actualizaPosX(10);
+                    }
+                    if (attackVP1) {
+                        powerP1V.actualizaPosY(-10);
+                    }
+                }
+                if (P2.getPowerUp()) {
+                    if (attackHP2) {
+                        powerP2H.actualizaPosX(10);
+                    }
+                    if (attackVP2) {
+                        powerP2V.actualizaPosY(-10);
+                    }
+                }
                 
                 // Checa que la vida de los personajes se acabe
                 if (vidaP1 <= 0 || vidaP2 <= 0) {
@@ -864,6 +928,16 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     
                     // Dibuja el power-up
                     g.drawImage(powerUp.getImagenI(), powerUp.getPosX(), powerUp.getPosY(), this);
+                    
+                    // Dibuja los power-ups de los personajes
+                    if (attackHP1)
+                        g.drawImage(powerP1H.getImagenI(), powerP1H.getPosX(), powerP1H.getPosY(), this);
+                    if (attackVP1)
+                        g.drawImage(powerP1V.getImagenI(), powerP1V.getPosX(), powerP1V.getPosY(), this);
+                    if (attackHP2)
+                        g.drawImage(powerP2H.getImagenI(), powerP2H.getPosX(), powerP2H.getPosY(), this);
+                    if (attackVP2)
+                        g.drawImage(powerP2V.getImagenI(), powerP2V.getPosX(), powerP2V.getPosY(), this);
                 } else {
                     // Dibuja la pantalla de créditos
                     g.drawImage(GameOver, 0, 0, this);
@@ -963,21 +1037,37 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (e.getKeyCode() == KeyEvent.VK_F) {
                 if (!pausaCharSelect) {
                     p1Select = !p1Select;
+                } else if (P1.getPowerUp()) {
+                    attackVP1 = true;
+                    powerP1V.setPosX(P1.getPosX());
+                    powerP1V.setPosY(P1.getPosY());
                 }
             }
             
             if (e.getKeyCode() == KeyEvent.VK_G) {
-                
+                if (P1.getPowerUp()) {
+                    attackHP1 = true;
+                    powerP1H.setPosX(P1.getPosX() + P1.getAncho());
+                    powerP1H.setPosY(P1.getPosY() + P1.getAlto()/2);
+                }
             }
             
             if (e.getKeyCode() == KeyEvent.VK_N) {
                 if (!pausaCharSelect) {
                     p2Select = !p2Select;
+                } else if (P2.getPowerUp()) {
+                    attackVP2 = true;
+                    powerP2V.setPosX(P2.getPosX());
+                    powerP2V.setPosY(P2.getPosY());
                 }
             }
             
             if (e.getKeyCode() == KeyEvent.VK_M) {
-                
+                if (P2.getPowerUp()) {
+                    attackHP2 = true;
+                    powerP2H.setPosX(P2.getPosX() + P2.getAncho());
+                    powerP2H.setPosY(P2.getPosY() + P2.getAlto()/2);
+                }
             }
             
             // Verifica las teclas de movimiento para los personajes
