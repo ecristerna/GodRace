@@ -358,7 +358,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     obstaclesLeft.add(ob);
                 break;
                 case 1:
-                    ob.setPosX(extremoDerecho - randPosicionX.nextInt((int)((extremoDerecho - extremoIzquierdo)/2)));
+                    ob.setPosX(extremoDerecho - ob.getAncho() - randPosicionX.nextInt((int)((extremoDerecho - extremoIzquierdo)/2)));
                     ob.setPosY(obstaclesRight.getLast().getPosY() - randPosicionY.nextInt(100) - 200);
                     obstaclesRight.add(ob);
                 break;
@@ -691,21 +691,17 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 powerUp.actualizaPosY(10);
                 
                 // Actualiza los power-ups cuando si es que algun personaje lo tiene y lo uso
-                if (P1.getPowerUp()) {
-                    if (attackHP1) {
-                        powerP1H.actualizaPosX(10);
-                    }
-                    if (attackVP1) {
-                        powerP1V.actualizaPosY(-10);
-                    }
+                if (attackHP1) {
+                    powerP1H.actualizaPosX(12);
                 }
-                if (P2.getPowerUp()) {
-                    if (attackHP2) {
-                        powerP2H.actualizaPosX(10);
-                    }
-                    if (attackVP2) {
-                        powerP2V.actualizaPosY(-10);
-                    }
+                if (attackVP1) {
+                    powerP1V.actualizaPosY(-12);
+                }
+                if (attackHP2) {
+                    powerP2H.actualizaPosX(12);
+                }
+                if (attackVP2) {
+                    powerP2V.actualizaPosY(-12);
                 }
                 
                 // Checa que la vida de los personajes se acabe
@@ -747,13 +743,13 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     if (obstaclesLeft.get(i).intersecta(P1)) {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
-                        vidaP1-=5;
+                        vidaP1 -= 5;
                         P1barra.actualiza(5);
                     }
                     if (obstaclesLeft.get(i).intersecta(P2)) {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
-                        vidaP2-=5;
+                        vidaP2 -= 5;
                         P2barra.actualiza(5);
                     }
                 }
@@ -810,7 +806,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     }
                 }
                 
-                // Colision de personaje con power-up
+                // Colision de personaje con el objeto power-up
                 Random randPosicionPU = new Random();
                 if (powerUp.intersecta(P1)) {
                     P1.setPowerUp(true);
@@ -823,10 +819,46 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     powerUp.setPosY(-1800);
                 }
                     
-                // Colision del power-up con frame
+                // Colision del objeto power-up con el frame
                 if (powerUp.getPosY() > getHeight()) {
                     powerUp.setPosX(randPosicionPU.nextInt((int)((extremoDerecho - extremoIzquierdo)) - powerUp.getAncho()) + extremoIzquierdo);
                     powerUp.setPosY(-800);
+                }
+                
+                // Colision de los power-ups con los linderos del frame y pista
+                if (powerP1H.getPosX() < extremoIzquierdo || powerP1H.getPosX() + powerP1H.getAncho() > extremoDerecho) {
+                    attackHP1 = false;
+                }
+                if (powerP2H.getPosX() < extremoIzquierdo || powerP2H.getPosX() + powerP2H.getAncho() > extremoDerecho) {
+                    attackHP2 = false;
+                }
+                if (powerP1V.getPosY() < 0) {
+                    attackVP1 = false;
+                }
+                if (powerP2V.getPosY() < 0) {
+                    attackVP2 = false;
+                }
+                
+                // Colision de los power-ups con los personajes
+                if (powerP1H.intersecta(P2) || powerP1V.intersecta(P2)) {
+                    powerP1H.setPosX(-100);
+                    powerP1H.setPosY(-100);
+                    powerP1V.setPosX(-100);
+                    powerP1V.setPosY(-100);
+                    vidaP2 -= 15;
+                    P2barra.actualiza(15);
+                    attackHP1 = false;
+                    attackVP1 = false;
+                }
+                if (powerP2H.intersecta(P1) || powerP2V.intersecta(P1)) {
+                    powerP2H.setPosX(-100);
+                    powerP2H.setPosY(-100);
+                    powerP2V.setPosX(-100);
+                    powerP2V.setPosY(-100);
+                    vidaP1 -= 15;
+                    P1barra.actualiza(15);
+                    attackHP2 = false;
+                    attackVP2 = false;
                 }
             }
         }
@@ -1041,6 +1073,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     attackVP1 = true;
                     powerP1V.setPosX(P1.getPosX());
                     powerP1V.setPosY(P1.getPosY());
+                    P1.setPowerUp(false);
                 }
             }
             
@@ -1049,6 +1082,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     attackHP1 = true;
                     powerP1H.setPosX(P1.getPosX() + P1.getAncho());
                     powerP1H.setPosY(P1.getPosY() + P1.getAlto()/2);
+                    P1.setPowerUp(false);
                 }
             }
             
@@ -1059,6 +1093,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     attackVP2 = true;
                     powerP2V.setPosX(P2.getPosX());
                     powerP2V.setPosY(P2.getPosY());
+                    P2.setPowerUp(false);
                 }
             }
             
@@ -1067,6 +1102,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     attackHP2 = true;
                     powerP2H.setPosX(P2.getPosX() + P2.getAncho());
                     powerP2H.setPosY(P2.getPosY() + P2.getAlto()/2);
+                    P2.setPowerUp(false);
                 }
             }
             
