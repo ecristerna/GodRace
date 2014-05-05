@@ -35,7 +35,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private final static int DESERT_DERECHO = 770;
     private final static int UNDERWORLD_IZQUIERDO = 290;
     private final static int UNDERWORLD_DERECHO = 776;
-    private final static int RAINBOW_IZQUIERDO=271;
+    private final static int RAINBOW_IZQUIERDO = 271;
     private final static int RAINBOW_DERECHO = 776;
     //variables
     private boolean izquierda;
@@ -84,6 +84,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image cursorMapaImg;
     private Image P1healthbar;
     private Image P2healthbar;
+    private Image PowerDown;
+    private Image PowerUp;
     private Animacion P1barra;
     private Animacion P2barra;
     private Image P1Icono;
@@ -114,6 +116,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Obstaculos cursorP2;
     private Obstaculos cursorMapa;
     private Obstaculos obstaculo;
+    private Obstaculos powerUp;
     private BasePersonajes P1;
     private BasePersonajes P2;
     private LinkedList<Obstaculos> obstaclesLeft;
@@ -274,6 +277,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
             obstaclesLeft = new<Obstaculos> LinkedList();
             obstaclesRight = new<Obstaculos> LinkedList();
             
+            // Inicializa power up y su posicion inicial
+            PowerUp = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerUp.gif"));
+            PowerDown = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerDown.gif"));
+            powerUp = new Obstaculos(getWidth()/2, -1000, PowerUp);
+            
             // Inicialización de personajes
             vidaP1 = 120;
             vidaP2 = 120;
@@ -284,7 +292,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
         
         public void creaObstaculo(int n) {
-            //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
             Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
             Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
@@ -322,7 +329,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
         
         public void inicializaObstaculos() {
             // Imagenes los obstaculos
-            //Image power = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
             Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
             Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
@@ -635,11 +641,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 for (int i = 0; i < obstaclesRight.size(); i++)
                    obstaclesRight.get(i).actualizaPosY(5);
                 
+                // Actualiza el power-up
+                powerUp.actualizaPosY(10);
+                
                 // Checa que la vida de los personajes se acabe
-                if (vidaP1 <= 0) {
-                    gameover = true;
-                }
-                if (vidaP2 <= 0) {
+                if (vidaP1 <= 0 || vidaP2 <= 0) {
                     gameover = true;
                 }
             }
@@ -706,68 +712,20 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     }
                 }
                 
-                if (desert) {
+                if (jungle || desert || underworld || rainbow) {
                     // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosX() < DESERT_IZQUIERDO) {
-                        P1.setPosX(DESERT_IZQUIERDO + 10);
+                    if (P1.getPosX() < extremoIzquierdo) {
+                        P1.setPosX(extremoIzquierdo + 10);
                     }
-                    if (P1.getPosX() > DESERT_DERECHO) {
-                        P1.setPosX(DESERT_DERECHO - 10);
-                    }
-                    // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < DESERT_IZQUIERDO) {
-                        P2.setPosX(DESERT_IZQUIERDO + 10);
-                    }
-                    if (P2.getPosX() > DESERT_DERECHO) {
-                        P2.setPosX(DESERT_DERECHO - 10);
-                    }
-                }
-                if (jungle) {
-                    // Verifica que el personaje 1 no choque con el frame                   
-                    if (P1.getPosX() < JUNGLE_IZQUIERDO) {
-                        P1.setPosX(JUNGLE_IZQUIERDO + 10);
-                    }
-                    if (P1.getPosX() > JUNGLE_DERECHO) {
-                        P1.setPosX(JUNGLE_DERECHO - 10);
+                    if (P1.getPosX() > extremoDerecho) {
+                        P1.setPosX(extremoDerecho - 10);
                     }
                     // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < JUNGLE_IZQUIERDO) {
-                        P2.setPosX(JUNGLE_IZQUIERDO + 10);
+                    if (P2.getPosX() < extremoIzquierdo) {
+                        P2.setPosX(extremoIzquierdo + 10);
                     }
-                    if (P2.getPosX() > JUNGLE_DERECHO) {
-                        P2.setPosX(JUNGLE_DERECHO - 10);
-                    }
-                }
-                if (rainbow) {
-                    // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosX() < RAINBOW_IZQUIERDO) {
-                        P1.setPosX(RAINBOW_IZQUIERDO + 10);
-                    }
-                    if (P1.getPosX() > RAINBOW_DERECHO) {
-                        P1.setPosX(RAINBOW_DERECHO - 10);
-                    }
-                    // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < RAINBOW_IZQUIERDO) {
-                        P2.setPosX(RAINBOW_IZQUIERDO + 10);
-                    }
-                    if (P2.getPosX() > RAINBOW_DERECHO) {
-                        P2.setPosX(RAINBOW_DERECHO - 10);
-                    }
-                }
-                if (underworld) {
-                    // Verifica que el personaje 1 no choque con el frame
-                    if (P1.getPosX() < UNDERWORLD_IZQUIERDO) {
-                        P1.setPosX(UNDERWORLD_IZQUIERDO + 10);
-                    }
-                    if (P1.getPosX() > UNDERWORLD_DERECHO) {
-                        P1.setPosX(UNDERWORLD_DERECHO - 10);
-                    }
-                    // Verifica que el personaje 2 no choque con el frame
-                    if (P2.getPosX() < UNDERWORLD_IZQUIERDO) {
-                        P2.setPosX(UNDERWORLD_IZQUIERDO + 10);
-                    }
-                    if (P2.getPosX() > UNDERWORLD_DERECHO) {
-                        P2.setPosX(UNDERWORLD_DERECHO - 10);
+                    if (P2.getPosX() > extremoDerecho) {
+                        P2.setPosX(extremoDerecho - 10);
                     }
                 }
                 
@@ -786,6 +744,25 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         P1.actualizaPosY(-30);
                         P2.actualizaPosY(30);
                     }
+                }
+                
+                // Colision de personaje con power-up
+                Random randPosicionPU = new Random();
+                if (powerUp.intersecta(P1)) {
+                    P1.setPowerUp(true);
+                    powerUp.setPosX(randPosicionPU.nextInt((int)((extremoDerecho - extremoIzquierdo)) - powerUp.getAncho()) + extremoIzquierdo);
+                    powerUp.setPosY(-1800);
+                }
+                if (powerUp.intersecta(P2)) {
+                    P2.setPowerUp(true);
+                    powerUp.setPosX(randPosicionPU.nextInt((int)((extremoDerecho - extremoIzquierdo)) - powerUp.getAncho()) + extremoIzquierdo);
+                    powerUp.setPosY(-1800);
+                }
+                    
+                // Colision del power-up con frame
+                if (powerUp.getPosY() > getHeight()) {
+                    powerUp.setPosX(randPosicionPU.nextInt((int)((extremoDerecho - extremoIzquierdo)) - powerUp.getAncho()) + extremoIzquierdo);
+                    powerUp.setPosY(-800);
                 }
             }
         }
@@ -860,6 +837,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     g.drawImage(P2Icono, getWidth()-145, 8, this);
                     g.drawImage(P1barra.getImagen(), 4, 110, this);
                     g.drawImage(P2barra.getImagen(), getWidth()-25, 110, this);
+                    if (P1.getPowerUp())
+                        g.drawImage(PowerUp, 23, 295, this);
+                    else
+                        g.drawImage(PowerDown, 23, 295, this);
+                    if (P2.getPowerUp())
+                        g.drawImage(PowerUp, getWidth()-50, 295, this);
+                    else
+                        g.drawImage(PowerDown, getWidth()-50, 295, this);
                     
                     // Dibuja a los personajes
                     g.drawImage(P1.getImagenI(), P1.getPosX(), P1.getPosY(), this);
@@ -870,6 +855,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         g.drawImage(obstaclesLeft.get(i).getImagenI(), obstaclesLeft.get(i).getPosX(), obstaclesLeft.get(i).getPosY(), this);
                     for (int i = 0; i < obstaclesRight.size(); i++)
                         g.drawImage(obstaclesRight.get(i).getImagenI(), obstaclesRight.get(i).getPosX(), obstaclesRight.get(i).getPosY(), this);
+                    
+                    // Dibuja el power-up
+                    g.drawImage(powerUp.getImagenI(), powerUp.getPosX(), powerUp.getPosY(), this);
                 } else {
                     // Dibuja la pantalla de créditos
                     g.drawImage(GameOver, 0, 0, this);
