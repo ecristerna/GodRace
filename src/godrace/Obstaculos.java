@@ -11,19 +11,24 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Clase Obstaculos que genera los objetos obsátculos del juego
  * @author
  * Eduardo Cristerna Morales
  * Edgar Ovidio Villarreal Treviño
  * Graciela Garcia Diaz
  * Andres Marcelo Garza Cantu
  */
+
 public class Obstaculos {
-    private int posX;
+    private int posX; // Posiciones del obstáculo
     private int posY;
     
-    protected Animacion anim;
+    protected Animacion anim; // Animación de la imagen
     
+    /**
+     * Método constructor por default de la clase <I>Obstaculos</I> que
+     * inicializ todo en ceros.
+     */
     public Obstaculos() {
         this.posX = 0;
         this.posY = 0;

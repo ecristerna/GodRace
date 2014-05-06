@@ -9,18 +9,18 @@ package godrace;
 import javax.swing.JFrame;
 
 /**
- *
+ *Clase GodRace que crea el juego
+ * 
  * @author 
  * @author
  * Eduardo Cristerna Morales
  * Edgar Ovidio Villarreal Treviño
  * Graciela Garcia Diaz
- * Andres Marcelo Garza Cantu
- * 
+ * Andres Marcelo Garza Cantu 
  */
 
 public class GodRace {
-
+    
     /**
      * @param args the command line arguments
      */

@@ -41,6 +41,7 @@ public class BasePersonajes {
         
         anim = new Animacion();
     }
+    
     /**
      * Método constructor de la clase <I>BasePersonajes</I> que inicializa
      * posX y posY con 0
@@ -118,6 +119,7 @@ public class BasePersonajes {
     public boolean getPowerUp() {
         return powerUp;
     }
+    
     /**
      * Metodo modificador usado para cambiar el valor de la velocidad del powerUp del objeto 
      * @param velPowerUp es la <code>velocidad</code> del power up del objeto.
@@ -181,6 +183,10 @@ public class BasePersonajes {
         return (new ImageIcon(anim.getImagen())).getImage();
     }
     
+    /**
+     * Método que añade un cuadro de animación a la animación del personaje
+     * @param img es la imagen del timpo <I>Image</I> que tendrá el cuadro
+     */
     public void setImagenI(Image img) {
         anim.sumaCuadro(img, 100);
     }
@@ -211,6 +217,10 @@ public class BasePersonajes {
         return sonido;
     }
     
+    /**
+     * Método que añade un sonido dependiendo del personaje para su powerup
+     * @param sonido es el clio de sonido de la clase <I>SoundClip</I>
+     */
     public void setSonido (SoundClip sonido) {
         this.sonido = sonido;
     }

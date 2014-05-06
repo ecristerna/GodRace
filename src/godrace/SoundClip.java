@@ -6,10 +6,6 @@
 
 package godrace;
 
-/**
- * Clase SoundClip
- *
- */
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.AudioInputStream;
@@ -18,6 +14,11 @@ import javax.sound.sampled.AudioSystem;
 import java.io.IOException;
 import java.net.URL;
 
+
+/**
+ * Clase SoundClip
+ * genera un Clip de Audio para el juego.
+ */
 public class SoundClip {
 
 	private AudioInputStream sample;
@@ -27,8 +28,8 @@ public class SoundClip {
 	private String filename = "";
 
 	/**
-	 * Constructor default
-	 */
+         * Método constructor default de la clase <I>SoundClip</I>
+         */
 	public SoundClip() {
 		try {
 			//crea el Buffer de sonido
@@ -39,7 +40,7 @@ public class SoundClip {
 	}
 
 	/** 
-	 * Constructor con parametros, que carga manda llamar a load
+	 * Constructor con parámetros de la clase <I>SoundClip</I>, que manda llamar a load
 	 * esto carga el archivo de sonido.
 	 * @param filename es el <code>String</code> del archivo.
 	 */
