@@ -277,18 +277,18 @@ public class Game extends JFrame implements Runnable, KeyListener {
             freyaPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
             
             // Imagenes de obstaculos dependiendo del nivel
-            obstaculo1Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
-            obstaculo2Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
-            obstaculo3Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
-            obstaculo1Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
-            obstaculo2Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
-            obstaculo3Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
-            obstaculo1Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
-            obstaculo2Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
-            obstaculo3Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
-            obstaculo1Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
-            obstaculo2Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map4_Obstaculos.gif"));
-            obstaculo3Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
+            obstaculo1Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/forest1.png"));
+            obstaculo2Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/forest2.png"));
+            obstaculo3Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/forest3.gif"));
+            obstaculo1Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/desierto1.gif"));
+            obstaculo2Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/desierto2.png"));
+            obstaculo3Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/desierto3.gif"));
+            obstaculo1Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/infierno1.png"));
+            obstaculo2Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/infierno2.png"));
+            obstaculo3Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/infierno3.gif"));
+            obstaculo1Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/rainbow1.png"));
+            obstaculo2Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/rainbow2.png"));
+            obstaculo3Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/rainbow3.gif"));
             
             // Imagenes de barra de vida
             P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.png"));
