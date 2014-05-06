@@ -90,6 +90,21 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image P2healthbar;
     private Image PowerDown;
     private Image PowerUp;
+    private Image obstaculo1;
+    private Image obstaculo2;
+    private Image obstaculo3;
+    private Image obstaculo1Jungle;
+    private Image obstaculo2Jungle;
+    private Image obstaculo3Jungle;
+    private Image obstaculo1Desert;
+    private Image obstaculo2Desert;
+    private Image obstaculo3Desert;
+    private Image obstaculo1Underworld;
+    private Image obstaculo2Underworld;
+    private Image obstaculo3Underworld;
+    private Image obstaculo1Rainbow;
+    private Image obstaculo2Rainbow;
+    private Image obstaculo3Rainbow;
     private Animacion P1barra;
     private Animacion P2barra;
     private Image P1Icono;
@@ -131,6 +146,16 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
     private SoundClip sonido_rainbow;
+    private SoundClip sonido_amaterasu;
+    private SoundClip sonido_anubis;
+    private SoundClip sonido_freya;
+    private SoundClip sonido_hades;
+    private SoundClip sonido_quetzal;
+    private SoundClip sonido_ra;
+    private SoundClip sonido_dragon;
+    private SoundClip sonido_zeus;
+    private SoundClip sonido_objColision;
+    private SoundClip sonido_proyColision;
     private Obstaculos cursorP1;
     private Obstaculos cursorP2;
     private Obstaculos cursorMenu;
@@ -232,10 +257,36 @@ public class Game extends JFrame implements Runnable, KeyListener {
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_FREYA.gif"));
             
             // Imagenes de los power-ups
-            raPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
-            raPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
-            anubisPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
-            anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            zeusPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
+            zeusPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
+            amaterasuPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
+            amaterasuPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            dragonPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
+            dragonPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
+            hadesPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
+            hadesPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            quetzalPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
+            quetzalPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
+            raPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
+            raPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            anubisPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
+            anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
+            freyaPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
+            freyaPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            
+            // Imagenes de obstaculos dependiendo del nivel
+            obstaculo1Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
+            obstaculo2Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
+            obstaculo3Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
+            obstaculo1Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            obstaculo2Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            obstaculo3Desert = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            obstaculo1Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            obstaculo2Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            obstaculo3Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            obstaculo1Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
+            obstaculo2Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map4_Obstaculos.gif"));
+            obstaculo3Rainbow = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
             
             // Imagenes de barra de vida
             P1healthbar = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Health.png"));
@@ -294,8 +345,18 @@ public class Game extends JFrame implements Runnable, KeyListener {
             P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif")), 5);
             
             // Sonidos de los personajes
-            SoundClip sonido_dragon = new SoundClip ("/sounds/bounce.wav");
-            SoundClip sonido_zeus = new SoundClip ("/sounds/twink.wav");
+            sonido_amaterasu = new SoundClip ("/sounds/amateratsuSfx.wav");
+            sonido_anubis = new SoundClip ("/sounds/anubiSfx.wav");
+            sonido_freya = new SoundClip ("/sounds/freyaSfx.wav");
+            sonido_hades = new SoundClip ("/sounds/hadeSfx.wav");
+            sonido_quetzal = new SoundClip ("/sounds/quetzySfx.wav");
+            sonido_ra = new SoundClip ("/sounds/raSfx.wav");
+            sonido_dragon = new SoundClip ("/sounds/shenSfx.wav");
+            sonido_zeus = new SoundClip ("/sounds/zeusSfx.wav");
+            
+            // Sonidos de colisiones
+            sonido_objColision = new SoundClip ("/sounds/obstacleSfx.wav");
+            sonido_proyColision = new SoundClip ("/sounds/proyectileColision.wav");
             
             // Inicializa Cursores
             opcionMenu = 0;
@@ -330,10 +391,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
         
         public void creaObstaculo(int n) {
-            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map4_Obstaculos.gif"));
-            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
-            Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
-            
             Obstaculos ob = new Obstaculos();
             
             Random randObstaculo = new Random();
@@ -366,11 +423,6 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
         
         public void inicializaObstaculos() {
-            // Imagenes los obstaculos
-            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
-            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
-            Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
-            
             Random randObstaculo = new Random();
             switch (randObstaculo.nextInt(3)) {
                 case 0:
@@ -552,76 +604,116 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         case 0:
                             P1Icono = iZeus;
                             P1.setImagenI(zeus);
+                            P1.setSonido(sonido_zeus);
+                            powerP1H.setImagenI(zeusPH);
+                            powerP1V.setImagenI(zeusPV);
                         break;
                         case 1:
                             P1Icono = iAmaterasu;
                             P1.setImagenI(amaterasu);
+                            P1.setSonido(sonido_amaterasu);
+                            powerP1H.setImagenI(amaterasuPH);
+                            powerP1V.setImagenI(amaterasuPV);
                         break;
                         case 2:
                             P1Icono = iDragon;
                             P1.setImagenI(dragon);
+                            P1.setSonido(sonido_dragon);
+                            powerP1H.setImagenI(dragonPH);
+                            powerP1V.setImagenI(dragonPV);
                         break;
                         case 3:
                             P1Icono = iHades;
                             P1.setImagenI(hades);
+                            P1.setSonido(sonido_hades);
+                            powerP1H.setImagenI(hadesPH);
+                            powerP1V.setImagenI(hadesPV);
                         break;
                         case 4:
                             P1Icono = iQuetzal;
                             P1.setImagenI(quetzal);
+                            P1.setSonido(sonido_quetzal);
+                            powerP1H.setImagenI(quetzalPH);
+                            powerP1V.setImagenI(quetzalPV);
                         break;
                         case 5:
                             P1Icono = iRa;
                             P1.setImagenI(ra);
+                            P1.setSonido(sonido_ra);
                             powerP1H.setImagenI(raPH);
                             powerP1V.setImagenI(raPV);
                         break;
                         case 6:
                             P1Icono = iAnubis;
                             P1.setImagenI(anubis);
+                            P1.setSonido(sonido_anubis);
                             powerP1H.setImagenI(anubisPH);
                             powerP1V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P1Icono = iFreya;
                             P1.setImagenI(freya);
+                            P1.setSonido(sonido_freya);
+                            powerP1H.setImagenI(freyaPH);
+                            powerP1V.setImagenI(freyaPV);
                         break;
                     }
                     switch(opcionP2) {
                         case 0:
                             P2Icono = iZeus;
                             P2.setImagenI(zeus);
+                            P2.setSonido(sonido_zeus);
+                            powerP2H.setImagenI(zeusPH);
+                            powerP2V.setImagenI(zeusPV);
                         break;
                         case 1:
                             P2Icono = iAmaterasu;
                             P2.setImagenI(amaterasu);
+                            P2.setSonido(sonido_amaterasu);
+                            powerP2H.setImagenI(amaterasuPH);
+                            powerP2V.setImagenI(amaterasuPV);
                         break;
                         case 2:
                             P2Icono = iDragon;
                             P2.setImagenI(dragon);
+                            P2.setSonido(sonido_dragon);
+                            powerP2H.setImagenI(dragonPH);
+                            powerP2V.setImagenI(dragonPV);
                         break;
                         case 3:
                             P2Icono = iHades;
                             P2.setImagenI(hades);
+                            P2.setSonido(sonido_hades);
+                            powerP2H.setImagenI(hadesPH);
+                            powerP2V.setImagenI(hadesPV);
                         break;
                         case 4:
                             P2Icono = iQuetzal;
                             P2.setImagenI(quetzal);
+                            P2.setSonido(sonido_quetzal);
+                            powerP2H.setImagenI(quetzalPH);
+                            powerP2V.setImagenI(quetzalPV);
                         break;
                         case 5:
                             P2Icono = iRa;
                             P2.setImagenI(ra);
+                            P2.setSonido(sonido_ra);
                             powerP2H.setImagenI(raPH);
                             powerP2V.setImagenI(raPV);
                         break;
                         case 6:
                             P2Icono = iAnubis;
                             P2.setImagenI(anubis);
+                            P2.setSonido(sonido_anubis);
                             powerP2H.setImagenI(anubisPH);
                             powerP2V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P2Icono = iFreya;
                             P2.setImagenI(freya);
+                            P2.setSonido(sonido_freya);
+                            powerP2H.setImagenI(freyaPH);
+                            powerP2V.setImagenI(freyaPV);
                         break;
                     }
                     
@@ -698,7 +790,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     powerP1V.actualizaPosY(-12);
                 }
                 if (attackHP2) {
-                    powerP2H.actualizaPosX(12);
+                    powerP2H.actualizaPosX(-12);
                 }
                 if (attackVP2) {
                     powerP2V.actualizaPosY(-12);
@@ -744,12 +836,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
                         vidaP1 -= 5;
+                        sonido_objColision.play();
                         P1barra.actualiza(5);
                     }
                     if (obstaclesLeft.get(i).intersecta(P2)) {
                         obstaclesLeft.remove(i);
                         creaObstaculo(0);
                         vidaP2 -= 5;
+                        sonido_objColision.play();
                         P2barra.actualiza(5);
                     }
                 }
@@ -762,12 +856,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         obstaclesRight.remove(i);
                         creaObstaculo(1);
                         vidaP1-=5;
+                        sonido_objColision.play();
                         P1barra.actualiza(5);
                     }
                     if (obstaclesRight.get(i).intersecta(P2)) {
                         obstaclesRight.remove(i);
                         creaObstaculo(1);
                         vidaP2-=5;
+                        sonido_objColision.play();
                         P2barra.actualiza(5);
                     }
                 }
@@ -822,7 +918,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 // Colision del objeto power-up con el frame
                 if (powerUp.getPosY() > getHeight()) {
                     powerUp.setPosX(randPosicionPU.nextInt((int)((extremoDerecho - extremoIzquierdo)) - powerUp.getAncho()) + extremoIzquierdo);
-                    powerUp.setPosY(-800);
+                    powerUp.setPosY(-1800);
                 }
                 
                 // Colision de los power-ups con los linderos del frame y pista
@@ -846,6 +942,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     powerP1V.setPosX(-100);
                     powerP1V.setPosY(-100);
                     vidaP2 -= 15;
+                    sonido_proyColision.play();
                     P2barra.actualiza(15);
                     attackHP1 = false;
                     attackVP1 = false;
@@ -855,6 +952,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     powerP2H.setPosY(-100);
                     powerP2V.setPosX(-100);
                     powerP2V.setPosY(-100);
+                    sonido_proyColision.play();
                     vidaP1 -= 15;
                     P1barra.actualiza(15);
                     attackHP2 = false;
@@ -1009,6 +1107,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     sonido_menu.stop();
                     switch (opcionMenu) {
                         case 0:
+                            obstaculo1 = obstaculo1Jungle;
+                            obstaculo2 = obstaculo2Jungle;
+                            obstaculo3 = obstaculo3Jungle;
                             extremoIzquierdo = JUNGLE_IZQUIERDO;
                             extremoDerecho = JUNGLE_DERECHO;
                             inicializaObstaculos();
@@ -1017,6 +1118,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_jungle.play();
                         break;
                         case 1:
+                            obstaculo1 = obstaculo1Desert;
+                            obstaculo2 = obstaculo2Desert;
+                            obstaculo3 = obstaculo3Desert;
                             extremoIzquierdo = DESERT_IZQUIERDO;
                             extremoDerecho = DESERT_DERECHO;
                             inicializaObstaculos();
@@ -1025,6 +1129,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_desierto.play();
                         break;
                         case 2:
+                            obstaculo1 = obstaculo1Underworld;
+                            obstaculo2 = obstaculo2Underworld;
+                            obstaculo3 = obstaculo3Underworld;
                             extremoIzquierdo = UNDERWORLD_IZQUIERDO;
                             extremoDerecho = UNDERWORLD_DERECHO;
                             inicializaObstaculos();
@@ -1033,6 +1140,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_underworld.play();
                         break;
                         case 3:
+                            obstaculo1 = obstaculo1Rainbow;
+                            obstaculo2 = obstaculo2Rainbow;
+                            obstaculo3 = obstaculo3Rainbow;
                             extremoIzquierdo = RAINBOW_IZQUIERDO;
                             extremoDerecho = RAINBOW_DERECHO;
                             inicializaObstaculos();
@@ -1071,7 +1181,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     p1Select = !p1Select;
                 } else if (P1.getPowerUp()) {
                     attackVP1 = true;
-                    powerP1V.setPosX(P1.getPosX());
+                    P1.getSonido().play();
+                    powerP1V.setPosX(P1.getPosX() + P1.getAncho()/2);
                     powerP1V.setPosY(P1.getPosY());
                     P1.setPowerUp(false);
                 }
@@ -1080,6 +1191,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (e.getKeyCode() == KeyEvent.VK_G) {
                 if (P1.getPowerUp()) {
                     attackHP1 = true;
+                    P1.getSonido().play();
                     powerP1H.setPosX(P1.getPosX() + P1.getAncho());
                     powerP1H.setPosY(P1.getPosY() + P1.getAlto()/2);
                     P1.setPowerUp(false);
@@ -1091,7 +1203,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     p2Select = !p2Select;
                 } else if (P2.getPowerUp()) {
                     attackVP2 = true;
-                    powerP2V.setPosX(P2.getPosX());
+                    P2.getSonido().play();
+                    powerP2V.setPosX(P2.getPosX() + P2.getAncho()/2);
                     powerP2V.setPosY(P2.getPosY());
                     P2.setPowerUp(false);
                 }
@@ -1100,7 +1213,8 @@ public class Game extends JFrame implements Runnable, KeyListener {
             if (e.getKeyCode() == KeyEvent.VK_M) {
                 if (P2.getPowerUp()) {
                     attackHP2 = true;
-                    powerP2H.setPosX(P2.getPosX() + P2.getAncho());
+                    P2.getSonido().play();
+                    powerP2H.setPosX(P2.getPosX());
                     powerP2H.setPosY(P2.getPosY() + P2.getAlto()/2);
                     P2.setPowerUp(false);
                 }
