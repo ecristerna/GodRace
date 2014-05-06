@@ -189,12 +189,19 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private long tiempoActual;
     private long tiempoInicial;
     
+        /**
+         * Método constructor por default de la clase <I>Game</I>.
+         */
         public Game() {
             setSize(1200,720);
             init();
             start();
         }
 
+        /**
+         * Método initi que inicializa los valores de las variables y carga
+         * las imágenes y sonidos
+         */
         public void init() {
             //variables booleanas de movimiento de personajes
             izquierda = false;
@@ -418,6 +425,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             addKeyListener(this);
         }
         
+        /**
+         * Método creaObstaculo que añade obstáculos a la pantalla
+         * @param n es el número de obstáculo en la pantalla
+         */
         public void creaObstaculo(int n) {
             Obstaculos ob = new Obstaculos();
             
@@ -450,6 +461,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
         }
         
+        /**
+         * Método que inicializa la aparición de los obstáculos en la pantalla
+         */
         public void inicializaObstaculos() {
             Random randObstaculo = new Random();
             switch (randObstaculo.nextInt(3)) {
@@ -478,13 +492,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
 
         /** 
-       * Metodo <I>start</I> sobrescrito de la clase <code>Applet</code>.<P>
-       * En este metodo se crea e inicializa el hilo
-       * para la animacion este metodo es llamado despues del init o 
-       * cuando el usuario visita otra pagina y luego regresa a la pagina
-       * en donde esta este <code>Applet</code>
-       * 
-       */
+         * Metodo <I>start</I> sobrescrito de la clase <code>Applet</code>.<P>
+         * para la animacion este metodo es llamado despues del init o 
+         * en donde esta este <code>Applet</code>
+         */
         public void start () {
                // Declaras un hilo
                Thread th = new Thread (this);
@@ -493,32 +504,25 @@ public class Game extends JFrame implements Runnable, KeyListener {
        }
 
         /**
-        * Metodo <I>stop</I> sobrescrito de la clase <code>Applet</code>.<P>
-        * En este metodo se pueden tomar acciones para cuando se termina
-        * de usar el <code>Applet</code>. Usualmente cuando el usuario sale de la pagina
-        * en donde esta este <code>Applet</code>.
-        */
+         * En este metodo se pueden tomar acciones para cuando se termina
+         * en donde esta este <code>Applet</code>.
+         */
         public void stop() {
 
         }
 
         /**
-        * Metodo <I>destroy</I> sobrescrito de la clase <code>Applet</code>.<P>
-        * En este metodo se toman las acciones necesarias para cuando
-        * el <code>Applet</code> ya no va a ser usado. Usualmente cuando el usuario
-        * cierra el navegador.
-        */
+         * En este metodo se toman las acciones necesarias para cuando
+         * cierra el navegador.
+         */
         public void destroy() {
 
         }
         
         /** 
-        * Metodo <I>run</I> sobrescrito de la clase <code>Thread</code>.<P>
-        * En este metodo se ejecuta el hilo, es un ciclo indefinido donde se incrementa
-        * la posicion en x o y dependiendo de la direccion, finalmente 
-        * se repinta el <code>Applet</code> y luego manda a dormir el hilo.
-        * 
-        */
+         * En este metodo se ejecuta el hilo, es un ciclo indefinido donde se incrementa
+         * se repinta el <code>Applet</code> y luego manda a dormir el hilo.
+         */
         public void run () {
             //Guarda el tiempo actual del sistema
             tiempoActual = System.currentTimeMillis();
@@ -536,6 +540,10 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
         }
         
+        /**
+         * Método <I>restart</I> que reinicializa las variables y objetos cuando
+         * se reinicia el juego después de ganar.
+         */
         public void restart() {
             //variables booleanas de movimiento de personajes
             izquierda = false;
@@ -646,7 +654,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
         /**
          * Metodo <I>actualiza</I>
          * Este metodo actualiza a los personajes en el applet en sus movimientos
-        */
+         */
         public void actualiza() {
             // Verifica que se este en el menu principal
             if (!start) {
@@ -988,11 +996,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
         
         /**
-        * Metodo <I>checaColision</I>
-        * Este metodo checa la colision entre los personajes,
-        * la colision de los malos con la parte inferior del applet y
-        * la  colision del bueno con los extremos del applet
-        */
+         * Este metodo checa la colision entre los personajes,
+         * la  colision del bueno con los extremos del applet
+         */
         public void checaColision() {
             // Verifica que no esté en pausa y esté en el escenario de juego
             if (!pausa && !gameover && (jungle || desert || underworld || rainbow)) {
@@ -1196,7 +1202,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
          * El método <I>paint1</I> muestra en pantalla la animación
          *
          * @param g es la imágen a proyectar
-        */
+         */
         public void paint1(Graphics g) {
             // Verifica que no esté pausado el juego
             if (!pausa) {
