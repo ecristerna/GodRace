@@ -29,5 +29,6 @@ public class GodRace {
         game.setTitle("GODRACE");
         game.setVisible(true);
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.setResizable(false);
     }
 }

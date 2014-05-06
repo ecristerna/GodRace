@@ -52,6 +52,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean instrucciones;
     private boolean start;
     private boolean gameover;
+    private boolean credits;
     private boolean pausaCharSelect;
     private boolean pausaMapSelect;
     private boolean desert;
@@ -176,12 +177,12 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private long tiempoInicial;
     
         public Game() {
+            setSize(1200,720);
             init();
             start();
         }
 
         public void init() {
-            setSize(1200,720);
             //variables booleanas de movimiento de personajes
             izquierda = false;
             izquierda2 = false;
@@ -202,6 +203,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             underworld = false;
             rainbow = false;
             gameover = false;
+            credits = false;
             
             p1Select = false;
             p2Select = false;
@@ -527,76 +529,76 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 }
             } else if (!pausaCharSelect) {
                 if (!p1Select) {
-                switch (opcionP1) {
-                    case 0:
-                        cursorP1.setPosX(97);
-                        cursorP1.setPosY(194);
-                    break;
-                    case 1:
-                        cursorP1.setPosX(365);
-                        cursorP1.setPosY(194);
-                    break;
-                    case 2:
-                        cursorP1.setPosX(636);
-                        cursorP1.setPosY(194);
-                    break;
-                    case 3:
-                        cursorP1.setPosX(908);
-                        cursorP1.setPosY(194);
-                    break;
-                    case 4:
-                        cursorP1.setPosX(98);
-                        cursorP1.setPosY(431);
-                    break;
-                    case 5:
-                        cursorP1.setPosX(367);
-                        cursorP1.setPosY(431);
-                    break;
-                    case 6:
-                        cursorP1.setPosX(636);
-                        cursorP1.setPosY(431);
-                    break;
-                    case 7:
-                        cursorP1.setPosX(908);
-                        cursorP1.setPosY(431);
-                    break;
-                }
+                    switch (opcionP1) {
+                        case 0:
+                            cursorP1.setPosX(97);
+                            cursorP1.setPosY(194);
+                        break;
+                        case 1:
+                            cursorP1.setPosX(365);
+                            cursorP1.setPosY(194);
+                        break;
+                        case 2:
+                            cursorP1.setPosX(636);
+                            cursorP1.setPosY(194);
+                        break;
+                        case 3:
+                            cursorP1.setPosX(908);
+                            cursorP1.setPosY(194);
+                        break;
+                        case 4:
+                            cursorP1.setPosX(98);
+                            cursorP1.setPosY(431);
+                        break;
+                        case 5:
+                            cursorP1.setPosX(367);
+                            cursorP1.setPosY(431);
+                        break;
+                        case 6:
+                            cursorP1.setPosX(636);
+                            cursorP1.setPosY(431);
+                        break;
+                        case 7:
+                            cursorP1.setPosX(908);
+                            cursorP1.setPosY(431);
+                        break;
+                    }
                 }
                 if (!p2Select) {
-                switch (opcionP2) {
-                    case 0:
-                        cursorP2.setPosX(97);
-                        cursorP2.setPosY(194);
-                    break;
-                    case 1:
-                        cursorP2.setPosX(365);
-                        cursorP2.setPosY(194);
-                    break;
-                    case 2:
-                        cursorP2.setPosX(636);
-                        cursorP2.setPosY(194);
-                    break;
-                    case 3:
-                        cursorP2.setPosX(908);
-                        cursorP2.setPosY(194);
-                    break;
-                    case 4:
-                        cursorP2.setPosX(98);
-                        cursorP2.setPosY(431);
-                    break;
-                    case 5:
-                        cursorP2.setPosX(367);
-                        cursorP2.setPosY(431);
-                    break;
-                    case 6:
-                        cursorP2.setPosX(636);
-                        cursorP2.setPosY(431);
-                    break;
-                    case 7:
-                        cursorP2.setPosX(908);
-                        cursorP2.setPosY(431);
-                    break;
-                }
+                    switch (opcionP2) {
+                        case 0:
+                            cursorP2.setPosX(97);
+                            cursorP2.setPosY(194);
+                        break;
+                        case 1:
+                            cursorP2.setPosX(365);
+                            cursorP2.setPosY(194);
+                        break;
+                        case 2:
+                            cursorP2.setPosX(636);
+                            cursorP2.setPosY(194);
+                        break;
+                        case 3:
+                            cursorP2.setPosX(908);
+                            cursorP2.setPosY(194);
+                        break;
+                        case 4:
+                            cursorP2.setPosX(98);
+                            cursorP2.setPosY(431);
+                        break;
+                        case 5:
+                            cursorP2.setPosX(367);
+                            cursorP2.setPosY(431);
+                        break;
+                        case 6:
+                            cursorP2.setPosX(636);
+                            cursorP2.setPosY(431);
+                        break;
+                        case 7:
+                            cursorP2.setPosX(908);
+                            cursorP2.setPosY(431);
+                        break;
+                    }
                 }
                 if (p1Select && p2Select) {
                     // mandar a crear los objetos de personaje
@@ -743,6 +745,17 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         cursorMapa.setPosY(425);
                     break;
                 }
+            } else if (gameover && !credits) {
+                switch (opcionMenu) {
+                    case 0:
+                        cursorMenu.setPosX(412);
+                        cursorMenu.setPosY(505);
+                    break;
+                    case 1:
+                        cursorMenu.setPosX(450);
+                        cursorMenu.setPosY(590);
+                    break;
+                }
             }
 
             // Verifica que no esté en pausa y que esté en el escenario de juego
@@ -798,7 +811,22 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 
                 // Checa que la vida de los personajes se acabe
                 if (vidaP1 <= 0 || vidaP2 <= 0) {
+                    switch(opcionMenu) {
+                        case 0:
+                            sonido_jungle.stop();
+                        break;
+                        case 1:
+                            sonido_desierto.stop();
+                        break;
+                        case 2:
+                            sonido_underworld.stop();
+                        break;
+                        case 3:
+                            sonido_rainbow.stop();
+                        break;
+                    }
                     gameover = true;
+                    opcionMenu = 0;
                 }
             }
         }
@@ -1068,7 +1096,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         g.drawImage(powerP2H.getImagenI(), powerP2H.getPosX(), powerP2H.getPosY(), this);
                     if (attackVP2)
                         g.drawImage(powerP2V.getImagenI(), powerP2V.getPosX(), powerP2V.getPosY(), this);
-                } else {
+                } else if (!credits) {
                     // Dibuja la pantalla de créditos
                     g.drawImage(GameOver, 0, 0, this);
                     if (vidaP1 > vidaP2) {
@@ -1076,6 +1104,9 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     } else {
                         g.drawImage(P2Icono, 535, 237, this);
                     }
+                    g.drawImage(cursorMenu.getImagenI(), cursorMenu.getPosX(), cursorMenu.getPosY(), this);
+                } else {
+                    g.drawImage(creditScreen, 0, 0, this);
                 }
             }
         }
@@ -1152,22 +1183,15 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         break;
                     }
                     pausaMapSelect = true;
-                } else if (gameover) {
+                } else if (gameover && !credits) {
                     switch(opcionMenu) {
                         case 0:
-                            sonido_jungle.stop();
+                            init();
                         break;
                         case 1:
-                            sonido_desierto.stop();
-                        break;
-                        case 2:
-                            sonido_underworld.stop();
-                        break;
-                        case 3:
-                            sonido_rainbow.stop();
+                            credits = true;
                         break;
                     }
-                    init();
                 }
             }
             
@@ -1177,7 +1201,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_F) {
-                if (!pausaCharSelect) {
+                if (start && !pausaCharSelect) {
                     p1Select = !p1Select;
                 } else if (P1.getPowerUp()) {
                     attackVP1 = true;
@@ -1199,7 +1223,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             }
             
             if (e.getKeyCode() == KeyEvent.VK_N) {
-                if (!pausaCharSelect) {
+                if (start && !pausaCharSelect) {
                     p2Select = !p2Select;
                 } else if (P2.getPowerUp()) {
                     attackVP2 = true;
@@ -1671,6 +1695,15 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             opcionMenu = 1;
                         break;
                     }
+                } else if (gameover && !credits) {
+                    switch (opcionMenu) {
+                        case 0:
+                            opcionMenu = 1;
+                        break;
+                        case 1:
+                            opcionMenu = 0;
+                        break;
+                    }
                 }
                 arriba = true;
             }
@@ -1741,6 +1774,15 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         break;
                         case 3:
                             opcionMenu = 1;
+                        break;
+                    }
+                } else if (gameover && !credits) {
+                    switch (opcionMenu) {
+                        case 0:
+                            opcionMenu = 1;
+                        break;
+                        case 1:
+                            opcionMenu = 0;
                         break;
                     }
                 }
