@@ -147,6 +147,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private SoundClip sonido_desierto;
     private SoundClip sonido_underworld;
     private SoundClip sonido_rainbow;
+    private SoundClip sonido_win;
     private SoundClip sonido_amaterasu;
     private SoundClip sonido_anubis;
     private SoundClip sonido_freya;
@@ -237,6 +238,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             sonido_desierto = new SoundClip("/sounds/Day_Agrabah.wav");
             sonido_underworld = new SoundClip("/sounds/Hades_Underworld.wav");
             sonido_rainbow = new SoundClip("/sounds/Rainbow_Road.wav");
+            sonido_win = new SoundClip("/sounds/victoryMusic.wav");
             sonido_menu.setLooping(true);
             sonido_menu.play();
             
@@ -508,6 +510,109 @@ public class Game extends JFrame implements Runnable, KeyListener {
                         System.out.println("Error en " + ex.toString());
                 }
             }
+        }
+        
+        public void restart() {
+            //variables booleanas de movimiento de personajes
+            izquierda = false;
+            izquierda2 = false;
+            derecha = false;
+            derecha2 = false;
+            arriba = false;
+            arriba2 = false;
+            abajo = false;
+            abajo2 = false;
+            
+            pausa = false;
+            instrucciones = false;
+            start = false;
+            pausaCharSelect = false;
+            pausaMapSelect = false;
+            desert = false;
+            jungle = false;
+            underworld = false;
+            rainbow = false;
+            gameover = false;
+            credits = false;
+            
+            obstaculo = new Obstaculos();
+            obstaclesLeft = new<Obstaculos> LinkedList();
+            obstaclesRight = new<Obstaculos> LinkedList();
+            
+            p1Select = false;
+            p2Select = false;
+            attackHP1 = false;
+            attackVP1 = false;
+            attackHP2 = false;
+            attackVP2 = false;
+            powerP1H = new Obstaculos();
+            powerP1V = new Obstaculos();
+            powerP2H = new Obstaculos();
+            powerP2V = new Obstaculos();
+            
+            sonido_menu.setLooping(true);
+            sonido_menu.play();
+            
+            opcionMenu = 0;
+            opcionP1 = 0;
+            opcionP2 = 1;
+            
+            P1barra = new Animacion();
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif")), 5);
+            P1barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif")), 5);
+            
+            P2barra = new Animacion();
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra0.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra1.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra2.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra3.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra4.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra5.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra6.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra7.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra8.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra9.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra10.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra11.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra12.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra13.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra14.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra15.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra16.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra17.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra18.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra19.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra20.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra21.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra22.gif")), 5);
+            P2barra.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/barra23.gif")), 5);
+            
+            vidaP1 = 120;
+            vidaP2 = 120;
+            P1 = new BasePersonajes();
+            P2 = new BasePersonajes();
         }
         
         /**
@@ -825,6 +930,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             sonido_rainbow.stop();
                         break;
                     }
+                    sonido_win.play();
                     gameover = true;
                     opcionMenu = 0;
                 }
@@ -1186,7 +1292,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 } else if (gameover && !credits) {
                     switch(opcionMenu) {
                         case 0:
-                            init();
+                            restart();
                         break;
                         case 1:
                             credits = true;
