@@ -330,7 +330,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
         }
         
         public void creaObstaculo(int n) {
-            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
+            Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map4_Obstaculos.gif"));
             Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
             
