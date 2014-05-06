@@ -59,9 +59,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private boolean jungle;
     private boolean underworld;
     private boolean rainbow;
-    private boolean attackHP1;
+    private boolean attackH1P1;
+    private boolean attackH2P1;
     private boolean attackVP1;
-    private boolean attackHP2;
+    private boolean attackH1P2;
+    private boolean attackH2P2;
     private boolean attackVP2;
     private int opcionMenu;
     private int opcionP1;
@@ -126,21 +128,29 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Image ra;
     private Image anubis;
     private Image freya;
-    private Image zeusPH;
+    private Image zeusPH1;
+    private Image zeusPH2;
     private Image zeusPV;
-    private Image amaterasuPH;
+    private Image amaterasuPH1;
+    private Image amaterasuPH2;
     private Image amaterasuPV;
-    private Image dragonPH;
+    private Image dragonPH1;
+    private Image dragonPH2;
     private Image dragonPV;
-    private Image hadesPH;
+    private Image hadesPH1;
+    private Image hadesPH2;
     private Image hadesPV;
-    private Image quetzalPH;
+    private Image quetzalPH1;
+    private Image quetzalPH2;
     private Image quetzalPV;
-    private Image raPH;
+    private Image raPH1;
+    private Image raPH2;
     private Image raPV;
-    private Image anubisPH;
+    private Image anubisPH1;
+    private Image anubisPH2;
     private Image anubisPV;
-    private Image freyaPH;
+    private Image freyaPH1;
+    private Image freyaPH2;
     private Image freyaPV;
     private SoundClip sonido_menu;
     private SoundClip sonido_jungle;
@@ -164,9 +174,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
     private Obstaculos cursorMapa;
     private Obstaculos obstaculo;
     private Obstaculos powerUp;
-    private Obstaculos powerP1H;
+    private Obstaculos powerP1H1;
+    private Obstaculos powerP1H2;
     private Obstaculos powerP1V;
-    private Obstaculos powerP2H;
+    private Obstaculos powerP2H1;
+    private Obstaculos powerP2H2;
     private Obstaculos powerP2V;
     private BasePersonajes P1;
     private BasePersonajes P2;
@@ -208,9 +220,11 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             p1Select = false;
             p2Select = false;
-            attackHP1 = false;
+            attackH1P1 = false;
+            attackH2P1 = false;
             attackVP1 = false;
-            attackHP2 = false;
+            attackH1P2 = false;
+            attackH2P2 = false;
             attackVP2 = false;
             
             // Imágenes de fondo, menús, créditos, etc.
@@ -223,7 +237,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
             Underworld = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_UnderworldGIF.gif"));
             RainbowRoad = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Map2_RainbowRoad.gif"));
             GameOver = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_GameOver.png"));
-            creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/CREDITS.png"));
+            creditScreen = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BioForge_Credits.gif"));
             
             // Imagenes de cursores de seleccion
             cursorMenuInicialImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Coin.gif"));
@@ -261,22 +275,30 @@ public class Game extends JFrame implements Runnable, KeyListener {
             freya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_FREYA.gif"));
             
             // Imagenes de los power-ups
-            zeusPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
-            zeusPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
-            amaterasuPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
-            amaterasuPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
-            dragonPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
-            dragonPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
-            hadesPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
-            hadesPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
-            quetzalPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
-            quetzalPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
-            raPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
-            raPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
-            anubisPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Left.gif"));
-            anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Sword_Up.gif"));
-            freyaPH = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Left.gif"));
-            freyaPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Arrow_Up.gif"));
+            zeusPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_zeus.png"));
+            zeusPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_zeus.png"));
+            zeusPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_zeus.png"));
+            amaterasuPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_amaterasu2.png"));
+            amaterasuPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_amaterasu3.png"));
+            amaterasuPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_amaterasu1.png"));
+            dragonPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_shenlong.png"));
+            dragonPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_shenlong.png"));
+            dragonPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_shenlong.png"));
+            hadesPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_hades1.png"));
+            hadesPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_hades2.png"));
+            hadesPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_hades3.png"));
+            quetzalPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_quetzy3.png"));
+            quetzalPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_quetzy1.png"));
+            quetzalPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_quetzy2.png"));
+            raPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_ra2.png"));
+            raPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_ra3.png"));
+            raPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_ra.png"));
+            anubisPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_anubis1.png"));
+            anubisPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_anubis1.png"));
+            anubisPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_anubis2.png"));
+            freyaPH1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_freya.png"));
+            freyaPH2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_freya.png"));
+            freyaPV = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectil_freya.png"));
             
             // Imagenes de obstaculos dependiendo del nivel
             obstaculo1Jungle = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/forest1.png"));
@@ -377,12 +399,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
             obstaclesRight = new<Obstaculos> LinkedList();
             
             // Inicializa power up y su posicion inicial
-            PowerUp = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerUp.gif"));
-            PowerDown = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerDown.gif"));
+            PowerUp = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerUP.gif"));
+            PowerDown = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/powerDOWN.gif"));
             powerUp = new Obstaculos(getWidth()/2, -1000, PowerUp);
-            powerP1H = new Obstaculos();
+            powerP1H1 = new Obstaculos();
+            powerP1H2 = new Obstaculos();
             powerP1V = new Obstaculos();
-            powerP2H = new Obstaculos();
+            powerP2H1 = new Obstaculos();
+            powerP2H2 = new Obstaculos();
             powerP2V = new Obstaculos();
             
             // Inicialización de personajes
@@ -541,13 +565,17 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             p1Select = false;
             p2Select = false;
-            attackHP1 = false;
+            attackH1P1 = false;
+            attackH2P1 = false;
             attackVP1 = false;
-            attackHP2 = false;
+            attackH1P2 = false;
+            attackH2P2 = false;
             attackVP2 = false;
-            powerP1H = new Obstaculos();
+            powerP1H1 = new Obstaculos();
+            powerP1H2 = new Obstaculos();
             powerP1V = new Obstaculos();
-            powerP2H = new Obstaculos();
+            powerP2H1 = new Obstaculos();
+            powerP2H2 = new Obstaculos();
             powerP2V = new Obstaculos();
             
             sonido_menu.setLooping(true);
@@ -712,56 +740,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             P1Icono = iZeus;
                             P1.setImagenI(zeus);
                             P1.setSonido(sonido_zeus);
-                            powerP1H.setImagenI(zeusPH);
+                            powerP1H1.setImagenI(zeusPH1);
+                            powerP1H2.setImagenI(zeusPH2);
                             powerP1V.setImagenI(zeusPV);
                         break;
                         case 1:
                             P1Icono = iAmaterasu;
                             P1.setImagenI(amaterasu);
                             P1.setSonido(sonido_amaterasu);
-                            powerP1H.setImagenI(amaterasuPH);
+                            powerP1H1.setImagenI(amaterasuPH1);
+                            powerP1H2.setImagenI(amaterasuPH2);
                             powerP1V.setImagenI(amaterasuPV);
                         break;
                         case 2:
                             P1Icono = iDragon;
                             P1.setImagenI(dragon);
                             P1.setSonido(sonido_dragon);
-                            powerP1H.setImagenI(dragonPH);
+                            powerP1H1.setImagenI(dragonPH1);
+                            powerP1H2.setImagenI(dragonPH2);
                             powerP1V.setImagenI(dragonPV);
                         break;
                         case 3:
                             P1Icono = iHades;
                             P1.setImagenI(hades);
                             P1.setSonido(sonido_hades);
-                            powerP1H.setImagenI(hadesPH);
+                            powerP1H1.setImagenI(hadesPH1);
+                            powerP1H2.setImagenI(hadesPH2);
                             powerP1V.setImagenI(hadesPV);
                         break;
                         case 4:
                             P1Icono = iQuetzal;
                             P1.setImagenI(quetzal);
                             P1.setSonido(sonido_quetzal);
-                            powerP1H.setImagenI(quetzalPH);
+                            powerP1H1.setImagenI(quetzalPH1);
+                            powerP1H2.setImagenI(quetzalPH2);
                             powerP1V.setImagenI(quetzalPV);
                         break;
                         case 5:
                             P1Icono = iRa;
                             P1.setImagenI(ra);
                             P1.setSonido(sonido_ra);
-                            powerP1H.setImagenI(raPH);
+                            powerP1H1.setImagenI(raPH1);
+                            powerP1H2.setImagenI(raPH2);
                             powerP1V.setImagenI(raPV);
                         break;
                         case 6:
                             P1Icono = iAnubis;
                             P1.setImagenI(anubis);
                             P1.setSonido(sonido_anubis);
-                            powerP1H.setImagenI(anubisPH);
+                            powerP1H1.setImagenI(anubisPH1);
+                            powerP1H2.setImagenI(anubisPH2);
                             powerP1V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P1Icono = iFreya;
                             P1.setImagenI(freya);
                             P1.setSonido(sonido_freya);
-                            powerP1H.setImagenI(freyaPH);
+                            powerP1H1.setImagenI(freyaPH1);
+                            powerP1H2.setImagenI(freyaPH2);
                             powerP1V.setImagenI(freyaPV);
                         break;
                     }
@@ -770,56 +806,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                             P2Icono = iZeus;
                             P2.setImagenI(zeus);
                             P2.setSonido(sonido_zeus);
-                            powerP2H.setImagenI(zeusPH);
+                            powerP2H1.setImagenI(zeusPH1);
+                            powerP2H2.setImagenI(zeusPH2);
                             powerP2V.setImagenI(zeusPV);
                         break;
                         case 1:
                             P2Icono = iAmaterasu;
                             P2.setImagenI(amaterasu);
                             P2.setSonido(sonido_amaterasu);
-                            powerP2H.setImagenI(amaterasuPH);
+                            powerP2H1.setImagenI(amaterasuPH1);
+                            powerP2H2.setImagenI(amaterasuPH2);
                             powerP2V.setImagenI(amaterasuPV);
                         break;
                         case 2:
                             P2Icono = iDragon;
                             P2.setImagenI(dragon);
                             P2.setSonido(sonido_dragon);
-                            powerP2H.setImagenI(dragonPH);
+                            powerP2H1.setImagenI(dragonPH1);
+                            powerP2H2.setImagenI(dragonPH2);
                             powerP2V.setImagenI(dragonPV);
                         break;
                         case 3:
                             P2Icono = iHades;
                             P2.setImagenI(hades);
                             P2.setSonido(sonido_hades);
-                            powerP2H.setImagenI(hadesPH);
+                            powerP2H1.setImagenI(hadesPH1);
+                            powerP2H2.setImagenI(hadesPH2);
                             powerP2V.setImagenI(hadesPV);
                         break;
                         case 4:
                             P2Icono = iQuetzal;
                             P2.setImagenI(quetzal);
                             P2.setSonido(sonido_quetzal);
-                            powerP2H.setImagenI(quetzalPH);
+                            powerP2H1.setImagenI(quetzalPH1);
+                            powerP2H2.setImagenI(quetzalPH2);
                             powerP2V.setImagenI(quetzalPV);
                         break;
                         case 5:
                             P2Icono = iRa;
                             P2.setImagenI(ra);
                             P2.setSonido(sonido_ra);
-                            powerP2H.setImagenI(raPH);
+                            powerP2H1.setImagenI(raPH1);
+                            powerP2H2.setImagenI(raPH2);
                             powerP2V.setImagenI(raPV);
                         break;
                         case 6:
                             P2Icono = iAnubis;
                             P2.setImagenI(anubis);
                             P2.setSonido(sonido_anubis);
-                            powerP2H.setImagenI(anubisPH);
+                            powerP2H1.setImagenI(anubisPH1);
+                            powerP2H2.setImagenI(anubisPH2);
                             powerP2V.setImagenI(anubisPV);
                         break;
                         case 7:
                             P2Icono = iFreya;
                             P2.setImagenI(freya);
                             P2.setSonido(sonido_freya);
-                            powerP2H.setImagenI(freyaPH);
+                            powerP2H1.setImagenI(freyaPH1);
+                            powerP2H2.setImagenI(freyaPH2);
                             powerP2V.setImagenI(freyaPV);
                         break;
                     }
@@ -901,14 +945,20 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 powerUp.actualizaPosY(10);
                 
                 // Actualiza los power-ups cuando si es que algun personaje lo tiene y lo uso
-                if (attackHP1) {
-                    powerP1H.actualizaPosX(12);
+                if (attackH1P1) {
+                    powerP1H1.actualizaPosX(-12);
+                }
+                if (attackH2P1) {
+                    powerP1H2.actualizaPosX(12);
                 }
                 if (attackVP1) {
                     powerP1V.actualizaPosY(-12);
                 }
-                if (attackHP2) {
-                    powerP2H.actualizaPosX(-12);
+                if (attackH1P2) {
+                    powerP2H1.actualizaPosX(-12);
+                }
+                if (attackH2P2) {
+                    powerP2H2.actualizaPosX(12);
                 }
                 if (attackVP2) {
                     powerP2V.actualizaPosY(-12);
@@ -1056,40 +1106,64 @@ public class Game extends JFrame implements Runnable, KeyListener {
                 }
                 
                 // Colision de los power-ups con los linderos del frame y pista
-                if (powerP1H.getPosX() < extremoIzquierdo || powerP1H.getPosX() + powerP1H.getAncho() > extremoDerecho) {
-                    attackHP1 = false;
+                if (powerP1H1.getPosX() < extremoIzquierdo) {
+                    powerP1H1.setPosX(-100);
+                    powerP1H1.setPosY(-100);
+                    attackH1P1 = false;
                 }
-                if (powerP2H.getPosX() < extremoIzquierdo || powerP2H.getPosX() + powerP2H.getAncho() > extremoDerecho) {
-                    attackHP2 = false;
+                if (powerP1H2.getPosX() + powerP1H2.getAncho() > extremoDerecho) {
+                    powerP1H2.setPosX(-100);
+                    powerP1H2.setPosY(-100);
+                    attackH2P1 = false;
+                }
+                if (powerP2H1.getPosX() < extremoIzquierdo) {
+                    powerP2H1.setPosX(-100);
+                    powerP2H1.setPosY(-100);
+                    attackH1P2 = false;
+                }
+                if (powerP2H2.getPosX() + powerP2H2.getAncho() > extremoDerecho) {
+                    powerP2H2.setPosX(-100);
+                    powerP2H2.setPosY(-100);
+                    attackH2P2 = false;
                 }
                 if (powerP1V.getPosY() < 0) {
+                    powerP1V.setPosX(-100);
+                    powerP1V.setPosY(-100);
                     attackVP1 = false;
                 }
                 if (powerP2V.getPosY() < 0) {
+                    powerP2V.setPosX(-100);
+                    powerP2V.setPosY(-100);
                     attackVP2 = false;
                 }
                 
                 // Colision de los power-ups con los personajes
-                if (powerP1H.intersecta(P2) || powerP1V.intersecta(P2)) {
-                    powerP1H.setPosX(-100);
-                    powerP1H.setPosY(-100);
+                if (powerP1H1.intersecta(P2) || powerP1H2.intersecta(P2) || powerP1V.intersecta(P2)) {
+                    powerP1H1.setPosX(-100);
+                    powerP1H1.setPosY(-100);
+                    powerP1H2.setPosX(-100);
+                    powerP1H2.setPosY(-100);
                     powerP1V.setPosX(-100);
                     powerP1V.setPosY(-100);
                     vidaP2 -= 15;
                     sonido_proyColision.play();
                     P2barra.actualiza(15);
-                    attackHP1 = false;
+                    attackH1P1 = false;
+                    attackH2P1 = false;
                     attackVP1 = false;
                 }
-                if (powerP2H.intersecta(P1) || powerP2V.intersecta(P1)) {
-                    powerP2H.setPosX(-100);
-                    powerP2H.setPosY(-100);
+                if (powerP2H1.intersecta(P1) || powerP2H2.intersecta(P1) || powerP2V.intersecta(P1)) {
+                    powerP2H1.setPosX(-100);
+                    powerP2H1.setPosY(-100);
+                    powerP2H2.setPosX(-100);
+                    powerP2H2.setPosY(-100);
                     powerP2V.setPosX(-100);
                     powerP2V.setPosY(-100);
                     sonido_proyColision.play();
                     vidaP1 -= 15;
                     P1barra.actualiza(15);
-                    attackHP2 = false;
+                    attackH1P2 = false;
+                    attackH2P2 = false;
                     attackVP2 = false;
                 }
             }
@@ -1194,12 +1268,16 @@ public class Game extends JFrame implements Runnable, KeyListener {
                     g.drawImage(powerUp.getImagenI(), powerUp.getPosX(), powerUp.getPosY(), this);
                     
                     // Dibuja los power-ups de los personajes
-                    if (attackHP1)
-                        g.drawImage(powerP1H.getImagenI(), powerP1H.getPosX(), powerP1H.getPosY(), this);
+                    if (attackH1P1)
+                        g.drawImage(powerP1H1.getImagenI(), powerP1H1.getPosX(), powerP1H1.getPosY(), this);
+                    if (attackH2P1)
+                        g.drawImage(powerP1H2.getImagenI(), powerP1H2.getPosX(), powerP1H2.getPosY(), this);
                     if (attackVP1)
                         g.drawImage(powerP1V.getImagenI(), powerP1V.getPosX(), powerP1V.getPosY(), this);
-                    if (attackHP2)
-                        g.drawImage(powerP2H.getImagenI(), powerP2H.getPosX(), powerP2H.getPosY(), this);
+                    if (attackH1P2)
+                        g.drawImage(powerP2H1.getImagenI(), powerP2H1.getPosX(), powerP2H1.getPosY(), this);
+                    if (attackH2P2)
+                        g.drawImage(powerP2H2.getImagenI(), powerP2H2.getPosX(), powerP2H2.getPosY(), this);
                     if (attackVP2)
                         g.drawImage(powerP2V.getImagenI(), powerP2V.getPosX(), powerP2V.getPosY(), this);
                 } else if (!credits) {
@@ -1320,10 +1398,13 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             if (e.getKeyCode() == KeyEvent.VK_G) {
                 if (P1.getPowerUp()) {
-                    attackHP1 = true;
+                    attackH1P1 = true;
+                    attackH2P1 = true;
                     P1.getSonido().play();
-                    powerP1H.setPosX(P1.getPosX() + P1.getAncho());
-                    powerP1H.setPosY(P1.getPosY() + P1.getAlto()/2);
+                    powerP1H1.setPosX(P1.getPosX());
+                    powerP1H1.setPosY(P1.getPosY() + P1.getAlto()/2);
+                    powerP1H2.setPosX(P1.getPosX() + P1.getAncho());
+                    powerP1H2.setPosY(P1.getPosY() + P1.getAlto()/2);
                     P1.setPowerUp(false);
                 }
             }
@@ -1342,10 +1423,13 @@ public class Game extends JFrame implements Runnable, KeyListener {
             
             if (e.getKeyCode() == KeyEvent.VK_M) {
                 if (P2.getPowerUp()) {
-                    attackHP2 = true;
+                    attackH1P2 = true;
+                    attackH2P2 = true;
                     P2.getSonido().play();
-                    powerP2H.setPosX(P2.getPosX());
-                    powerP2H.setPosY(P2.getPosY() + P2.getAlto()/2);
+                    powerP2H1.setPosX(P2.getPosX());
+                    powerP2H1.setPosY(P2.getPosY() + P2.getAlto()/2);
+                    powerP2H2.setPosX(P2.getPosX() + P2.getAncho());
+                    powerP2H2.setPosY(P2.getPosY() + P2.getAlto()/2);
                     P2.setPowerUp(false);
                 }
             }
