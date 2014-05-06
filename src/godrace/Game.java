@@ -214,14 +214,14 @@ public class Game extends JFrame implements Runnable, KeyListener {
             sonido_menu.play();
             
             // Imagenes de personajes y sus iconos
-            iZeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char1.gif"));
-            iAmaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.gif"));
-            iDragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char3.gif"));
-            iHades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.gif"));
-            iQuetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.gif"));
-            iRa = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char6.gif"));
-            iAnubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.gif"));
-            iFreya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.gif"));
+            iZeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char1.png"));
+            iAmaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char2.png"));
+            iDragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char3.png"));
+            iHades = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char4.png"));
+            iQuetzal = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char5.png"));
+            iRa = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char6.png"));
+            iAnubis = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char7.png"));
+            iFreya = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/char8.png"));
             zeus = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_ZEUS.gif"));
             amaterasu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_AMATER.gif"));
             dragon = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/character_SHENLONG.gif"));
@@ -368,7 +368,7 @@ public class Game extends JFrame implements Runnable, KeyListener {
         public void inicializaObstaculos() {
             // Imagenes los obstaculos
             Image obstaculo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Fire-bar.gif"));
-            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/SpinyEgg.gif"));
+            Image obstaculo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/proyectilA3.png"));
             Image obstaculo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/cloud_plat.gif"));
             
             Random randObstaculo = new Random();
